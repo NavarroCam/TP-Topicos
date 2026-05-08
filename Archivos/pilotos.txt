@@ -1,0 +1,10 @@
+1;Max Verstappen;Paises Bajos;1;136;A;19970930
+2;Lewis Hamilton;Reino Unido;2;84;A;19850107
+3;Charles Leclerc;Monaco;3;102;A;19971016
+4;Lando Norris;Reino Unido;4;128;A;19991113
+5;Fernando Alonso;España;5;56;A;19810729
+6;Oscar Piastri;Australia;4;111;A;20010406
+7;Carlos Sainz;España;7;71;A;19940901
+8;George Russell;Reino Unido;2;77;A;19980215
+9;Yuki Tsunoda;Japon;8;22;A;20000511
+10;Pierre Gasly;Francia;6;18;A;19960207
