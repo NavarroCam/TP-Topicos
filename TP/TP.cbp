@@ -37,6 +37,7 @@
 		<Unit filename="carreras.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="carreras.h" />
 		<Unit filename="escuderias.c">
 			<Option compilerVar="CC" />
 		</Unit>
