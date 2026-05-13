@@ -1,5 +1,6 @@
 #include "archivos.h"
 
+
 /* PILOTOS: txt -> dat
    Formato linea: id;nombre;nacionalidad;id_escuderia;puntos;estado;fechaNacimiento*/
 int cargarPilotosTxtABin(const char *txtPath, const char *binPath, const char *errorPath)

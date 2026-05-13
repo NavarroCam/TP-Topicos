@@ -12,6 +12,6 @@ typedef struct{
     int estado;
 }t_escuderia;
 
-void imprimirEscuderias(const char *binPath);
+void listarEscuderias(const char *binPath);
 
 #endif // ESCUDERIAS_H_INCLUDED

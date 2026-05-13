@@ -27,9 +27,12 @@ int main()
         printf("Error al cargar escuderias.\n");
     }
 
-    // Verifico si lee los .dat
-    imprimirPilotos("pilotos.dat");
-    imprimirEscuderias("escuderias.dat");
+    // Verifico si lee los .dat, después borrar
+    listarPilotos("pilotos.dat");
+    listarEscuderias("escuderias.dat");
+
+
+    menuPilotos("pilotos.dat", "bajasPilotos.dat");
 
     return 0;
 }

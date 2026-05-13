@@ -1,6 +1,6 @@
 #include "escuderias.h"
 
-void imprimirEscuderias(const char *binPath)
+void listarEscuderias(const char *binPath)
 {
     t_escuderia e1;
     t_escuderia *escuderia = &e1;
