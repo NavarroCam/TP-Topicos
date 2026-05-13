@@ -13,3 +13,35 @@
 
 1778456553 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
 
+1778202157 source:c:\topicos\tp\tp-topicos\tp\carreras.c
+
+1778630605 source:c:\topicos\tp\tp-topicos\tp\escuderias.c
+	"escuderias.h"
+
+1778202184 source:c:\topicos\tp\tp-topicos\tp\estadisticas.c
+
+1778630990 source:c:\topicos\tp\tp-topicos\tp\main.c
+	<stdio.h>
+	"archivos.h"
+
+1778630641 c:\topicos\tp\tp-topicos\tp\archivos.h
+	"pilotos.h"
+	"escuderias.h"
+	"carreras.h"
+
+1778630667 c:\topicos\tp\tp-topicos\tp\pilotos.h
+	<stdio.h>
+	<string.h>
+
+1778630641 c:\topicos\tp\tp-topicos\tp\escuderias.h
+	<stdio.h>
+	<string.h>
+
+1778630990 c:\topicos\tp\tp-topicos\tp\carreras.h
+
+1778630605 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
+	"pilotos.h"
+
+1778630090 source:c:\topicos\tp\tp-topicos\tp\archivos.c
+	"archivos.h"
+
