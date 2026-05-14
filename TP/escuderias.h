@@ -3,14 +3,11 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "tipos.h"
 
-typedef struct{
-    unsigned id;
-    char codigo[4];
-    char nombre[30];
-    char pais[50];
-    int estado;
-}t_escuderia;
+#define ESCUDERIAS_DAT "escuderias.dat"
+#define ESCUDERIAS_TXT "../Archivos/escuderias.txt"
+
 
 void listarEscuderias(const char *binPath);
 

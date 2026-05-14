@@ -39,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="carreras.h" />
+		<Unit filename="comunes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="comunes.h" />
 		<Unit filename="escuderias.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -53,6 +57,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="pilotos.h" />
+		<Unit filename="tipos.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

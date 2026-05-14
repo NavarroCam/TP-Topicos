@@ -1,38 +1,57 @@
 #include <stdio.h>
 #include "archivos.h"
-
+#include "pilotos.h" //Esta bien que la referencia venga de otro archivo?
 int main()
 {
-    int resultado;
-
-    // Cargo pilotos
-    resultado = cargarPilotosTxtABin("pilotos.txt", "pilotos.dat", "pilotos_error.txt");
-    if (resultado == OK)
+    int op;
+    FILE* test;
+//    Carga inicial si no existen los .dat
+    test = fopen(PILOTOS_DAT,"rb");
+    if(!test)
     {
-        printf("Pilotos cargados correctamente.\n");
-    }
-    else
-    {
-        printf("Error al cargar pilotos.\n");
-    }
-
-    // Cargo escuderias
-    resultado = cargarEscuderiasTxtABin("escuderias.txt", "escuderias.dat", "escuderias_error.txt");
-    if (resultado == OK)
-    {
-        printf("Escuderias cargadas correctamente.\n");
-    }
-    else
-    {
-        printf("Error al cargar escuderias.\n");
+        puts("Cargando datos iniciales...");
+        cargarPilotosTxtABin(PILOTOS_TXT,PILOTOS_DAT);//para poder modificarlos
+        cargarEscuderiasTxtABin(ESCUDERIAS_TXT,ESCUDERIAS_DAT);//para poder modificarlos
+//        reconstruirIndice(PILOTOS_DAT,PILOTOS_IDX);
     }
 
-    // Verifico si lee los .dat, después borrar
-    listarPilotos("pilotos.dat");
-    listarEscuderias("escuderias.dat");
+    printf("=== SISTEMA DE GESTION TEMPORADA F1 ===\n");
+    do
+    {
+        printf("\n======= MENU PRINCIPAL =======\n");
+        printf("1. Pilotos\n");
+        printf("2. Escuderias\n");
+        printf("3. Carreras\n");
+        printf("4. Estadisticas\n");
+        printf("0. Salir\n");
+        printf("Opcion: ");
+        scanf("%d", &op);
 
-
-    menuPilotos("pilotos.dat", "bajasPilotos.dat");
-
+        switch (op)
+        {
+        case 1:
+            printf("menu pilotos");
+            //menuPilotos();
+            break;
+        case 2:
+            printf("menu escuderias");
+            //menuEscuderias();
+            break;
+        case 3:
+            printf("menu carreras");
+            //menuCarreras();
+            break;
+        case 4:
+            printf("menu estadisticas");
+            //menuEstadisticas();
+            break;
+        case 0:
+            printf("Saliendo..\n");
+            break;
+        default:
+            printf("Opcion inválida.\n");
+        }
+    }
+    while (op != 0);
     return 0;
 }

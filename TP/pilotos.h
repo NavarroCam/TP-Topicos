@@ -4,18 +4,12 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "tipos.h"
 #include "archivos.h"
 
+#define PILOTOS_DAT "pilotos.dat"
+#define PILOTOS_TXT "../Archivos/pilotos.txt"
 
-typedef struct{
-    unsigned id;
-    char nombre[30];
-    char nacionalidad[30];
-    unsigned id_escuderia;
-    unsigned puntos_acumulados;
-    char estado;
-    unsigned long long fechaNacimiento;
-}t_piloto;
 
 void listarPilotos(const char *binPath);
 

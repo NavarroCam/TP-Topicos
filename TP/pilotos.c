@@ -1,6 +1,7 @@
 #include "pilotos.h"
 #include <ctype.h>
 
+
 void listarPilotos(const char *binPath)
 {
     t_piloto p1;
@@ -325,7 +326,7 @@ void listarBajas(const char *bajasPath)
 }
 
 
-void menuPilotos(const char *binPath, const char *bajasPath)
+/*void menuPilotos(const char *binPath, const char *bajasPath)
 {
     int opcion;
 
@@ -376,4 +377,55 @@ void menuPilotos(const char *binPath, const char *bajasPath)
         }
 
     }while(opcion != 0);
-}
+}*/
+
+/*void __menuPilotos()
+{
+    int op;
+    unsigned int idEsc;
+    unsigned int idPil;
+    do{
+        printf("\n--- PILOTOS ---\n");
+        printf("1. Listar pilotos\n");
+        printf("2. Alta piloto\n");
+        printf("3. Baja piloto\n");
+        printf("4. Modificar piloto\n");
+        printf("5. Buscar piloto por ID\n");
+        printf("6. Mostrar ranking\n");
+        printf("7. Pilotos por escudería\n");
+        printf("8. Exportar pilotos\n");
+        printf("0. Volver\n");
+        op = leerEntero("Opción: ");
+
+        switch (op) {
+            case 1: _listarPilotos(PILOTOS_DAT); break;
+            case 2: _altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
+            case 3: _bajaPiloto(PILOTOS_DAT, PILOTOS_IDX, BAJAS_PILOTOS); break;
+            case 4: _modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
+            case 5: {
+                FILE *fp;
+                Piloto p;
+                idPil = (unsigned int)leerEntero("ID piloto: ");
+                fp = fopen(PILOTOS_DAT, "rb");
+                if (fp) {
+                    if (buscarPilotoPorId(fp, idPil, &p))
+                        printf("Encontrado: [%u] %s - %s - Pts:%u - Estado:%c\n",
+                               p.id, p.nombre, p.nacionalidad,
+                               p.puntos_acumulados, p.estado);
+                    else
+                        printf("No encontrado.\n");
+                    fclose(fp);
+                }
+                break;
+            }
+            case 6: mostrarRanking(PILOTOS_DAT); break;
+            case 7:
+                idEsc = (unsigned int)leerEntero("ID escuderia: ");
+                listarPilotosPorEscuderia(PILOTOS_DAT, idEsc);
+                break;
+            case 8: exportarPilotos(PILOTOS_DAT, EXP_PILOTOS); break;
+            case 0: break;
+            default: printf("Opcion invalida.\n");
+        }
+    }while(op != 0);
+}*/

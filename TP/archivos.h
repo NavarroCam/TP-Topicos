@@ -7,9 +7,14 @@
 
 #define OK    0
 #define ERROR -1
+#define TAMCADENA 256
+#define SEPARADOR ';'
 
-int cargarPilotosTxtABin(const char *txtPath, const char *binPath, const char *errorPath);
-int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath, const char *errorPath);
+int cargarPilotosTxtABin(const char *txtPath, const char *binPath);
+int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath);
 int exportarPilotosTxt(const char *binPath, const char *txtPath);
 
+///////////////
+int trozarPilotos(char* cad, t_piloto* p1);
+int trozarEscuderias(char* cad, t_escuderia* e1);
 #endif // ARCHIVOS_H_INCLUDED
