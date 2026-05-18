@@ -1,12 +1,11 @@
 #ifndef ARCHIVOS_H_INCLUDED
 #define ARCHIVOS_H_INCLUDED
 
+#include "comunes.h"
 #include "pilotos.h"
 #include "escuderias.h"
 #include "carreras.h"
 
-#define OK    0
-#define ERROR -1
 #define TAMCADENA 256
 #define SEPARADOR ';'
 

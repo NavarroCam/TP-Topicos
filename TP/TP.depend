@@ -50,7 +50,8 @@
 1778720211 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.c
 	"archivos.h"
 
-1778720211 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.h
+1779063304 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.h
+	"comunes.h"
 	"pilotos.h"
 	"escuderias.h"
 	"carreras.h"
@@ -86,12 +87,13 @@
 
 1778712994 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\rutas.h
 
-1778717375 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.c
+1779063902 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.c
 	"comunes.h"
 
-1778717495 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.h
-	"stdio.h"
-	"stdlib.h"
+1779063974 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 
 1778720443 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\tipos.h
 

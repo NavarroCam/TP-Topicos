@@ -2,7 +2,7 @@
 #include <ctype.h>
 
 
-void listarPilotos(const char *binPath)
+void listarPilotos(const char *binPath)///fijarse si conviene que le llegue el tda
 {
     t_piloto p1;
     t_piloto *piloto = &p1;
@@ -33,7 +33,6 @@ void listarPilotos(const char *binPath)
 
     fclose(fbin);
 }
-
 
 static long buscarPilotoPorId(FILE *fbin, unsigned id, t_piloto *piloto)
 {
@@ -379,14 +378,15 @@ void listarBajas(const char *bajasPath)
     }while(opcion != 0);
 }*/
 
-/*void __menuPilotos()
+void __menuPilotos()
 {
     int op;
     unsigned int idEsc;
     unsigned int idPil;
+
     do{
         printf("\n--- PILOTOS ---\n");
-        printf("1. Listar pilotos\n");
+        printf("1. Listar pilotos(SOLO FUNCIONA ESTA)\n");
         printf("2. Alta piloto\n");
         printf("3. Baja piloto\n");
         printf("4. Modificar piloto\n");
@@ -399,33 +399,44 @@ void listarBajas(const char *bajasPath)
 
         switch (op) {
             case 1: _listarPilotos(PILOTOS_DAT); break;
-            case 2: _altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
-            case 3: _bajaPiloto(PILOTOS_DAT, PILOTOS_IDX, BAJAS_PILOTOS); break;
-            case 4: _modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
-            case 5: {
-                FILE *fp;
-                Piloto p;
-                idPil = (unsigned int)leerEntero("ID piloto: ");
-                fp = fopen(PILOTOS_DAT, "rb");
-                if (fp) {
-                    if (buscarPilotoPorId(fp, idPil, &p))
-                        printf("Encontrado: [%u] %s - %s - Pts:%u - Estado:%c\n",
-                               p.id, p.nombre, p.nacionalidad,
-                               p.puntos_acumulados, p.estado);
-                    else
-                        printf("No encontrado.\n");
-                    fclose(fp);
-                }
-                break;
-            }
-            case 6: mostrarRanking(PILOTOS_DAT); break;
-            case 7:
-                idEsc = (unsigned int)leerEntero("ID escuderia: ");
-                listarPilotosPorEscuderia(PILOTOS_DAT, idEsc);
-                break;
-            case 8: exportarPilotos(PILOTOS_DAT, EXP_PILOTOS); break;
+//            case 2: _altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
+//            case 3: _bajaPiloto(PILOTOS_DAT, PILOTOS_IDX, BAJAS_PILOTOS); break;
+//            case 4: _modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
+//            case 5: {
+//                FILE *fp;
+//                Piloto p;
+//                idPil = (unsigned int)leerEntero("ID piloto: ");
+//                fp = fopen(PILOTOS_DAT, "rb");
+//                if (fp) {
+//                    if (buscarPilotoPorId(fp, idPil, &p))
+//                        printf("Encontrado: [%u] %s - %s - Pts:%u - Estado:%c\n",
+//                               p.id, p.nombre, p.nacionalidad,
+//                               p.puntos_acumulados, p.estado);
+//                    else
+//                        printf("No encontrado.\n");
+//                    fclose(fp);
+//                }
+//                break;
+//            }
+//            case 6: mostrarRanking(PILOTOS_DAT); break;
+//            case 7:
+//                idEsc = (unsigned int)leerEntero("ID escuderia: ");
+//                listarPilotosPorEscuderia(PILOTOS_DAT, idEsc);
+//                break;
+//            case 8: exportarPilotos(PILOTOS_DAT, EXP_PILOTOS); break;
             case 0: break;
             default: printf("Opcion invalida.\n");
         }
     }while(op != 0);
-}*/
+}
+
+void mostrarPiloto(void* pilotos)
+{
+    printf("ID: %u | Nombre: %s | Nac: %s | Escuderia: %u | Puntos: %u | Estado: %c\n",
+               piloto->id,
+               piloto->nombre,
+               piloto->nacionalidad,
+               piloto->id_escuderia,
+               piloto->puntos_acumulados,
+               piloto->estado);
+}

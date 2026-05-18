@@ -22,4 +22,5 @@ void listarBajas(const char *bajasPath);
 
 void menuPilotos(const char *binPath, const char *bajasPath);
 
+void mostrarPiloto(void* pilotos);
 #endif // PILOTOS_H_INCLUDED

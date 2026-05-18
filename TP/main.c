@@ -30,8 +30,7 @@ int main()
         switch (op)
         {
         case 1:
-            printf("menu pilotos");
-            //menuPilotos();
+            __menuPilotos();
             break;
         case 2:
             printf("menu escuderias");
