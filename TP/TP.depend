@@ -97,3 +97,51 @@
 
 1778720443 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\tipos.h
 
+1779120896 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\archivos.c
+	"archivos.h"
+
+1779122679 c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\archivos.h
+	"comunes.h"
+	"pilotos.h"
+	"escuderias.h"
+	"carreras.h"
+
+1779120896 c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\comunes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1779124135 c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\pilotos.h
+	<stdio.h>
+	<string.h>
+	"archivos.h"
+	"tipos.h"
+
+1779120897 c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\tipos.h
+
+1779120897 c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\escuderias.h
+	<stdio.h>
+	<string.h>
+	"tipos.h"
+
+1779120896 c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\carreras.h
+
+1779120896 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\carreras.c
+
+1779120896 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\comunes.c
+	"comunes.h"
+
+1779120896 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\escuderias.c
+	"escuderias.h"
+
+1779120897 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\estadisticas.c
+
+1779120897 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\main.c
+	<stdio.h>
+	"archivos.h"
+	"pilotos.h"
+
+1779124482 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\pilotos.c
+	"pilotos.h"
+	<ctype.h>
+

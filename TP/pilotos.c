@@ -381,8 +381,12 @@ void listarBajas(const char *bajasPath)
 void __menuPilotos()
 {
     int op;
-    unsigned int idEsc;
-    unsigned int idPil;
+//    unsigned int idEsc;
+//    unsigned int idPil;
+
+    tda_vector pilotos;
+    crear_Vector(&pilotos,sizeof(t_piloto));
+    cargarEnTDA(PILOTOS_DAT,&pilotos,sizeof(t_piloto));
 
     do{
         printf("\n--- PILOTOS ---\n");
@@ -395,10 +399,11 @@ void __menuPilotos()
         printf("7. Pilotos por escudería\n");
         printf("8. Exportar pilotos\n");
         printf("0. Volver\n");
-        op = leerEntero("Opción: ");
+        printf("Opcion: ");
+        scanf("%d", &op);
 
         switch (op) {
-            case 1: _listarPilotos(PILOTOS_DAT); break;
+            case 1: _listarPilotos(&pilotos); break;
 //            case 2: _altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
 //            case 3: _bajaPiloto(PILOTOS_DAT, PILOTOS_IDX, BAJAS_PILOTOS); break;
 //            case 4: _modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
@@ -428,15 +433,44 @@ void __menuPilotos()
             default: printf("Opcion invalida.\n");
         }
     }while(op != 0);
+    destruir_Vector(&pilotos);
 }
 
 void mostrarPiloto(void* pilotos)
 {
-    printf("ID: %u | Nombre: %s | Nac: %s | Escuderia: %u | Puntos: %u | Estado: %c\n",
-               piloto->id,
-               piloto->nombre,
-               piloto->nacionalidad,
-               piloto->id_escuderia,
-               piloto->puntos_acumulados,
-               piloto->estado);
+    t_piloto* pil = (t_piloto*)pilotos;
+    printf("%s | Puntos: %u\n",
+               pil->nombre,
+               pil->puntos_acumulados);
+}
+
+int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
+{
+    void* elem;
+    FILE* pf;
+    pf = fopen(archNom, "rb");
+    if(!pf)
+        return ERROR;
+    elem = malloc(tamElem);
+    if(!elem)
+    {
+        fclose(pf);
+        return ERROR_MEMORIA;
+    }
+
+    fread(elem,tamElem,1,pf);
+    while(!feof(pf))
+    {
+        insertarAlFinal_Vector(v,elem);
+        fread(elem,tamElem,1,pf);
+    }
+    fclose(pf);
+    free(elem);
+    return OK;
+}
+
+void _listarPilotos(tda_vector* v)
+{
+    puts("PILOTOS || PUNTOS OBTENIDOS");
+    map_(v->vec,v->ce,v->tam,mostrarPiloto);
 }
