@@ -1,17 +1,22 @@
 # depslib dependency file v1.0
-1778456553 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.c
+1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.c
+	"archivos.h"
 
-1778456553 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
+1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
 
-1778456553 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
+1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
+	"escuderias.h"
 
-1778456553 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
+1779120897 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
 
-1778456553 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
+1779120897 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
 	<stdio.h>
-	<stdlib.h>
+	"archivos.h"
+	"pilotos.h"
 
-1778456553 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
+1779550084 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
+	"pilotos.h"
+	<ctype.h>
 
 1778202157 source:c:\topicos\tp\tp-topicos\tp\carreras.c
 
@@ -144,4 +149,33 @@
 1779124482 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
+
+1779122679 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.h
+	"comunes.h"
+	"pilotos.h"
+	"escuderias.h"
+	"carreras.h"
+
+1779120896 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1779124135 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.h
+	<stdio.h>
+	<string.h>
+	"archivos.h"
+	"tipos.h"
+
+1779120897 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
+
+1779120897 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.h
+	<stdio.h>
+	<string.h>
+	"tipos.h"
+
+1779120896 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
+
+1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
+	"comunes.h"
 

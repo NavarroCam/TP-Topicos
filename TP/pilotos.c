@@ -401,6 +401,7 @@ void __menuPilotos()
         printf("0. Volver\n");
         printf("Opcion: ");
         scanf("%d", &op);
+        system("cls");
 
         switch (op) {
             case 1: _listarPilotos(&pilotos); break;
@@ -471,6 +472,7 @@ int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
 
 void _listarPilotos(tda_vector* v)
 {
+    system("cls");
     puts("PILOTOS || PUNTOS OBTENIDOS");
     map_(v->vec,v->ce,v->tam,mostrarPiloto);
 }
