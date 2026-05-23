@@ -21,4 +21,8 @@ int insertarAlFinal_Vector(tda_vector* v, const void* dato);
 void destruir_Vector(tda_vector* v);
 
 void* map_(void* vec, size_t ce, size_t tam, void accion(void*));
+void sSort(void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
+void* buscarMenor(const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
+void intercambiar(void* a, void* b, size_t tam);
+
 #endif // COMUNES_H_INCLUDED

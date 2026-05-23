@@ -40,3 +40,48 @@ void* map_(void* vec, size_t ce, size_t tam, void accion(void*))
     }
     return ini;
 }
+
+void sSort(void* vec, size_t ce, size_t tam, int cmp(const void*, const void*))
+{
+    int i;
+    char* base = (char*)vec;
+    void* pmenor;
+
+    for(i=0;i<ce-1;i++)
+    {
+        pmenor = buscarMenor(base,ce-i,tam,cmp);
+        if(pmenor != base)
+            intercambiar(base,pmenor,tam);
+        base += tam;
+    }
+}
+
+void* buscarMenor(const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*))
+{
+    char* menor = (char*)vec;
+    char* base = (char*)vec;
+    int i;
+    base += tam;
+
+    for(i=1;i<ce;i++)
+    {
+        if(cmp(base,menor) < 0)
+            menor = base;
+        base += tam;
+    }
+    return menor;
+}
+
+void intercambiar(void* a, void* b, size_t tam)
+{
+    int i;
+    char temp;
+    for(i=0;i<tam;i++)
+    {
+        temp = *(char*)a;
+        *(char*)a = *(char*)b;
+        *(char*)b = temp;
+        a++;
+        b++;
+    }
+}
