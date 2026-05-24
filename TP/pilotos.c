@@ -54,15 +54,15 @@
     }while(opcion != 0);
 }*/
 
-void __menuPilotos()
+void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
 {
     int op;
 //    unsigned int idEsc;
 //    unsigned int idPil;
-
-    tda_vector pilotos;
+    /*tda_vector pilotos;
     crear_Vector(&pilotos,sizeof(t_piloto));
     cargarEnTDA(PILOTOS_DAT,&pilotos,sizeof(t_piloto));
+*/
 
     do{
         printf("\n--- PILOTOS ---\n");
@@ -79,9 +79,11 @@ void __menuPilotos()
         scanf("%d", &op);
         system("cls");
 
-        switch (op) {
-            case 1: listarPilotos(&pilotos); break;
-//            case 2: _altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
+        switch (op)
+        {
+            case 1: listarPilotos(pilotos); break;
+            case 2: altaPiloto(pilotos, escuderias); break;
+                //_altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
 //            case 3: _bajaPiloto(PILOTOS_DAT, PILOTOS_IDX, BAJAS_PILOTOS); break;
 //            case 4: _modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
 //            case 5: {
@@ -110,7 +112,7 @@ void __menuPilotos()
             default: printf("Opcion invalida.\n");
         }
     }while(op != 0);
-    destruir_Vector(&pilotos);
+    //destruir_Vector(&pilotos);
 }
 
 
@@ -118,9 +120,11 @@ int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
 {
     void* elem;
     FILE* pf;
+
     pf = fopen(archNom, "rb");
     if(!pf)
         return ERROR;
+
     elem = malloc(tamElem);
     if(!elem)
     {
@@ -145,6 +149,7 @@ int compararPuntos(const void* a, const void* b)
     t_piloto* pil2 = (t_piloto*)b;
     return pil2->puntos_acumulados - pil1->puntos_acumulados;
 }
+
 void mostrarPiloto(void* pilotos)
 {
     t_piloto* pil = (t_piloto*)pilotos;
@@ -161,4 +166,56 @@ void listarPilotos(tda_vector* v)
     puts("===============================================");
     map_(v->vec,v->ce,v->tam,mostrarPiloto);
     puts("===============================================");
+}
+
+unsigned generarNuevoId(tda_vector* v)
+{
+    t_piloto* pil = (t_piloto*)v->vec;
+    unsigned maxId = 0;
+    int i;
+
+    for(i = 0; i < v->ce; i++)
+    {
+        if(pil->id > maxId)
+            maxId = pil->id;
+        pil++;
+    }
+    return maxId + 1;
+}
+
+int altaPiloto(tda_vector* v, tda_vector* esc)
+{
+    t_piloto nuevo;
+    char fechaStr[20];
+
+    nuevo.id = generarNuevoId(v);
+
+    printf("Nombre: ");
+    fflush(stdin);
+    fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
+    nuevo.nombre[strlen(nuevo.nombre) - 1] = '\0';
+
+    printf("Nacionalidad: ");
+    fflush(stdin);
+    fgets(nuevo.nacionalidad, sizeof(nuevo.nacionalidad), stdin);
+    nuevo.nacionalidad[strlen(nuevo.nacionalidad) - 1] = '\0';
+
+    do{
+        printf("ID escuderia: ");
+        scanf("%u", &nuevo.id_escuderia);
+    }while(escuderiaValida(nuevo.id_escuderia, esc) != OK);
+
+    nuevo.puntos_acumulados = 0;
+    nuevo.estado = 'A';
+
+    printf("Fecha nacimiento (AAAAMMDD): ");
+    fflush(stdin);
+    fgets(fechaStr, sizeof(fechaStr), stdin);
+    fechaStr[strlen(fechaStr) - 1] = '\0';
+    sscanf(fechaStr, "%I64u", &nuevo.fechaNacimiento);
+
+    insertarAlFinal_Vector(v, &nuevo);
+
+    printf("Piloto %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
+    return OK;
 }

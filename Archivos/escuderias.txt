@@ -1,9 +1,9 @@
-1;RBR;Red Bull Racing;Austria;1
-2;MER;Mercedes;Alemania;1
+1;RBR;Red Bull Racing;Austria;0
+2;MER;Mercedes;Alemania;0
 3;FER;Ferrari;Italia;1
 4;MCL;McLaren;Reino Unido;1
 5;AST;Aston Martin;Reino Unido;1
 6;ALP;Alpine;Francia;1
 7;WIL;Williams;Reino Unido;1
 8;RBT;RB Team;Italia;1
-9;SBR;Sauber;Suiza;0
+9;SBR;Sauber;Suiza;1

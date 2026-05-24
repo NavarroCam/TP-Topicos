@@ -30,3 +30,32 @@ void listarEscuderias(const char *binPath)
 
     fclose(fbin);
 }
+
+int compararIdEscuderia(const void* a, const void* b)
+{
+    unsigned idBuscado = *(unsigned*)a;
+    unsigned idEsc = ((t_escuderia*)b)->id;
+    if(idBuscado < idEsc) return -1;
+    if(idBuscado > idEsc) return  1;
+    return 0;
+}
+
+int escuderiaValida(unsigned idEsc, tda_vector* v)
+{
+    t_escuderia* resultado;
+
+    resultado = (t_escuderia*)bsearch(&idEsc, v->vec, v->ce, sizeof(t_escuderia), compararIdEscuderia);
+
+    if(!resultado)
+    {
+        printf("Escuderia no encontrada.\n");
+        return ERROR;
+    }
+
+    if(resultado->estado != 1)
+    {
+        printf("La escuderia %s esta inactiva.\n", resultado->nombre);
+        return ERROR;
+    }
+    return OK;
+}

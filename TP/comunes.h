@@ -25,4 +25,5 @@ void sSort(void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
 void* buscarMenor(const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
 void intercambiar(void* a, void* b, size_t tam);
 
+
 #endif // COMUNES_H_INCLUDED

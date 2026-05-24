@@ -1,6 +1,5 @@
 #include "archivos.h"
 
-
 /* PILOTOS: txt -> dat
    Formato linea: id;nombre;nacionalidad;id_escuderia;puntos;estado;fechaNacimiento*/
 int cargarPilotosTxtABin(const char *txtPath, const char *binPath)
@@ -122,28 +121,32 @@ int trozarEscuderias(char* cad, t_escuderia* e1)
     if(!p)
         return ERROR;
     *p = '\0';
+
     p = strrchr(cad,SEPARADOR);
     if(!p)
         return ERROR;
     sscanf(p+1,"%d",&e1->estado);
     *p = '\0';
+
     p = strrchr(cad,SEPARADOR);
     if(!p)
         return ERROR;
     strcpy(e1->pais,p+1);
     *p = '\0';
+
     p = strrchr(cad,SEPARADOR);
     if(!p)
         return ERROR;
     strcpy(e1->nombre,p+1);
     *p = '\0';
+
     p = strrchr(cad,SEPARADOR);
     if(!p)
         return ERROR;
     strcpy(e1->codigo,p+1);
     *p = '\0';
-
     sscanf(cad,"%u",&e1->id);
+
     return OK;
 }
 
