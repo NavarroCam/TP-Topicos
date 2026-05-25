@@ -6,7 +6,7 @@
 #include "tipos.h"
 #include "comunes.h"
 
-#define ESCUDERIAS_DAT "escuderias.dat"
+#define ESCUDERIAS_DAT "../Archivos/escuderias.dat"
 #define ESCUDERIAS_TXT "../Archivos/escuderias.txt"
 
 

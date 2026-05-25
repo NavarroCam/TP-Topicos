@@ -1,9 +1,11 @@
 #include <stdio.h>
-//#include "archivos.h"
-#include "pilotos.h" //PREGUNTAR A CARO: Esta bien que la referencia venga de otro archivo?
+#include <locale.h>
+#include "archivos.h"
+//#include "pilotos.h" //PREGUNTAR A CARO: Esta bien que la referencia venga de otro archivo?
 
 int main()
 {
+    setlocale(LC_ALL, "");
     int op;
 
     tda_vector pilotos;
@@ -47,15 +49,14 @@ int main()
                 __menuPilotos(&pilotos, &escuderias);
                 break;
             case 2:
-                //printf("menu escuderias");
                 menuEscuderias(&escuderias);
                 break;
             case 3:
-                printf("menu carreras");
+                printf("menu carreras -> HACER");
                 //menuCarreras();
                 break;
             case 4:
-                printf("menu estadisticas");
+                printf("menu estadisticas -> HACER");
                 //menuEstadisticas();
                 break;
             case 0:

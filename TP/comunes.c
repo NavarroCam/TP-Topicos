@@ -100,3 +100,52 @@ void intercambiar(void* a, void* b, size_t tam)
     }
 }
 
+void* bSearch(const void* clave, const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*))
+{
+    int pm, res;
+    void* ppm;
+
+    while(ce > 0)
+    {
+        pm = ce/2;
+        ppm = (void*)vec + (pm * tam);
+        res = cmp(clave, ppm);
+        if(res == 0)
+            return ppm;
+        else if(res > 0)
+        {
+            ce = ce - pm - 1;
+            vec = ppm + tam;
+        }
+        else
+            ce = pm;
+    }
+    return NULL;
+}
+
+int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
+{
+    void* elem;
+    FILE* pf;
+
+    pf = fopen(archNom, "rb");
+    if(!pf)
+        return ERROR;
+
+    elem = malloc(tamElem);
+    if(!elem)
+    {
+        fclose(pf);
+        return ERROR_MEMORIA;
+    }
+
+    fread(elem,tamElem,1,pf);
+    while(!feof(pf))
+    {
+        insertarAlFinal_Vector(v,elem);
+        fread(elem,tamElem,1,pf);
+    }
+    fclose(pf);
+    free(elem);
+    return OK;
+}

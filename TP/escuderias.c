@@ -9,14 +9,14 @@ void menuEscuderias(tda_vector* escuderias)
         printf("2. Alta escuderia\n");
         printf("3. Baja escuderia\n");
         printf("0. Volver\n");
-        printf("Opcion: ");
+        printf("Opción: ");
         scanf("%d", &op);
         system("cls");
 
         switch (op)
         {
             case 0: break;
-            //case 1: listarEscuderias(); break;
+            case 1: //listarEscuderias(); break;
             case 2: altaEscuderias(escuderias); break;
             //case 3: bajaEscuderia(escuderias); break;
             default:
@@ -90,7 +90,7 @@ int altaEscuderias(tda_vector* esc)
 
     nuevo.id = generarNuevoIdEscuderias(esc);
     do{
-        printf("--- ALTA ESCUDERIA ---\n");
+        printf("==== ALTA ESCUDERIA ====\n");
         printf("Codigo: ");
         fflush(stdin);
         fgets(nuevo.codigo, sizeof(nuevo.codigo), stdin);

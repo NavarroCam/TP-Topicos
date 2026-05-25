@@ -59,10 +59,6 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
     int op;
 //    unsigned int idEsc;
 //    unsigned int idPil;
-    /*tda_vector pilotos;
-    crear_Vector(&pilotos,sizeof(t_piloto));
-    cargarEnTDA(PILOTOS_DAT,&pilotos,sizeof(t_piloto));
-*/
 
     do{
         printf("\n--- PILOTOS ---\n");
@@ -102,45 +98,16 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
 //                }
 //                break;
 //            }
-//            case 6: mostrarRanking(PILOTOS_DAT); break;
+            case 6: mostrarRanking(pilotos); break;
 //            case 7:
 //                idEsc = (unsigned int)leerEntero("ID escuderia: ");
 //                listarPilotosPorEscuderia(PILOTOS_DAT, idEsc);
 //                break;
 //            case 8: exportarPilotos(PILOTOS_DAT, EXP_PILOTOS); break;
             case 0: break;
-            default: printf("Opcion invalida.\n");
+            default: printf("Opción inválida.\n");
         }
     }while(op != 0);
-    //destruir_Vector(&pilotos);
-}
-
-
-int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
-{
-    void* elem;
-    FILE* pf;
-
-    pf = fopen(archNom, "rb");
-    if(!pf)
-        return ERROR;
-
-    elem = malloc(tamElem);
-    if(!elem)
-    {
-        fclose(pf);
-        return ERROR_MEMORIA;
-    }
-
-    fread(elem,tamElem,1,pf);
-    while(!feof(pf))
-    {
-        insertarAlFinal_Vector(v,elem);
-        fread(elem,tamElem,1,pf);
-    }
-    fclose(pf);
-    free(elem);
-    return OK;
 }
 
 int compararPuntos(const void* a, const void* b)
@@ -190,6 +157,8 @@ int altaPiloto(tda_vector* v, tda_vector* esc)
 
     nuevo.id = generarNuevoId(v);
 
+    puts("==== ALTA DE PILOTO ====");
+
     printf("Nombre: ");
     fflush(stdin);
     fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
@@ -218,4 +187,80 @@ int altaPiloto(tda_vector* v, tda_vector* esc)
 
     printf("Piloto %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
     return OK;
+}
+
+char* obtenerNombre(const void* p)
+{
+    if(!p)
+        return NULL;
+    return ((t_piloto*)p)->nombre;
+}
+
+unsigned obtenerPuntos(const void* p)
+{
+    if(!p)
+        return 0;
+    return ((t_piloto*)p)->puntos_acumulados;
+}
+
+void mostrarRanking(tda_vector* v)
+{
+    //POS NOMBRE PUNTOS
+    //POS AUTOINC
+    int i;
+    int puesto_real = 1;
+    char* nombre;
+    char str_puesto[8];
+    unsigned puntos_actual;
+    void* piloto_actual;
+    void* piloto_anterior;
+    tda_vector temp;
+
+    if(crear_Vector(&temp,v->tam) != OK)
+    {
+        puts("No es posible generar el ranking.");
+        return;
+    }
+    temp.ce = v->ce;
+    temp.vec = malloc(temp.ce * temp.tam);
+    if(!temp.vec)
+    {
+        puts("Error de asignación de memoria.");
+        destruir_Vector(&temp);
+        return;
+    }
+
+    memcpy(temp.vec, v->vec, temp.ce * temp.tam);
+
+    sSort(temp.vec,temp.ce,temp.tam,compararPuntos);
+
+    listarPilotos(&temp);
+
+    system("cls");
+    puts("=======================================================");
+    printf("| %-8s | %-30s | %-7s |\n","POSICIÓN", "PILOTO", "PUNTOS");
+    puts("=======================================================");
+
+    for(i=0;i<temp.ce;i++)
+    {
+        piloto_actual = (char*)temp.vec + (i*temp.tam);
+
+        nombre = obtenerNombre(piloto_actual);
+        puntos_actual = obtenerPuntos(piloto_actual);
+
+        if(i > 0)
+        {
+            piloto_anterior = (char*)temp.vec + ((i - 1) * temp.tam);
+            if(puntos_actual < obtenerPuntos(piloto_anterior))
+            {
+                puesto_real = i + 1;
+            }
+        }
+
+        sprintf(str_puesto, "%d°", puesto_real);
+        printf("| %-8s | %-30s | %-4u pts|\n", str_puesto, nombre, puntos_actual);
+    }
+
+    puts("=======================================================");
+    destruir_Vector(&temp);
 }
