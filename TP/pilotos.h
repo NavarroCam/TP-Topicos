@@ -15,7 +15,7 @@
 void menuPilotos(const char *binPath, const char *bajasPath);
 
 void mostrarPiloto(void* pilotos);
-int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem);
+int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem); //mover a comunes¿?
 void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias);
 void listarPilotos(tda_vector* v);
 int compararPuntos(const void* a, const void* b);

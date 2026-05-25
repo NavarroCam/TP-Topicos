@@ -47,8 +47,8 @@ int main()
                 __menuPilotos(&pilotos, &escuderias);
                 break;
             case 2:
-                printf("menu escuderias");
-                //menuEscuderias();
+                //printf("menu escuderias");
+                menuEscuderias(&escuderias);
                 break;
             case 3:
                 printf("menu carreras");
