@@ -37,4 +37,8 @@ int modificarPiloto(tda_vector* v, tda_vector* esc);
 void mostrarRanking(tda_vector* v);
 char* obtenerNombre(const void* p);
 unsigned obtenerPuntos(const void* p);
+
+void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* escuderias);
+void listarPilotosPorEscuderia_Op2(tda_vector* v, tda_vector* escuderias);
+
 #endif // PILOTOS_H_INCLUDED

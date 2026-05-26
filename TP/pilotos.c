@@ -64,15 +64,15 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
         puts("\n\n===============================================");
         printf("\t\t   PILOTOS\n");
         puts("===============================================");
-        printf("1. Listar pilotos(FUNCIONA)\n");
+        printf("1. Listar pilotos y puntajes(FUNCIONA)\n"); //sacar columna de estado, solo está para checkear las funciones posteriores
         printf("2. Alta piloto(FUNCIONA)\n");
         printf("3. Baja piloto(FUNCIONA)\n");
         printf("4. Modificar piloto(FUNCIONA)\n");
-        printf("5. Buscar piloto por ID\n");
-        printf("6. Mostrar ranking(FUNCIONA)\n");
-        printf("7. Pilotos por escuderia\n");
-        printf("8. Exportar pilotos\n");
+        printf("5. Mostrar ranking(FUNCIONA)\n");
+        printf("6. Pilotos por escuderia(FUNCIONAN LAS 2)\n");
+        printf("7. Exportar pilotos\n");
         printf("0. Volver\n");
+
         printf("\nOpcion: ");
         scanf("%d", &op);
         system("cls");
@@ -101,12 +101,13 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
 //                }
 //                break;
 //            }
-            case 6: mostrarRanking(pilotos); break;
-//            case 7:
-//                idEsc = (unsigned int)leerEntero("ID escuderia: ");
-//                listarPilotosPorEscuderia(PILOTOS_DAT, idEsc);
-//                break;
-//            case 8: exportarPilotos(PILOTOS_DAT, EXP_PILOTOS); break;
+            case 5: mostrarRanking(pilotos); break;
+
+            case 6: //elegir 1 -> Preguntar a Caro
+                //listarPilotosPorEscuderia_Op1(pilotos, escuderias);
+                listarPilotosPorEscuderia_Op2(pilotos, escuderias);
+                break;
+//            case 7: exportarPilotos(PILOTOS_DAT, EXP_PILOTOS); break;
             case 0: break;
             default: printf("Opción inválida.\n");
         }
@@ -369,7 +370,6 @@ int modificarPiloto(tda_vector* v, tda_vector* esc)
 }
 
 
-
 char* obtenerNombre(const void* p)
 {
     if(!p)
@@ -437,11 +437,82 @@ void mostrarRanking(tda_vector* v)
                 puesto_real = i + 1;
             }
         }
-
         sprintf(str_puesto, "%d°", puesto_real);
         printf("| %-8s | %-30s | %-4u pts|\n", str_puesto, nombre, puntos_actual);
     }
 
     puts("=======================================================");
     destruir_Vector(&temp);
+}
+
+
+
+void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias)
+{
+    t_escuderia* esc = (t_escuderia*)escuderias->vec;
+    t_piloto* pil;
+    int i, j;
+
+    for(i = 0; i < escuderias->ce; i++)
+    {
+        printf("\n\n=============\t %15s \t=============\n", esc->nombre);
+        puts("-----------------------------------------------------");
+        printf("| %-3s | %-30s | %6s | %s |\n",
+               "ID", "NOMBRE", "PUNTOS", "E");
+        puts("-----------------------------------------------------");
+
+        pil = (t_piloto*)pilotos->vec;
+        for(j = 0; j < pilotos->ce; j++)
+        {
+            if(pil->id_escuderia == esc->id && (pil->estado == 'A' || pil->estado == 'S'))
+            {
+                printf("| %-3u | %-30s | %6u | %c |\n",
+                       pil->id,
+                       pil->nombre,
+                       pil->puntos_acumulados,
+                       pil->estado);
+            }
+            pil++;
+        }
+        puts("=====================================================");
+        esc++;
+    }
+}
+
+void listarPilotosPorEscuderia_Op2(tda_vector* pilotos, tda_vector* escuderias)
+{
+    t_escuderia* esc;
+    t_piloto* pil;
+    unsigned idEsc;
+    int i, encontrado = 0;
+
+    printf("\nID escuderia: ");
+    scanf("%u", &idEsc);
+
+    esc = (t_escuderia*)bsearch(&idEsc, escuderias->vec, escuderias->ce, sizeof(t_escuderia), compararIdEscuderia);
+    if(!esc)
+    {
+        printf("Escuderia no encontrada.\n");
+        return;
+    }
+
+    system("cls");
+    printf("\n\n=============\t %15s \t=============\n", esc->nombre);
+    puts("-----------------------------------------------------");
+    printf("| %-3s | %-30s | %6s | %s |\n", "ID", "NOMBRE", "PUNTOS", "E");
+    puts("-----------------------------------------------------");
+
+    pil = (t_piloto*)pilotos->vec;
+    for(i = 0; i < pilotos->ce; i++)
+    {
+        if(pil->id_escuderia == idEsc && (pil->estado == 'A' || pil->estado == 'S'))
+        {
+            printf("| %-3u | %-30s | %-6u | %c |\n", pil->id, pil->nombre, pil->puntos_acumulados, pil->estado);
+            encontrado = 1;
+        }
+        pil++;
+    }
+    puts("=====================================================");
+    if(!encontrado)
+        printf("No hay pilotos para esta escuderia.\n");
 }

@@ -36,7 +36,7 @@
 	"escuderias.h"
 	"carreras.h"
 
-1779759268 c:\topicos\tp\tp-topicos\tp\pilotos.h
+1779799877 c:\topicos\tp\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -52,7 +52,7 @@
 
 1778630990 c:\topicos\tp\tp-topicos\tp\carreras.h
 
-1779762313 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
+1779799033 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -189,7 +189,7 @@
 1779672650 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
-1779761134 c:\topicos\tp\tp-topicos\tp\comunes.h
+1779762544 c:\topicos\tp\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
