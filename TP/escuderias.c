@@ -94,8 +94,8 @@ int altaEscuderias(tda_vector* esc)
         printf("Codigo: ");
         fflush(stdin);
         fgets(nuevo.codigo, sizeof(nuevo.codigo), stdin);
-        aux=BuscarCodigoEscuderia(esc,nuevo.codigo);
-        if(aux==1)
+        aux = BuscarCodigoEscuderia(esc,nuevo.codigo);
+        if(aux == 1)
         {
             printf("Codigo ya existente\n");
             system("pause");
@@ -121,6 +121,7 @@ int altaEscuderias(tda_vector* esc)
     printf("Escuderia %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
     return OK;
 }
+
 int BuscarCodigoEscuderia(tda_vector *escuderias, char* cod)
 {
     size_t cant = escuderias->ce;
@@ -137,6 +138,7 @@ int BuscarCodigoEscuderia(tda_vector *escuderias, char* cod)
     }
     return band;
 }
+
 unsigned generarNuevoIdEscuderias(tda_vector* v)
 {
     t_escuderia* esc = (t_escuderia*)v->vec;

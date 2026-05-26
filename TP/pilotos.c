@@ -61,17 +61,19 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
 //    unsigned int idPil;
 
     do{
-        printf("\n--- PILOTOS ---\n");
-        printf("1. Listar pilotos(SOLO FUNCIONA ESTA)\n");
-        printf("2. Alta piloto\n");
-        printf("3. Baja piloto\n");
-        printf("4. Modificar piloto\n");
+        puts("\n\n===============================================");
+        printf("\t\t   PILOTOS\n");
+        puts("===============================================");
+        printf("1. Listar pilotos(FUNCIONA)\n");
+        printf("2. Alta piloto(FUNCIONA)\n");
+        printf("3. Baja piloto(FUNCIONA)\n");
+        printf("4. Modificar piloto(FUNCIONA)\n");
         printf("5. Buscar piloto por ID\n");
-        printf("6. Mostrar ranking\n");
+        printf("6. Mostrar ranking(FUNCIONA)\n");
         printf("7. Pilotos por escuderia\n");
         printf("8. Exportar pilotos\n");
         printf("0. Volver\n");
-        printf("Opcion: ");
+        printf("\nOpcion: ");
         scanf("%d", &op);
         system("cls");
 
@@ -80,8 +82,9 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
             case 1: listarPilotos(pilotos); break;
             case 2: altaPiloto(pilotos, escuderias); break;
                 //_altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
-//            case 3: _bajaPiloto(PILOTOS_DAT, PILOTOS_IDX, BAJAS_PILOTOS); break;
-//            case 4: _modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
+            case 3: bajaPiloto(pilotos); break;
+            case 4: modificarPiloto(pilotos, escuderias); break;
+                //_modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
 //            case 5: {
 //                FILE *fp;
 //                Piloto p;
@@ -117,19 +120,32 @@ int compararPuntos(const void* a, const void* b)
     return pil2->puntos_acumulados - pil1->puntos_acumulados;
 }
 
+int compararIdPiloto(const void* a, const void* b)
+{
+    unsigned idBuscado = *(unsigned*)a;
+    unsigned idPiloto = ((t_piloto*)b)->id;
+    if(idBuscado < idPiloto) return -1;
+    if(idBuscado > idPiloto) return  1;
+    return 0;
+}
+
 void mostrarPiloto(void* pilotos)
 {
     t_piloto* pil = (t_piloto*)pilotos;
-    printf("| %-30s | %-10u |\n",
+    if(pil->estado == 'A' || pil->estado == 'S')
+    {
+        printf("| %-30s | %-6u | %c |\n",
                pil->nombre,
-               pil->puntos_acumulados);
+               pil->puntos_acumulados,
+               pil->estado);
+    }
 }
 
 void listarPilotos(tda_vector* v)
 {
     system("cls");
     puts("===============================================");
-    printf("| %-30s | %-10s |\n", "PILOTO", "PUNTOS");
+    printf("| %-30s | %-6s | %s |\n", "NOMBRE", "PUNTOS", "E");
     puts("===============================================");
     map_(v->vec,v->ce,v->tam,mostrarPiloto);
     puts("===============================================");
@@ -188,6 +204,171 @@ int altaPiloto(tda_vector* v, tda_vector* esc)
     printf("Piloto %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
     return OK;
 }
+
+int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
+{
+    t_piloto p;
+    FILE* fbin;
+    FILE* ftxt;
+
+    fbin = fopen(binPath, "rb");
+    if(!fbin)
+    {
+        printf("Error al abrir %s\n", binPath);
+        return ERROR;
+    }
+
+    ftxt = fopen(txtPath, "wt");
+    if(!ftxt)
+    {
+        printf("Error al abrir %s\n", txtPath);
+        fclose(fbin);
+        return ERROR;
+    }
+
+    while(fread(&p, sizeof(t_piloto), 1, fbin) == 1)
+    {
+        fprintf(ftxt, "%u;%s;%s;%u;%u;%c;%I64u\n",
+                p.id, p.nombre, p.nacionalidad,
+                p.id_escuderia, p.puntos_acumulados,
+                p.estado, p.fechaNacimiento);
+    }
+
+    fclose(fbin);
+    fclose(ftxt);
+    return OK;
+}
+
+int bajaPiloto(tda_vector* v)
+{
+    unsigned id;
+    t_piloto* piloto;
+    FILE* fbajas;
+
+    printf("\n==== BAJA DE PILOTO ====\n");
+    printf("ID del piloto a dar de baja: ");
+    scanf("%u", &id);
+
+    piloto = bsearch(&id, v->vec, v->ce, sizeof(t_piloto), compararIdPiloto);
+    if(!piloto)
+    {
+        printf("Piloto no encontrado.\n");
+        return ERROR;
+    }
+    if(piloto->estado == 'R')
+    {
+        printf("El piloto ya esta dado de baja.\n");
+        return ERROR;
+    }
+
+    piloto->estado = 'R';
+
+    fbajas = fopen(BAJAS_PILOTOS_DAT, "ab");
+    if(!fbajas)
+    {
+        printf("Error al abrir archivo de bajas.\n");
+        return ERROR;
+    }
+    fwrite(piloto, sizeof(t_piloto), 1, fbajas);
+    fclose(fbajas);
+    exportarBajasPilotosTxt(BAJAS_PILOTOS_DAT, BAJAS_PILOTOS_TXT); //Para leer los pilotos en el txt
+
+    printf("Piloto %s dado de baja.\n", piloto->nombre);
+    return OK;
+}
+
+int confirmarModificacion(const char *mensaje)
+{
+    char opcion;
+
+    do{
+        printf("%s (S/N): ", mensaje);
+        scanf(" %c", &opcion);
+        opcion = toupper(opcion);
+        if(opcion != 'S' && opcion != 'N')
+        {
+            printf("Opcion invalida.\n");
+        }
+    }while(opcion != 'S' && opcion != 'N');
+
+    return opcion == 'S';
+}
+
+int modificarPiloto(tda_vector* v, tda_vector* esc)
+{
+    unsigned id;
+    t_piloto* piloto;
+    char fechaStr[20];
+    unsigned nuevoIdEsc;
+
+    printf("\n==== MODIFICAR PILOTO ====\n");
+    printf("ID del piloto a modificar: ");
+    scanf("%u", &id);
+
+    piloto = bsearch(&id, v->vec, v->ce, sizeof(t_piloto), compararIdPiloto);
+    if(!piloto)
+    {
+        printf("Piloto no encontrado.\n");
+        return ERROR;
+    }
+
+    printf("\nNombre: %s\n", piloto->nombre);
+    if(confirmarModificacion("Modificar nombre"))
+    {
+        printf("\nNombre (%s): ", piloto->nombre);
+        fflush(stdin);
+        fgets(piloto->nombre, sizeof(piloto->nombre), stdin);
+        piloto->nombre[strlen(piloto->nombre) - 1] = '\0';
+    }
+
+    printf("\nNacionalidad: %s\n", piloto->nacionalidad);
+    if(confirmarModificacion("Modificar nacionalidad"))
+    {
+        printf("Nacionalidad (%s): ", piloto->nacionalidad);
+        fflush(stdin);
+        fgets(piloto->nacionalidad, sizeof(piloto->nacionalidad), stdin);
+        piloto->nacionalidad[strlen(piloto->nacionalidad) - 1] = '\0';
+    }
+
+    printf("\nID Escuderia: %u\n", piloto->id_escuderia);
+    if(confirmarModificacion("Modificar escuderia"))
+    {
+        do{
+            printf("ID escuderia: ");
+            scanf("%u", &nuevoIdEsc);
+        }while(escuderiaValida(nuevoIdEsc, esc) != OK);
+        piloto->id_escuderia = nuevoIdEsc;
+    }
+
+    printf("\nEstado: %c\n", piloto->estado);
+    if(confirmarModificacion("Modificar estado"))
+    {
+        if(piloto->estado == 'A')
+        {
+            piloto->estado = 'S';
+        }
+        else
+        {
+            piloto->estado = 'A';
+        }
+    }
+
+    FECHA_FORMATO(piloto->fechaNacimiento, anio, mes, dia)
+    printf("\nFecha nacimiento (%04u-%02u-%02u)\n", anio, mes, dia); //acá se usa la macro para mostrar bien por consola la fecha
+    if(confirmarModificacion("Modificar fecha de nacimiento"))
+    {
+        printf("\nFecha nacimiento (AAAAMMDD) (%I64u): ", piloto->fechaNacimiento);
+        fflush(stdin);
+        fgets(fechaStr, sizeof(fechaStr), stdin);
+        fechaStr[strlen(fechaStr) - 1] = '\0';
+        sscanf(fechaStr, "%I64u", &piloto->fechaNacimiento);
+    }
+
+    printf("\nPiloto modificado correctamente!\n");
+    return OK;
+}
+
+
 
 char* obtenerNombre(const void* p)
 {

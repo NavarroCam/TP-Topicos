@@ -9,6 +9,12 @@
 #define OK    0
 #define ERROR -1
 
+// Macro para mostrar por pantalla la fecha
+#define FECHA_FORMATO(f, a, m, d) \
+    unsigned a = (f) / 10000; \
+    unsigned m = ((f) % 10000) / 100; \
+    unsigned d = (f) % 100;
+
 typedef struct{
     void* vec;
     size_t ce;

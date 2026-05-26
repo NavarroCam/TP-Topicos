@@ -34,14 +34,17 @@ int main()
     printf("=== SISTEMA DE GESTION TEMPORADA F1 ===\n");
     do
     {
-        printf("\n======= MENU PRINCIPAL =======\n");
+        puts("\n\n===============================================");
+        puts("\t\t   MENU PRINCIPAL");
+        puts("===============================================");
         printf("1. Pilotos\n");
         printf("2. Escuderias\n");
         printf("3. Carreras\n");
         printf("4. Estadisticas\n");
         printf("0. Salir\n");
-        printf("Opcion: ");
+        printf("\nOpcion: ");
         scanf("%d", &op);
+        system("cls");
 
         switch (op)
         {
