@@ -9,12 +9,12 @@
 
 1779120897 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
 
-1779902344 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
+1779917626 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	"archivos.h"
 
-1779905658 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
+1779917413 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -176,7 +176,7 @@
 	"tipos.h"
 	"comunes.h"
 
-1779906155 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
+1779915827 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
 
 1779672776 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.h
 	<stdio.h>

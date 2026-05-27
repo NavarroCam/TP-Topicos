@@ -30,8 +30,9 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
             case 4: modificarPiloto(pilotos, escuderias); break;
             case 5: mostrarRanking(pilotos); break;
             case 6: ///elegir 1 -> Preguntar a Caro
-                //listarPilotosPorEscuderia_Op1(pilotos, escuderias);
-                listarPilotosPorEscuderia_Op2(pilotos, escuderias);
+                listarPilotosPorEscuderia_Op1(pilotos, escuderias);//OK
+                //listarPilotosPorEscuderia_Op2(pilotos, escuderias);//OK
+                //PUEDEN SER AMBAS
                 break;
             case 7: puts("Exportar pilotos"); break;
             case 0: break;

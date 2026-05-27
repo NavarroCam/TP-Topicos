@@ -2,7 +2,7 @@
 #include <locale.h>
 #include "archivos.h"
 //#include "pilotos.h" //PREGUNTAR A CARO: Esta bien que la referencia venga de otro archivo?
-
+///PILOTOS.DAT ORDENAR y BUSCAR en el archivo
 int main()
 {
     setlocale(LC_ALL, "");
@@ -69,7 +69,9 @@ int main()
                 printf("Opcion inválida.\n");
         }
     }while (op != 0);
-
+//guardar datos archivo -> reescribo?
+//exportar datos a txt -> pilotos y escuderias nomas? guardar los datos
+///MODIFICAR DONDE EL TDA NO SEA ESTRICTAMENTE NECESARIO
     destruir_Vector(&pilotos);
     destruir_Vector(&escuderias);
 
