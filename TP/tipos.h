@@ -19,4 +19,19 @@ typedef struct{
     int estado;
 }t_escuderia;
 
+typedef struct{
+    unsigned posicion;
+    unsigned id_piloto;
+    unsigned puntos;
+}t_posicion;
+
+typedef struct{
+    int id;
+    char circuito[20];
+    unsigned long long fecha;
+    int estado;
+    int cant_resultados;
+    t_posicion** matResultados;
+}t_carrera;
+
 #endif // TIPOS_H_INCLUDED

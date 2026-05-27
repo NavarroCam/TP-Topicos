@@ -4,17 +4,17 @@
 
 1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
 
-1779673080 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
+1779902344 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
 1779120897 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
 
-1779673061 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
+1779902344 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	"archivos.h"
 
-1779679380 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
+1779905658 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -163,12 +163,12 @@
 	"escuderias.h"
 	"carreras.h"
 
-1779672650 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.h
+1779902344 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1779678724 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.h
+1779902344 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -176,7 +176,7 @@
 	"tipos.h"
 	"comunes.h"
 
-1779120897 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
+1779906155 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
 
 1779672776 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.h
 	<stdio.h>
@@ -184,7 +184,7 @@
 	"tipos.h"
 	"comunes.h"
 
-1779120896 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
+1779906155 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
 
 1779672650 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
 	"comunes.h"

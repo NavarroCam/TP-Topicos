@@ -1,70 +1,15 @@
 #include "pilotos.h"
 #include <ctype.h>
 
-/*void menuPilotos(const char *binPath, const char *bajasPath)
-{
-    int opcion;
-
-    do
-    {
-        printf("\n=============================\n");
-        printf("      GESTION PILOTOS\n");
-        printf("=============================\n");
-
-        printf("1 - Listar pilotos\n");
-        printf("2 - Alta piloto\n");
-        printf("3 - Baja piloto\n");
-        printf("4 - Modificar piloto\n");
-        printf("5 - Listar bajas\n");
-        printf("0 - Salir\n");
-
-        printf("\nOpcion: ");
-        scanf("%d", &opcion);
-
-        switch(opcion)
-        {
-            case 1:
-                listarAltas(binPath);
-                break;
-
-            case 2:
-                altaPiloto(binPath);
-                break;
-
-            case 3:
-                bajaPiloto(binPath, bajasPath);
-                break;
-
-            case 4:
-                modificarPiloto(binPath);
-                break;
-
-            case 5:
-                listarBajas(bajasPath);
-                break;
-
-            case 0:
-                printf("\nFin.\n");
-                break;
-
-            default:
-                printf("\nOpcion invalida.\n");
-        }
-
-    }while(opcion != 0);
-}*/
-
 void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
 {
     int op;
-//    unsigned int idEsc;
-//    unsigned int idPil;
 
     do{
         puts("\n\n===============================================");
         printf("\t\t   PILOTOS\n");
         puts("===============================================");
-        printf("1. Listar pilotos y puntajes(FUNCIONA)\n"); //sacar columna de estado, solo está para checkear las funciones posteriores
+        printf("1. Listar pilotos y puntajes(FUNCIONA)\n");
         printf("2. Alta piloto(FUNCIONA)\n");
         printf("3. Baja piloto(FUNCIONA)\n");
         printf("4. Modificar piloto(FUNCIONA)\n");
@@ -81,33 +26,14 @@ void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias)
         {
             case 1: listarPilotos(pilotos); break;
             case 2: altaPiloto(pilotos, escuderias); break;
-                //_altaPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
             case 3: bajaPiloto(pilotos); break;
             case 4: modificarPiloto(pilotos, escuderias); break;
-                //_modificarPiloto(PILOTOS_DAT, PILOTOS_IDX); break;
-//            case 5: {
-//                FILE *fp;
-//                Piloto p;
-//                idPil = (unsigned int)leerEntero("ID piloto: ");
-//                fp = fopen(PILOTOS_DAT, "rb");
-//                if (fp) {
-//                    if (buscarPilotoPorId(fp, idPil, &p))
-//                        printf("Encontrado: [%u] %s - %s - Pts:%u - Estado:%c\n",
-//                               p.id, p.nombre, p.nacionalidad,
-//                               p.puntos_acumulados, p.estado);
-//                    else
-//                        printf("No encontrado.\n");
-//                    fclose(fp);
-//                }
-//                break;
-//            }
             case 5: mostrarRanking(pilotos); break;
-
-            case 6: //elegir 1 -> Preguntar a Caro
+            case 6: ///elegir 1 -> Preguntar a Caro
                 //listarPilotosPorEscuderia_Op1(pilotos, escuderias);
                 listarPilotosPorEscuderia_Op2(pilotos, escuderias);
                 break;
-//            case 7: exportarPilotos(PILOTOS_DAT, EXP_PILOTOS); break;
+            case 7: puts("Exportar pilotos"); break;
             case 0: break;
             default: printf("Opción inválida.\n");
         }
@@ -135,21 +61,20 @@ void mostrarPiloto(void* pilotos)
     t_piloto* pil = (t_piloto*)pilotos;
     if(pil->estado == 'A' || pil->estado == 'S')
     {
-        printf("| %-30s | %-6u | %c |\n",
+        printf("| %-30s | %-6u |\n",
                pil->nombre,
-               pil->puntos_acumulados,
-               pil->estado);
+               pil->puntos_acumulados);
     }
 }
 
 void listarPilotos(tda_vector* v)
 {
     system("cls");
-    puts("===============================================");
-    printf("| %-30s | %-6s | %s |\n", "NOMBRE", "PUNTOS", "E");
-    puts("===============================================");
+    puts("===========================================");
+    printf("| %-30s | %-6s |\n", "NOMBRE", "PUNTOS");
+    puts("===========================================");
     map_(v->vec,v->ce,v->tam,mostrarPiloto);
-    puts("===============================================");
+    puts("===========================================");
 }
 
 unsigned generarNuevoId(tda_vector* v)
@@ -386,8 +311,6 @@ unsigned obtenerPuntos(const void* p)
 
 void mostrarRanking(tda_vector* v)
 {
-    //POS NOMBRE PUNTOS
-    //POS AUTOINC
     int i;
     int puesto_real = 1;
     char* nombre;
