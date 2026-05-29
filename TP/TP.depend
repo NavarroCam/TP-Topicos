@@ -199,3 +199,47 @@
 1779745293 source:c:\topicos\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
+1780006478 source:c:\users\npabl\tp-topicos\tp\archivos.c
+	"archivos.h"
+
+1780006478 c:\users\npabl\tp-topicos\tp\archivos.h
+	"comunes.h"
+	"pilotos.h"
+	"escuderias.h"
+	"carreras.h"
+
+1780006478 c:\users\npabl\tp-topicos\tp\comunes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1780011344 c:\users\npabl\tp-topicos\tp\pilotos.h
+	<stdio.h>
+	<string.h>
+	"archivos.h"
+	"escuderias.h"
+	"tipos.h"
+	"comunes.h"
+
+1780011343 c:\users\npabl\tp-topicos\tp\escuderias.h
+	<stdio.h>
+	<string.h>
+	"tipos.h"
+	"comunes.h"
+
+1780006478 c:\users\npabl\tp-topicos\tp\tipos.h
+
+1780006478 c:\users\npabl\tp-topicos\tp\carreras.h
+
+1780006478 source:c:\users\npabl\tp-topicos\tp\carreras.c
+
+1780006478 source:c:\users\npabl\tp-topicos\tp\comunes.c
+	"comunes.h"
+
+1780006478 source:c:\users\npabl\tp-topicos\tp\estadisticas.c
+
+1780010772 source:c:\users\npabl\tp-topicos\tp\main.c
+	<stdio.h>
+	<locale.h>
+	"archivos.h"
+

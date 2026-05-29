@@ -8,9 +8,6 @@ int main()
     setlocale(LC_ALL, "");
     int op;
 
-    tda_vector pilotos;
-    tda_vector escuderias;
-
     FILE* test;
 
 //    Carga inicial si no existen los .dat
@@ -24,12 +21,6 @@ int main()
     }
     else
         fclose(test);
-
-    crear_Vector(&pilotos,sizeof(t_piloto));
-    cargarEnTDA(PILOTOS_DAT,&pilotos,sizeof(t_piloto));
-
-    crear_Vector(&escuderias, sizeof(t_escuderia));
-    cargarEnTDA(ESCUDERIAS_DAT, &escuderias, sizeof(t_escuderia));
 
     printf("=== SISTEMA DE GESTION TEMPORADA F1 ===\n");
     do
@@ -49,10 +40,10 @@ int main()
         switch (op)
         {
             case 1:
-                __menuPilotos(&pilotos, &escuderias);
+                __menuPilotos(PILOTOS_DAT, ESCUDERIAS_DAT);
                 break;
             case 2:
-                menuEscuderias(&escuderias);
+                menuEscuderias(ESCUDERIAS_DAT);
                 break;
             case 3:
                 printf("menu carreras -> HACER");
@@ -72,8 +63,6 @@ int main()
 //guardar datos archivo -> reescribo?
 //exportar datos a txt -> pilotos y escuderias nomas? guardar los datos
 ///MODIFICAR DONDE EL TDA NO SEA ESTRICTAMENTE NECESARIO
-    destruir_Vector(&pilotos);
-    destruir_Vector(&escuderias);
 
     return 0;
 }
