@@ -97,6 +97,7 @@ int altaPiloto(tda_vector* v, tda_vector* esc)
 {
     t_piloto nuevo;
     char fechaStr[20];
+    int aux;
 
     nuevo.id = generarNuevoId(v);
 
@@ -119,11 +120,20 @@ int altaPiloto(tda_vector* v, tda_vector* esc)
 
     nuevo.puntos_acumulados = 0;
     nuevo.estado = 'A';
-
-    printf("Fecha nacimiento (AAAAMMDD): ");
-    fflush(stdin);
-    fgets(fechaStr, sizeof(fechaStr), stdin);
-    fechaStr[strlen(fechaStr) - 1] = '\0';
+    do{
+        printf("Fecha nacimiento (AAAAMMDD): ");
+        fflush(stdin);
+        fgets(fechaStr, sizeof(fechaStr), stdin);
+        fechaStr[strlen(fechaStr) - 1] = '\0';
+        aux=ValidarFecha(fechaStr);
+        if(aux == ERROR)
+        {
+            printf("Fecha invalida\n");
+            system("pause");
+            system("cls");
+            puts("==== ALTA DE PILOTO ====");
+        }
+    }while(aux == ERROR);
     sscanf(fechaStr, "%I64u", &nuevo.fechaNacimiento);
 
     insertarAlFinal_Vector(v, &nuevo);

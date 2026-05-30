@@ -11,7 +11,11 @@
 
 
 void menuEscuderias(tda_vector* escuderias);
-void listarEscuderias(const char *binPath);
+
+//void listarEscuderias(const char *binPath);
+void listarEscuderias(const tda_vector* v);
+void mostrarEscuderia(void* escuderias);
+
 int compararIdEscuderia(const void* a, const void* b);
 int escuderiaValida(unsigned idEsc, tda_vector* v);
 int altaEscuderias(tda_vector* esc);

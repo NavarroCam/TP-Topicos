@@ -16,7 +16,7 @@ void menuEscuderias(tda_vector* escuderias)
         switch (op)
         {
             case 0: break;
-            case 1: //listarEscuderias(); break;
+            case 1: listarEscuderias(escuderias); break;
             case 2: altaEscuderias(escuderias); break;
             //case 3: bajaEscuderia(escuderias); break;
             default:
@@ -24,37 +24,57 @@ void menuEscuderias(tda_vector* escuderias)
         }
     }while(op != 0);
 }
-void listarEscuderias(const char *binPath)
+//void listarEscuderias(const char *binPath)
+//{
+//    t_escuderia e1;
+//    t_escuderia *escuderia = &e1;
+//    FILE *fbin;
+//    int contador;
+//
+//    fbin = fopen(binPath, "rb");
+//    if (fbin == NULL)
+//    {
+//        printf("Error al abrir %s\n", binPath);
+//        return;
+//    }
+//
+//    printf("\n===== ESCUDERIAS =====\n");
+//    contador = 0;
+//    while (fread(escuderia, sizeof(t_escuderia), 1, fbin) == 1)
+//    {
+//        printf("ID: %u | Codigo: %s | Nombre: %s | Pais: %s | Estado: %d\n",
+//               escuderia->id,
+//               escuderia->codigo,
+//               escuderia->nombre,
+//               escuderia->pais,
+//               escuderia->estado);
+//        contador++;
+//    }
+//    printf("Total escuderias leidas: %d\n", contador);
+//
+//    fclose(fbin);
+//}
+void listarEscuderias(const tda_vector* v)
 {
-    t_escuderia e1;
-    t_escuderia *escuderia = &e1;
-    FILE *fbin;
-    int contador;
-
-    fbin = fopen(binPath, "rb");
-    if (fbin == NULL)
-    {
-        printf("Error al abrir %s\n", binPath);
-        return;
-    }
-
-    printf("\n===== ESCUDERIAS =====\n");
-    contador = 0;
-    while (fread(escuderia, sizeof(t_escuderia), 1, fbin) == 1)
-    {
-        printf("ID: %u | Codigo: %s | Nombre: %s | Pais: %s | Estado: %d\n",
-               escuderia->id,
-               escuderia->codigo,
-               escuderia->nombre,
-               escuderia->pais,
-               escuderia->estado);
-        contador++;
-    }
-    printf("Total escuderias leidas: %d\n", contador);
-
-    fclose(fbin);
+    system("cls");
+    puts("==================================================================================");
+    printf("| %-3s | %-6s | %-30s | %-30s |\n", "ID", "CODIGO", "NOMBRE", "PAIS");
+    puts("==================================================================================");
+    map_(v->vec,v->ce,v->tam,mostrarEscuderia);
 }
+void mostrarEscuderia(void* escuderias)
+{
 
+    t_escuderia* esc = (t_escuderia*)escuderias;
+    if(esc->estado == 1)
+    {
+        printf("| %-3u | %-6s | %-30s | %-30s |\n",
+               esc->id,
+               esc->codigo,
+               esc->nombre,
+               esc->pais);
+    }
+}
 int compararIdEscuderia(const void* a, const void* b)
 {
     unsigned idBuscado = *(unsigned*)a;
@@ -87,6 +107,7 @@ int altaEscuderias(tda_vector* esc)
 {
     t_escuderia nuevo;
     int aux;
+    char *p;
 
     nuevo.id = generarNuevoIdEscuderias(esc);
     do{
@@ -94,25 +115,28 @@ int altaEscuderias(tda_vector* esc)
         printf("Codigo: ");
         fflush(stdin);
         fgets(nuevo.codigo, sizeof(nuevo.codigo), stdin);
+        if ((p = strchr(nuevo.codigo, '\n')) != NULL)
+            *p = '\0';
         aux = BuscarCodigoEscuderia(esc,nuevo.codigo);
-        if(aux == 1)
+        if(aux != ERROR)
         {
             printf("Codigo ya existente\n");
             system("pause");
             system("cls");
         }
-    }while(aux==1);
-    nuevo.codigo[strlen(nuevo.codigo) - 1] = '\0';
+    }while(aux != ERROR);
 
     printf("Nombre: ");
     fflush(stdin);
     fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
-    nuevo.nombre[strlen(nuevo.nombre) - 1] = '\0';
+    if ((p = strchr(nuevo.nombre, '\n')) != NULL)
+        *p = '\0';
 
     printf("Pais: ");
     fflush(stdin);
     fgets(nuevo.pais, sizeof(nuevo.pais), stdin);
-    nuevo.pais[strlen(nuevo.pais) - 1] = '\0';
+    if ((p = strchr(nuevo.pais, '\n')) != NULL)
+        *p = '\0';
 
     nuevo.estado = 1;
 
@@ -126,14 +150,14 @@ int BuscarCodigoEscuderia(tda_vector *escuderias, char* cod)
 {
     size_t cant = escuderias->ce;
     size_t i = 0;
-    int band = 0;
+    int band = ERROR;
     t_escuderia tEsc;
 
-    while(i<cant && band != 1)
+    while(i<cant && band != OK)
     {
         memcpy(&tEsc,(escuderias->vec)+(i*sizeof(t_escuderia)),sizeof(t_escuderia));
         if(strcmp(tEsc.codigo,cod) == 0)
-            band = 1;
+            band = OK;
         i++;
     }
     return band;

@@ -32,4 +32,5 @@ void* buscarMenor(const void* vec, size_t ce, size_t tam, int cmp(const void*, c
 void intercambiar(void* a, void* b, size_t tam);
 void* bSearch(const void* clave, const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
 int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem);
+int ValidarFecha(char* fecha);
 #endif // COMUNES_H_INCLUDED
