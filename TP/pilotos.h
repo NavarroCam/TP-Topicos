@@ -18,27 +18,29 @@
 void menuPilotos(const char *binPath, const char *bajasPath);
 
 void mostrarPiloto(void* pilotos);
-void __menuPilotos(tda_vector* pilotos, tda_vector* escuderias);
-void listarPilotos(tda_vector* v);
+void __menuPilotos(FILE* pilotos, FILE* escuderias);
+void listarPilotos(FILE* pilotos);
 
 int compararPuntos(const void* a, const void* b);
 int compararIdPiloto(const void* a, const void* b);
 
-unsigned generarNuevoId(tda_vector* v);
-int altaPiloto(tda_vector* v, tda_vector* esc);
+unsigned generarNuevoId(const char* v);
+int altaPiloto(const char* pilotos, const char* escuderias);
 
 int exportarBajasPilotosTxt(const char* binPath, const char* txtPath);
-int bajaPiloto(tda_vector* v);
+int bajaPiloto(const char* pilotos);
 
 int confirmarModificacion(const char *mensaje);
-int modificarPiloto(tda_vector* v, tda_vector* esc);
+int modificarPiloto(const char* pilotos, const char* escuderias);
 
 
-void mostrarRanking(tda_vector* v);
+void mostrarRanking(const char* pilotos);
 char* obtenerNombre(const void* p);
 unsigned obtenerPuntos(const void* p);
 
-void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* escuderias);
-void listarPilotosPorEscuderia_Op2(tda_vector* v, tda_vector* escuderias);
+void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias);
+void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias);
+
+void mostrarPilotoCarrera(void* pilotos);
 
 #endif // PILOTOS_H_INCLUDED

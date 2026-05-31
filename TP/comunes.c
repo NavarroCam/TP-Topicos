@@ -149,24 +149,4 @@ int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
     free(elem);
     return OK;
 }
-int ValidarFecha(char* fecha)
-{
-    int dia, mes, anio, aux = OK;
-    sscanf(fecha,"%4d%2d%2d",&anio,&mes,&dia);
-    if(anio < 0)
-        aux = ERROR;
-    if(mes < 1 || mes > 12)
-        aux = ERROR;
-    if((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && dia > 31)
-        aux = ERROR;
-    if((mes == 4 || mes == 6 || mes == 9 || mes ==11) && dia >30)
-        aux = ERROR;
-    if((anio % 4 == 0 && anio % 100 != 0)|| (anio % 400 == 0))//Bisiesto
-    {
-        if(mes == 2 && dia > 29)
-            aux = ERROR;
-    }
-    else if(mes == 2 && dia > 28)
-        aux = ERROR;
-    return aux;
-}
+

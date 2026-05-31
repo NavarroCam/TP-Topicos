@@ -1,20 +1,22 @@
 # depslib dependency file v1.0
-1779670582 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.c
+1780017786 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.c
 	"archivos.h"
 
-1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
+1780246725 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
+	"carreras.h"
 
-1779902344 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
+1780246141 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
-1779120897 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
+1780017786 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
 
-1779917626 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
+1780246141 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	"archivos.h"
+	"carreras.h"
 
-1779917413 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
+1780247204 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -157,18 +159,18 @@
 	"pilotos.h"
 	<ctype.h>
 
-1779122679 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.h
+1780017786 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.h
 	"comunes.h"
 	"pilotos.h"
 	"escuderias.h"
 	"carreras.h"
 
-1779902344 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.h
+1780098644 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1779902344 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.h
+1780243586 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -176,17 +178,18 @@
 	"tipos.h"
 	"comunes.h"
 
-1779915827 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
+1780246102 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
 
-1779672776 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.h
+1780017786 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.h
 	<stdio.h>
 	<string.h>
 	"tipos.h"
 	"comunes.h"
 
-1779906155 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
+1780246766 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
+	"pilotos.h"
 
-1779672650 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
+1780098644 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
 1779762544 c:\topicos\tp\tp-topicos\tp\comunes.h
@@ -198,4 +201,48 @@
 
 1779745293 source:c:\topicos\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
+
+1780006478 source:c:\users\npabl\tp-topicos\tp\archivos.c
+	"archivos.h"
+
+1780006478 c:\users\npabl\tp-topicos\tp\archivos.h
+	"comunes.h"
+	"pilotos.h"
+	"escuderias.h"
+	"carreras.h"
+
+1780006478 c:\users\npabl\tp-topicos\tp\comunes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1780011344 c:\users\npabl\tp-topicos\tp\pilotos.h
+	<stdio.h>
+	<string.h>
+	"archivos.h"
+	"escuderias.h"
+	"tipos.h"
+	"comunes.h"
+
+1780011343 c:\users\npabl\tp-topicos\tp\escuderias.h
+	<stdio.h>
+	<string.h>
+	"tipos.h"
+	"comunes.h"
+
+1780006478 c:\users\npabl\tp-topicos\tp\tipos.h
+
+1780006478 c:\users\npabl\tp-topicos\tp\carreras.h
+
+1780006478 source:c:\users\npabl\tp-topicos\tp\carreras.c
+
+1780006478 source:c:\users\npabl\tp-topicos\tp\comunes.c
+	"comunes.h"
+
+1780006478 source:c:\users\npabl\tp-topicos\tp\estadisticas.c
+
+1780010772 source:c:\users\npabl\tp-topicos\tp\main.c
+	<stdio.h>
+	<locale.h>
+	"archivos.h"
 
