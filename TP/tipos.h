@@ -1,6 +1,8 @@
 #ifndef TIPOS_H_INCLUDED
 #define TIPOS_H_INCLUDED
 
+#define MAX_RESULTADOS 22
+
 typedef struct{
     unsigned id;
     char nombre[30];
@@ -26,12 +28,17 @@ typedef struct{
 }t_posicion;
 
 typedef struct{
+    unsigned posicion;
+    unsigned puntos;
+}t_puntajes;
+
+typedef struct{
     int id;
     char circuito[20];
     unsigned long long fecha;
     int estado;
     int cant_resultados;
-    t_posicion** matResultados;
+    t_posicion resultados[MAX_RESULTADOS];
 }t_carrera;
 
 #endif // TIPOS_H_INCLUDED

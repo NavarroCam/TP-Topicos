@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <locale.h>
+
 #include "archivos.h"
+#include "carreras.h"
 //#include "pilotos.h" //PREGUNTAR A CARO: Esta bien que la referencia venga de otro archivo?
 ///PILOTOS.DAT ORDENAR y BUSCAR en el archivo
 int main()
@@ -9,6 +11,7 @@ int main()
     int op;
 
     FILE* test;
+    FILE* pPilotos, *pEscuderias, *pCarreras, *pPuntajes;
 
 //    Carga inicial si no existen los .dat
     test = fopen(PILOTOS_DAT,"rb");
@@ -21,6 +24,18 @@ int main()
     }
     else
         fclose(test);
+
+    pPilotos = fopen(PILOTOS_DAT,"r+b");
+    if(!pPilotos)
+    {
+        return ERROR;
+    }
+    pEscuderias = fopen(ESCUDERIAS_DAT, "r+b");
+    if(!pEscuderias)
+    {
+        fclose(pPilotos);
+        return ERROR;
+    }
 
     printf("=== SISTEMA DE GESTION TEMPORADA F1 ===\n");
     do
@@ -40,14 +55,32 @@ int main()
         switch (op)
         {
             case 1:
-                __menuPilotos(PILOTOS_DAT, ESCUDERIAS_DAT);
+                __menuPilotos(pPilotos, pEscuderias);
                 break;
             case 2:
-                menuEscuderias(ESCUDERIAS_DAT);
+                ///REVISAR TODO LO DE ESCUDERIAS
+//                menuEscuderias(ESCUDERIAS_DAT);
                 break;
             case 3:
-                printf("menu carreras -> HACER");
-                //menuCarreras();
+                pCarreras = fopen(CARRERAS_DAT,"a+b");
+                if(!pCarreras)
+                {
+                    fclose(pPilotos);
+                    fclose(pEscuderias);
+                    return ERROR;
+                }
+                pPuntajes = fopen(PUNTAJES_TXT,"rt");
+                if(!pPuntajes)
+                {
+                    fclose(pPilotos);
+                    fclose(pEscuderias);
+                    fclose(pCarreras);
+                    return ERROR;
+                }
+                menuCarreras(pCarreras,pPilotos,pPuntajes);
+                //lo pongo aca porque no se si seria correcto o como hacer para cerrarlo al final
+                fclose(pCarreras);
+                fclose(pPuntajes);
                 break;
             case 4:
                 printf("menu estadisticas -> HACER");
@@ -63,6 +96,7 @@ int main()
 //guardar datos archivo -> reescribo?
 //exportar datos a txt -> pilotos y escuderias nomas? guardar los datos
 ///MODIFICAR DONDE EL TDA NO SEA ESTRICTAMENTE NECESARIO
-
+    fclose(pPilotos);
+    fclose(pEscuderias);
     return 0;
 }

@@ -1,7 +1,7 @@
 #include "pilotos.h"
 #include <ctype.h>
 
-void __menuPilotos(const char* pilotos, const char* escuderias)
+void __menuPilotos(FILE* pilotos, FILE* escuderias)
 {
     int op;
 
@@ -25,12 +25,12 @@ void __menuPilotos(const char* pilotos, const char* escuderias)
         switch (op)
         {
             case 1: listarPilotos(pilotos); break;
-            case 2: altaPiloto(pilotos, escuderias); break;
-            case 3: bajaPiloto(pilotos); break;
-            case 4: modificarPiloto(pilotos, escuderias); break;
-            case 5: mostrarRanking(pilotos); break;
+//            case 2: altaPiloto(pilotos, escuderias); break;
+//            case 3: bajaPiloto(pilotos); break;
+//            case 4: modificarPiloto(pilotos, escuderias); break;
+//            case 5: mostrarRanking(pilotos); break;
             case 6: ///elegir 1 -> Preguntar a Caro
-                listarPilotosPorEscuderia_Op1(pilotos, escuderias);//OK
+//                listarPilotosPorEscuderia_Op1(pilotos, escuderias);//OK
                 //listarPilotosPorEscuderia_Op2(pilotos, escuderias);//OK
                 //PUEDEN SER AMBAS
                 break;
@@ -68,27 +68,22 @@ void mostrarPiloto(void* pilotos)
     }
 }
 
-void listarPilotos(const char* pilotos)
+void listarPilotos(FILE* pilotos)
 {
-    FILE *arch = fopen(pilotos,"rb");
-    if(!arch)
-    {
-        printf("Error al abrir%s\n",pilotos);
-        return;
-    }
     t_piloto pil;
+
+    rewind(pilotos);
     system("cls");
     puts("===========================================");
     printf("| %-30s | %-6s |\n", "NOMBRE", "PUNTOS");
     puts("===========================================");
 
-    while(fread(&pil,sizeof(t_piloto),1,arch)==1)
+    while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
     {
         if(pil.estado=='A'||pil.estado=='S')
             printf("| %-30s | %-6u |\n",pil.nombre,pil.puntos_acumulados);
     }
     puts("===========================================");
-    fclose(arch);
 }
 
 unsigned generarNuevoId(const char* pilotos)
@@ -108,7 +103,7 @@ unsigned generarNuevoId(const char* pilotos)
     return maxId + 1;
 }
 
-int altaPiloto(const char* pilotos, const char* escuderias)
+/*int altaPiloto(const char* pilotos, const char* escuderias)
 {
     t_piloto nuevo;
     char fechaStr[20];
@@ -150,7 +145,7 @@ int altaPiloto(const char* pilotos, const char* escuderias)
     printf("Piloto %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
     return OK;
 }
-
+*/
 int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
 {
     t_piloto p;
@@ -185,7 +180,7 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
     return OK;
 }
 
-int bajaPiloto(const char* pilotos)
+/*int bajaPiloto(const char* pilotos)
 {
     unsigned idbuscado;
     t_piloto pil;
@@ -227,11 +222,11 @@ int bajaPiloto(const char* pilotos)
                 }
           }
 
-    if(!encontrado) printf("Piloto no encontrado.\n")
+    if(!encontrado) printf("Piloto no encontrado.\n");
     fclose(arch);
     return encontrado ? OK : ERROR;
 }
-
+*/
 int confirmarModificacion(const char *mensaje)
 {
     char opcion;
@@ -249,7 +244,7 @@ int confirmarModificacion(const char *mensaje)
     return opcion == 'S';
 }
 
-int modificarPiloto(const char* pilotos, const char* escuderias)
+/*int modificarPiloto(const char* pilotos, const char* escuderias)
 {
     unsigned idBuscado;
     t_piloto piloto;
@@ -333,7 +328,7 @@ int modificarPiloto(const char* pilotos, const char* escuderias)
         printf("Piloto no encontrado.\n");
     fclose(arch);
     return encontrado ? OK : ERROR;
-}
+}*/
 
 
 char* obtenerNombre(const void* p)
@@ -394,17 +389,15 @@ void mostrarRanking(const char* pilotos)
     destruir_Vector(&ranking);
 }
 
-
-
-void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* esc)
+/*void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* esc)
 {
-    t_escuderia* esc = (t_escuderia*)escuderias->vec;
+    t_escuderia* escu = (t_escuderia*)esc->vec;
     t_piloto* pil;
     int i, j;
 
-    for(i = 0; i < escuderias->ce; i++)
+    for(i = 0; i < esc->ce; i++)
     {
-        printf("\n\n=============\t %15s \t=============\n", esc->nombre);
+        printf("\n\n=============\t %15s \t=============\n", escu->nombre);
         puts("-----------------------------------------------------");
         printf("| %-3s | %-30s | %6s | %s |\n",
                "ID", "NOMBRE", "PUNTOS", "E");
@@ -427,7 +420,7 @@ void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* esc)
         esc++;
     }
 }
-
+*/
 void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias)
 {
     t_escuderia esc;
@@ -476,4 +469,15 @@ void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias)
     puts("=====================================================");
     if(!encontradoPil)
         printf("No hay pilotos para esta escuderia.\n");
+}
+
+void mostrarPilotoCarrera(void* pilotos)
+{
+    t_piloto* pil = (t_piloto*)pilotos;
+    if(pil->estado == 'A' || pil->estado == 'S')
+    {
+        printf("| %-8u | %-30s |\n",
+               pil->id,
+               pil->nombre);
+    }
 }

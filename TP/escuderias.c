@@ -1,6 +1,6 @@
 #include "escuderias.h"
 
-void menuEscuderias(tda_vector* escuderias)
+/*void menuEscuderias(tda_vector* escuderias)
 {
     int op;
     do{
@@ -17,6 +17,7 @@ void menuEscuderias(tda_vector* escuderias)
         {
             case 0: break;
             case 1: //listarEscuderias(); break;
+                ///corregir el tipo de dato
             case 2: altaEscuderias(escuderias); break;
             //case 3: bajaEscuderia(escuderias); break;
             default:
@@ -153,3 +154,4 @@ unsigned generarNuevoIdEscuderias(tda_vector* v)
     }
     return maxId + 1;
 }
+*/

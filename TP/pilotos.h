@@ -18,8 +18,8 @@
 void menuPilotos(const char *binPath, const char *bajasPath);
 
 void mostrarPiloto(void* pilotos);
-void __menuPilotos(const char* pilotos, const char* escuderias);
-void listarPilotos(const char* pilotos);
+void __menuPilotos(FILE* pilotos, FILE* escuderias);
+void listarPilotos(FILE* pilotos);
 
 int compararPuntos(const void* a, const void* b);
 int compararIdPiloto(const void* a, const void* b);
@@ -40,5 +40,7 @@ unsigned obtenerPuntos(const void* p);
 
 void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias);
 void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias);
+
+void mostrarPilotoCarrera(void* pilotos);
 
 #endif // PILOTOS_H_INCLUDED
