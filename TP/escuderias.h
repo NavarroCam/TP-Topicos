@@ -17,7 +17,7 @@ int BuscarCodigoEscuderia(FILE* escuderias, const char* cod);
 unsigned generarNuevoIdEscuderias(FILE* escuderias);
 void bajaEscuderia(FILE* escuderias);
 //int compararIdEscuderia(const void* a, const void* b);
-//int escuderiaValida(unsigned idEsc, const char* escuderias);
+int escuderiaValida(unsigned idEsc, FILE* escuderias);
 //int compararCodEscuderia(const void* a, const void* b);
 
 

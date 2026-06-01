@@ -56,25 +56,28 @@ void listarEscuderias(FILE* escuderias)
 //    return 0;
 //}
 //
-//int escuderiaValida(unsigned idEsc, tda_vector* v)
-//{
-//    t_escuderia* resultado;
-//
-//    resultado = (t_escuderia*)bsearch(&idEsc, v->vec, v->ce, sizeof(t_escuderia), compararIdEscuderia);
-//
-//    if(!resultado)
-//    {
-//        printf("Escuderia no encontrada.\n");
-//        return ERROR;
-//    }
-//
-//    if(resultado->estado != 1)
-//    {
-//        printf("La escuderia %s esta inactiva.\n", resultado->nombre);
-//        return ERROR;
-//    }
-//    return OK;
-//}
+int escuderiaValida(unsigned idEsc, FILE* escuderias)
+{
+    t_escuderia esc;
+    int encontrado=0;
+    rewind(escuderias);
+
+    while(!encontrado && fread(&esc,sizeof(t_escuderia),1,escuderias)==1)
+    {
+        if(esc.id==idEsc)
+        {
+            encontrado=1;
+            if(esc.estado!=1)
+            {
+                printf("La escuderia %s esta inactiva\n",esc.nombre);
+                return ERROR;
+            }
+            return OK;
+        }
+    }
+    printf("Escuderia no encontrada.\n");
+    return ERROR;
+}
 void altaEscuderias(FILE* escuderias)
 {
     t_escuderia nuevo;
@@ -113,6 +116,7 @@ void altaEscuderias(FILE* escuderias)
 
     fseek(escuderias, 0, SEEK_END);
     fwrite(&nuevo, sizeof(t_escuderia), 1, escuderias);
+    fflush(escuderias);
 
     printf("Escuderia %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
 }
@@ -143,8 +147,34 @@ unsigned generarNuevoIdEscuderias(FILE* escuderias)
 
     return maxId + 1;
 }
-//void bajaEscuderia(FILE* escuderias)
-//{
-//    t_escuderia escuderia;
-//
-//}
+void bajaEscuderia(FILE* escuderias)
+{
+    unsigned idbuscado;
+    t_escuderia esc;
+    int encontrado=0;
+
+    printf("\n==== BAJA DE ESCUDERIA ====\n");
+    printf("ID de la escuderia a dar de baja: ");
+    scanf("%u", &idbuscado);
+    rewind(escuderias);
+    while(!encontrado && fread(&esc,sizeof(t_escuderia),1,escuderias)==1)
+    {
+        if(esc.id==idbuscado)
+        {
+            encontrado=1;
+            if(esc.estado==0)
+            {
+                printf("La escuderia ya fue dada de baja anteriormente.\n");
+                return;
+            }
+            esc.estado=0;
+            fseek(escuderias,-sizeof(t_escuderia),SEEK_CUR);
+            fwrite(&esc,sizeof(t_escuderia),1,escuderias);
+            fflush(escuderias);
+            printf("Escuderia %s dada de baja exitosamente.\n",esc.nombre);
+        }
+    }
+    if(!encontrado)
+        printf("Escuderia no encontrada.\n");
+
+}

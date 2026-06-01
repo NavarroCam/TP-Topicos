@@ -24,22 +24,22 @@ void listarPilotos(FILE* pilotos);
 int compararPuntos(const void* a, const void* b);
 int compararIdPiloto(const void* a, const void* b);
 
-unsigned generarNuevoId(const char* v);
-int altaPiloto(const char* pilotos, const char* escuderias);
+unsigned generarNuevoId(FILE* pilotos);
+int altaPiloto(FILE* pilotos, FILE* escuderias);
 
 int exportarBajasPilotosTxt(const char* binPath, const char* txtPath);
-int bajaPiloto(const char* pilotos);
+int bajaPiloto(FILE* pilotos);
 
 int confirmarModificacion(const char *mensaje);
-int modificarPiloto(const char* pilotos, const char* escuderias);
+int modificarPiloto(FILE* pilotos, FILE* escuderias);
 
 
-void mostrarRanking(const char* pilotos);
+void mostrarRanking(FILE* pilotos);
 char* obtenerNombre(const void* p);
 unsigned obtenerPuntos(const void* p);
 
 void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias);
-void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias);
+void listarPilotosPorEscuderia_Op2(FILE* pilotos, FILE* escuderias);
 
 void mostrarPilotoCarrera(void* pilotos);
 

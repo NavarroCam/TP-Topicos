@@ -86,24 +86,21 @@ void listarPilotos(FILE* pilotos)
     puts("===========================================");
 }
 
-unsigned generarNuevoId(const char* pilotos)
+unsigned generarNuevoId(FILE* pilotos)
 {
-    FILE* arch = fopen(pilotos,"rb");
-    if(!arch) return 1;
-
     t_piloto pil;
     unsigned maxId = 0;
+    rewind(pilotos);
 
-    while(fread(&pil,sizeof(t_piloto),1,arch)==1)
+    while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
     {
         if(pil.id>maxId)
             maxId=pil.id;
     }
-    fclose(arch);
     return maxId + 1;
 }
 
-/*int altaPiloto(const char* pilotos, const char* escuderias)
+int altaPiloto(FILE* pilotos, FILE* escuderias)
 {
     t_piloto nuevo;
     char fechaStr[20];
@@ -136,16 +133,15 @@ unsigned generarNuevoId(const char* pilotos)
     fechaStr[strlen(fechaStr) - 1] = '\0';
     sscanf(fechaStr, "%I64u", &nuevo.fechaNacimiento);
 
-    FILE *arch = fopen(pilotos,"ab");
-    if(!arch) return ERROR;
-    fwrite(&nuevo,sizeof(t_piloto),1,arch);
-    fclose(arch);
+    fseek(pilotos,0,SEEK_END);
+    fwrite(&nuevo,sizeof(t_piloto),1,pilotos);
+    fflush(pilotos);
 
 
     printf("Piloto %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
     return OK;
 }
-*/
+
 int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
 {
     t_piloto p;
@@ -180,11 +176,10 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
     return OK;
 }
 
-/*int bajaPiloto(const char* pilotos)
+int bajaPiloto(FILE* pilotos)
 {
     unsigned idbuscado;
     t_piloto pil;
-    FILE* arch;
     FILE* fbajas;
     int encontrado=0;
 
@@ -192,10 +187,8 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
     printf("ID del piloto a dar de baja: ");
     scanf("%u", &idbuscado);
 
-    arch = fopen(pilotos,"r+b");
-    if(!arch) return ERROR;
-
-    while(!encontrado && fread(&pil,sizeof(t_piloto),1,arch)==1)
+    rewind(pilotos);
+    while(!encontrado && fread(&pil,sizeof(t_piloto),1,pilotos)==1)
           {
               if(pil.id==idbuscado)
                 {
@@ -203,12 +196,12 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
                     if(pil.estado=='R')
                     {
                         printf("El piloto ya fue dado de baja.\n");
-                        fclose(arch);
                         return ERROR;
                     }
                     pil.estado='R';
-                    fseek(arch, -sizeof(t_piloto),SEEK_CUR);
-                    fwrite(&pil,sizeof(t_piloto),1,arch);
+                    fseek(pilotos, -sizeof(t_piloto),SEEK_CUR);
+                    fwrite(&pil,sizeof(t_piloto),1,pilotos);
+                    fflush(pilotos);
 
                     fbajas = fopen(BAJAS_PILOTOS_DAT, "ab");
                     if(fbajas)
@@ -223,10 +216,8 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
           }
 
     if(!encontrado) printf("Piloto no encontrado.\n");
-    fclose(arch);
     return encontrado ? OK : ERROR;
 }
-*/
 int confirmarModificacion(const char *mensaje)
 {
     char opcion;
@@ -244,23 +235,20 @@ int confirmarModificacion(const char *mensaje)
     return opcion == 'S';
 }
 
-/*int modificarPiloto(const char* pilotos, const char* escuderias)
+int modificarPiloto(FILE* pilotos, FILE* escuderias)
 {
     unsigned idBuscado;
     t_piloto piloto;
     char fechaStr[20];
     unsigned nuevoIdEsc;
-    FILE* arch;
     int encontrado=0;
 
     printf("\n==== MODIFICAR PILOTO ====\n");
     printf("ID del piloto a modificar: ");
     scanf("%u", &idBuscado);
+    rewind(pilotos);
 
-    arch = fopen(pilotos,"r+b");
-    if(!arch) return ERROR;
-
-    while(!encontrado && fread(&piloto,sizeof(t_piloto),1,arch)==1)
+    while(!encontrado && fread(&piloto,sizeof(t_piloto),1,pilotos)==1)
     {
         if(piloto.id==idBuscado)
         {
@@ -298,13 +286,9 @@ int confirmarModificacion(const char *mensaje)
             if(confirmarModificacion("Modificar estado"))
             {
                 if(piloto.estado == 'A')
-                {
                     piloto.estado = 'S';
-                }
                 else
-                {
                     piloto.estado = 'A';
-                }
             }
 
             FECHA_FORMATO(piloto.fechaNacimiento, anio, mes, dia)
@@ -320,15 +304,15 @@ int confirmarModificacion(const char *mensaje)
 
             fseek(arch,-sizeof(t_piloto),SEEK_CUR);
             fwrite(&piloto,sizeof(t_piloto),1,arch);
+            fflush(pilotos);
 
             printf("\nPiloto modificado correctamente!\n");
         }
     }
     if(!encontrado)
         printf("Piloto no encontrado.\n");
-    fclose(arch);
     return encontrado ? OK : ERROR;
-}*/
+}
 
 
 char* obtenerNombre(const void* p)
@@ -345,23 +329,20 @@ unsigned obtenerPuntos(const void* p)
     return ((t_piloto*)p)->puntos_acumulados;
 }
 
-void mostrarRanking(const char* pilotos)
+void mostrarRanking(FILE* pilotos)
 {
-    FILE * arch = fopen(pilotos,"rb");
-    if(!arch) return;
-
     tda_vector ranking;
     t_piloto pil;
     int i,puesto_real = 1;
 
     crear_Vector(&ranking,sizeof(t_piloto));
+    rewind(pilotos);
 
-    while(fread(&pil,sizeof(t_piloto),1,arch)==1)
+    while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
     {
         if(pil.estado=='A'||pil.estado=='S')
             insertarAlFinal_Vector(&ranking,&pil);
     }
-    fclose(arch);
 
     sSort(ranking.vec,ranking.ce,ranking.tam,compararPuntos);
 
@@ -389,7 +370,7 @@ void mostrarRanking(const char* pilotos)
     destruir_Vector(&ranking);
 }
 
-/*void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* esc)
+void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* esc)
 {
     t_escuderia* escu = (t_escuderia*)esc->vec;
     t_piloto* pil;
@@ -420,8 +401,7 @@ void mostrarRanking(const char* pilotos)
         esc++;
     }
 }
-*/
-void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias)
+void listarPilotosPorEscuderia_Op2(FILE* pilotos, FILE* escuderias)
 {
     t_escuderia esc;
     t_piloto pil;
@@ -430,15 +410,12 @@ void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias)
 
     printf("\nID escuderia: ");
     scanf("%u", &idEsc);
+    rewind(escuderias);
 
-    FILE* archEsc = fopen(escuderias,"rb");
-    if(!archEsc) return;
-
-    while(!encontradoEsc && fread(&esc,sizeof(t_escuderia),1,archEsc)==1)
+    while(!encontradoEsc && fread(&esc,sizeof(t_escuderia),1,escuderias)==1)
     {
         if(esc.id==idEsc) encontradoEsc=1;
     }
-    fclose(archEsc);
 
     if(!encontradoEsc)
     {
@@ -452,19 +429,14 @@ void listarPilotosPorEscuderia_Op2(const char* pilotos, const char* escuderias)
     printf("| %-3s | %-30s | %6s | %s |\n", "ID", "NOMBRE", "PUNTOS", "E");
     puts("-----------------------------------------------------");
 
-
-    FILE* archPil=fopen(pilotos,"rb");
-    if(archPil)
+    rewind(pilotos);
+    while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
     {
-        while(fread(&pil,sizeof(t_piloto),1,archPil)==1)
+        if(pil.id_escuderia==idEsc&&(pil.estado=='A'||pil.estado=='S'))
         {
-            if(pil.id_escuderia==idEsc&&(pil.estado=='A'||pil.estado=='S'))
-            {
                 printf("| %-3u | %-30s | %-6u | %c |\n",pil.id, pil.nombre, pil.puntos_acumulados, pil.estado);
                 encontradoPil=1;
-            }
         }
-        fclose(archPil);
     }
     puts("=====================================================");
     if(!encontradoPil)
