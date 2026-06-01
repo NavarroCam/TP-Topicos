@@ -169,7 +169,7 @@ void bajaEscuderia(FILE* escuderias)
                 return;
             }
             esc.estado=0;
-            fseek(escuderias,-sizeof(t_escuderia),SEEK_CUR);
+            fseek(escuderias,-(long)sizeof(t_escuderia),SEEK_CUR);
             fwrite(&esc,sizeof(t_escuderia),1,escuderias);
             fflush(escuderias);
             printf("Escuderia %s dada de baja exitosamente.\n",esc.nombre);

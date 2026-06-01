@@ -202,7 +202,7 @@
 1779745293 source:c:\topicos\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
-1780287512 source:c:\users\npabl\tp-topicos\tp\archivos.c
+1780288210 source:c:\users\npabl\tp-topicos\tp\archivos.c
 	"archivos.h"
 
 1780006478 c:\users\npabl\tp-topicos\tp\archivos.h
@@ -235,7 +235,7 @@
 1780276758 c:\users\npabl\tp-topicos\tp\carreras.h
 	"pilotos.h"
 
-1780286519 source:c:\users\npabl\tp-topicos\tp\carreras.c
+1780288210 source:c:\users\npabl\tp-topicos\tp\carreras.c
 	"carreras.h"
 
 1780277289 source:c:\users\npabl\tp-topicos\tp\comunes.c
@@ -243,7 +243,7 @@
 
 1780006478 source:c:\users\npabl\tp-topicos\tp\estadisticas.c
 
-1780286523 source:c:\users\npabl\tp-topicos\tp\main.c
+1780288210 source:c:\users\npabl\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	"archivos.h"
@@ -252,7 +252,7 @@
 1780286522 source:c:\users\npabl\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
-1780286992 source:c:\users\npabl\tp-topicos\tp\pilotos.c
+1780288210 source:c:\users\npabl\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
