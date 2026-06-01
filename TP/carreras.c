@@ -92,15 +92,20 @@ int generarIdCarrera(FILE* archCarreras)
 void cargarDatosCarrera(t_carrera* c)
 {
     char fechaStr[20];
+    char *p;
     //CIRCUITO
     printf("Circuito: ");
     scanf("%s", c->circuito);
+    if((p = strchr(c->circuito, '\n')) != NULL)
+            *p = '\0';
+        else while(getchar() != '\n');
     //FECHA
     do {
         printf("Fecha (AAAAMMDD): ");
-        fflush(stdin);
         fgets(fechaStr, sizeof(fechaStr), stdin);
-        fechaStr[strlen(fechaStr) - 1] = '\0';
+        if((p = strchr(fechaStr, '\n')) != NULL)
+            *p = '\0';
+        else while(getchar() != '\n');
     } while (ValidarFecha(fechaStr) != OK);
     sscanf(fechaStr, "%I64u", &c->fecha);
     //ESTADO

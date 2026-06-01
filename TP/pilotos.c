@@ -9,16 +9,17 @@ void __menuPilotos(FILE* pilotos, FILE* escuderias)
         puts("\n\n===============================================");
         printf("\t\t   PILOTOS\n");
         puts("===============================================");
-        printf("1. Listar pilotos y puntajes(FUNCIONA)\n");
-        printf("2. Alta piloto(FUNCIONA)\n");
-        printf("3. Baja piloto(FUNCIONA)\n");
-        printf("4. Modificar piloto(FUNCIONA)\n");
-        printf("5. Mostrar ranking(FUNCIONA)\n");
+        printf("1. Listar pilotos y puntajes)\n");
+        printf("2. Alta piloto\n");
+        printf("3. Baja piloto\n");
+        printf("4. Modificar piloto\n");
+        printf("5. Mostrar ranking\n");
         printf("6. Exportar pilotos\n");
         printf("0. Volver\n");
 
         printf("\nOpcion: ");
         scanf("%d", &op);
+        while (getchar() != '\n');
         system("cls");
 
         switch (op)
@@ -98,6 +99,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
 {
     t_piloto nuevo;
     char fechaStr[20];
+    char *p;
 
     nuevo.id = generarNuevoId(pilotos);
 
@@ -106,12 +108,16 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
     printf("Nombre: ");
     fflush(stdin);
     fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
-    nuevo.nombre[strlen(nuevo.nombre) - 1] = '\0';
+    if((p = strchr(nuevo.nombre, '\n')) != NULL)
+            *p = '\0';
+        else while(getchar() != '\n');
 
     printf("Nacionalidad: ");
     fflush(stdin);
     fgets(nuevo.nacionalidad, sizeof(nuevo.nacionalidad), stdin);
-    nuevo.nacionalidad[strlen(nuevo.nacionalidad) - 1] = '\0';
+    if((p = strchr(nuevo.nacionalidad, '\n')) != NULL)
+            *p = '\0';
+        else while(getchar() != '\n');
 
     do{
         printf("ID escuderia: ");
@@ -120,12 +126,15 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
 
     nuevo.puntos_acumulados = 0;
     nuevo.estado = 'A';
-
+    getchar();
     do {
         printf("Fecha nacimiento (AAAAMMDD): ");
         fflush(stdin);
         fgets(fechaStr, sizeof(fechaStr), stdin);
-        fechaStr[strlen(fechaStr) - 1] = '\0';
+        if((p = strchr(fechaStr, '\n')) != NULL)
+            *p = '\0';
+        else while(getchar() != '\n');
+
     } while (ValidarFecha(fechaStr) != OK);
     sscanf(fechaStr, "%I64u", &nuevo.fechaNacimiento);
 
@@ -224,6 +233,7 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
     char fechaStr[20];
     unsigned nuevoIdEsc;
     int encontrado=0;
+    char *p;
 
     printf("\n==== MODIFICAR PILOTO ====\n");
     printf("ID del piloto a modificar: ");
@@ -239,24 +249,30 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
             printf("\nNombre: %s\n", piloto.nombre);
             if(confirmarModificacion("Modificar nombre"))
             {
+                getchar();
                 printf("Nombre: ");
-                fflush(stdin);
                 fgets(piloto.nombre, sizeof(piloto.nombre), stdin);
-                piloto.nombre[strlen(piloto.nombre) - 1] = '\0';
+                if((p = strchr(piloto.nombre, '\n')) != NULL)
+                    *p = '\0';
+                else while(getchar() != '\n');
+
             }
 
             printf("\nNacionalidad: %s\n", piloto.nacionalidad);
             if(confirmarModificacion("Modificar nacionalidad"))
             {
+                getchar();
                 printf("Nacionalidad: ");
-                fflush(stdin);
                 fgets(piloto.nacionalidad, sizeof(piloto.nacionalidad), stdin);
-                piloto.nacionalidad[strlen(piloto.nacionalidad) - 1] = '\0';
+                if((p = strchr(piloto.nacionalidad, '\n')) != NULL)
+                    *p = '\0';
+                else while(getchar() != '\n');
             }
 
             printf("\nID Escuderia: %u\n", piloto.id_escuderia);
             if(confirmarModificacion("Modificar escuderia"))
             {
+                getchar();
                 do{
                     printf("ID escuderia: ");
                     scanf("%u", &nuevoIdEsc);
@@ -267,6 +283,7 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
             printf("\nEstado: %c\n", piloto.estado);
             if(confirmarModificacion("Modificar estado"))
             {
+                getchar();
                 if(piloto.estado == 'A')
                     piloto.estado = 'S';
                 else
@@ -277,11 +294,13 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
             printf("\nFecha nacimiento (%04u-%02u-%02u)\n", anio, mes, dia); //acá se usa la macro para mostrar bien por consola la fecha
             if(confirmarModificacion("Modificar fecha de nacimiento"))
             {
+                getchar();
                 do{
                     printf("Fecha nacimiento (AAAAMMDD): ");
-                    fflush(stdin);
                     fgets(fechaStr, sizeof(fechaStr), stdin);
-                    fechaStr[strlen(fechaStr) - 1] = '\0';
+                    if((p = strchr(fechaStr, '\n')) != NULL)
+                    *p = '\0';
+                else while(getchar() != '\n');
                 } while (ValidarFecha(fechaStr) != OK);
                 sscanf(fechaStr, "%I64u", &piloto.fechaNacimiento);
             }

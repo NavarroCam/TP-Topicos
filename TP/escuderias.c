@@ -7,9 +7,9 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
         puts("\n\n===============================================");
         printf("\t\t ESCUDERIAS\n");
         puts("===============================================");
-        printf("1. Listar escuderias (Funciona)\n");
-        printf("2. Alta escuderia (Funciona)\n");
-        printf("3. Baja escuderia (Funciona)\n");
+        printf("1. Listar escuderias\n");
+        printf("2. Alta escuderia\n");
+        printf("3. Baja escuderia\n");
         printf("4. Modificar escuderia\n");
         printf("0. Volver\n");
 
@@ -93,10 +93,10 @@ void altaEscuderias(FILE* escuderias)
     do{
         printf("==== ALTA ESCUDERIA ====\n");
         printf("Codigo: ");
-        fflush(stdin);
         fgets(nuevo.codigo, sizeof(nuevo.codigo), stdin);
         if((p = strchr(nuevo.codigo, '\n')) != NULL)
             *p = '\0';
+        else while(getchar() != '\n');
         aux = BuscarCodigoEscuderia(escuderias,nuevo.codigo);
         if(aux != ERROR)
         {
@@ -107,16 +107,16 @@ void altaEscuderias(FILE* escuderias)
     }while(aux != ERROR);
 
     printf("Nombre: ");
-    fflush(stdin);
     fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
     if((p = strchr(nuevo.nombre, '\n')) != NULL)
             *p = '\0';
+    else while(getchar() != '\n');
 
     printf("Pais: ");
-    fflush(stdin);
     fgets(nuevo.pais, sizeof(nuevo.pais), stdin);
     if((p = strchr(nuevo.pais, '\n')) != NULL)
             *p = '\0';
+    else while(getchar() != '\n');
 
     nuevo.estado = 1;
 
