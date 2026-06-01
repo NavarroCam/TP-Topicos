@@ -12,6 +12,7 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
         printf("0. Volver\n");
         printf("Opción: ");
         scanf("%d", &op);
+        while (getchar() != '\n');
         system("cls");
 
         switch (op)

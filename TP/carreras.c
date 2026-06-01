@@ -16,6 +16,7 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
         printf("0. Volver\n");
         printf("Opción: ");
         scanf("%d", &op);
+        while (getchar() != '\n');
 
         switch (op)
         {

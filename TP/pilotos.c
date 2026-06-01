@@ -131,7 +131,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
     fflush(stdin);
     fgets(fechaStr, sizeof(fechaStr), stdin);
     fechaStr[strlen(fechaStr) - 1] = '\0';
-    sscanf(fechaStr, "%I64u", &nuevo.fechaNacimiento);
+    sscanf(fechaStr, "%llu", &nuevo.fechaNacimiento);
 
     fseek(pilotos,0,SEEK_END);
     fwrite(&nuevo,sizeof(t_piloto),1,pilotos);
@@ -165,7 +165,7 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
 
     while(fread(&p, sizeof(t_piloto), 1, fbin) == 1)
     {
-        fprintf(ftxt, "%u;%s;%s;%u;%u;%c;%I64u\n",
+        fprintf(ftxt, "%u;%s;%s;%u;%u;%c;%llu\n",
                 p.id, p.nombre, p.nacionalidad,
                 p.id_escuderia, p.puntos_acumulados,
                 p.estado, p.fechaNacimiento);
@@ -199,7 +199,7 @@ int bajaPiloto(FILE* pilotos)
                         return ERROR;
                     }
                     pil.estado='R';
-                    fseek(pilotos, -sizeof(t_piloto),SEEK_CUR);
+                    fseek(pilotos, -(long)sizeof(t_piloto),SEEK_CUR);
                     fwrite(&pil,sizeof(t_piloto),1,pilotos);
                     fflush(pilotos);
 
@@ -295,15 +295,15 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
             printf("\nFecha nacimiento (%04u-%02u-%02u)\n", anio, mes, dia); //acá se usa la macro para mostrar bien por consola la fecha
             if(confirmarModificacion("Modificar fecha de nacimiento"))
             {
-                printf("\nFecha nacimiento (AAAAMMDD) (%I64u): ", piloto.fechaNacimiento);
+                printf("\nFecha nacimiento (AAAAMMDD) (%llu): ", piloto.fechaNacimiento);
                 fflush(stdin);
                 fgets(fechaStr, sizeof(fechaStr), stdin);
                 fechaStr[strlen(fechaStr) - 1] = '\0';
-                sscanf(fechaStr, "%I64u", &piloto.fechaNacimiento);
+                sscanf(fechaStr, "%llu", &piloto.fechaNacimiento);
             }
 
-            fseek(arch,-sizeof(t_piloto),SEEK_CUR);
-            fwrite(&piloto,sizeof(t_piloto),1,arch);
+            fseek(pilotos,-(long)sizeof(t_piloto),SEEK_CUR);
+            fwrite(&piloto,sizeof(t_piloto),1,pilotos);
             fflush(pilotos);
 
             printf("\nPiloto modificado correctamente!\n");
@@ -370,7 +370,7 @@ void mostrarRanking(FILE* pilotos)
     destruir_Vector(&ranking);
 }
 
-void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* esc)
+/*void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* esc)
 {
     t_escuderia* escu = (t_escuderia*)esc->vec;
     t_piloto* pil;
@@ -400,7 +400,7 @@ void listarPilotosPorEscuderia_Op1(tda_vector* v, tda_vector* esc)
         puts("=====================================================");
         esc++;
     }
-}
+}*/
 void listarPilotosPorEscuderia_Op2(FILE* pilotos, FILE* escuderias)
 {
     t_escuderia esc;

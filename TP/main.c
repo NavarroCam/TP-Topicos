@@ -50,6 +50,7 @@ int main()
         printf("0. Salir\n");
         printf("\nOpcion: ");
         scanf("%d", &op);
+        while (getchar() != '\n');
         system("cls");
 
         switch (op)
