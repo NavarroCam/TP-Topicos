@@ -46,7 +46,7 @@ int trozarPilotos(char* cad, t_piloto* p1)
     p = strrchr(cad,SEPARADOR);
     if(!p)
         return ERROR;
-    sscanf(p+1,"%llu",&p1->fechaNacimiento);
+    sscanf(p+1,"%I64u",&p1->fechaNacimiento);
     *p = '\0';
     p = strrchr(cad,SEPARADOR);
     if(!p)
@@ -178,7 +178,7 @@ int exportarPilotosTxt(const char *binPath, const char *txtPath)
     while (fread(piloto, sizeof(t_piloto), 1, fbin) == 1)
     {
         fprintf(ftxt,
-                "%u;%s;%s;%u;%u;%c;%llu\n",
+                "%u;%s;%s;%u;%u;%c;%I64u\n",
                 piloto->id,
                 piloto->nombre,
                 piloto->nacionalidad,

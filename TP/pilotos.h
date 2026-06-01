@@ -12,8 +12,8 @@
 #define PILOTOS_DAT "../Archivos/pilotos.dat"
 #define PILOTOS_TXT "../Archivos/pilotos.txt"
 
-#define BAJAS_PILOTOS_DAT "bajas_pilotos.dat"
-#define BAJAS_PILOTOS_TXT "bajas_pilotos.txt"
+#define BAJAS_PILOTOS_DAT "../Archivos/bajas_pilotos.dat"
+#define BAJAS_PILOTOS_TXT "../Archivos/bajas_pilotos.txt"
 
 void menuPilotos(const char *binPath, const char *bajasPath);
 
@@ -30,7 +30,6 @@ int altaPiloto(FILE* pilotos, FILE* escuderias);
 int exportarBajasPilotosTxt(const char* binPath, const char* txtPath);
 int bajaPiloto(FILE* pilotos);
 
-int confirmarModificacion(const char *mensaje);
 int modificarPiloto(FILE* pilotos, FILE* escuderias);
 
 
@@ -39,7 +38,7 @@ char* obtenerNombre(const void* p);
 unsigned obtenerPuntos(const void* p);
 
 void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias);
-void listarPilotosPorEscuderia_Op2(FILE* pilotos, FILE* escuderias);
+//void listarPilotosPorEscuderia_Op2(FILE* pilotos, FILE* escuderias);
 
 void mostrarPilotoCarrera(void* pilotos);
 

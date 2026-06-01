@@ -20,17 +20,19 @@
 	"pilotos.h"
 	<ctype.h>
 
-1778202157 source:c:\topicos\tp\tp-topicos\tp\carreras.c
+1780348000 source:c:\topicos\tp\tp-topicos\tp\carreras.c
+	"carreras.h"
 
-1779756035 source:c:\topicos\tp\tp-topicos\tp\escuderias.c
+1780348000 source:c:\topicos\tp\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
 1778202184 source:c:\topicos\tp\tp-topicos\tp\estadisticas.c
 
-1779762313 source:c:\topicos\tp\tp-topicos\tp\main.c
+1780325433 source:c:\topicos\tp\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	"archivos.h"
+	"carreras.h"
 
 1779576691 c:\topicos\tp\tp-topicos\tp\archivos.h
 	"comunes.h"
@@ -38,7 +40,7 @@
 	"escuderias.h"
 	"carreras.h"
 
-1779799877 c:\topicos\tp\tp-topicos\tp\pilotos.h
+1780343701 c:\topicos\tp\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -46,19 +48,20 @@
 	"tipos.h"
 	"comunes.h"
 
-1779756035 c:\topicos\tp\tp-topicos\tp\escuderias.h
+1780343859 c:\topicos\tp\tp-topicos\tp\escuderias.h
 	<stdio.h>
 	<string.h>
 	"tipos.h"
 	"comunes.h"
 
-1778630990 c:\topicos\tp\tp-topicos\tp\carreras.h
+1780254076 c:\topicos\tp\tp-topicos\tp\carreras.h
+	"pilotos.h"
 
-1779799033 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
+1780347875 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
-1779589013 source:c:\topicos\tp\tp-topicos\tp\archivos.c
+1780325621 source:c:\topicos\tp\tp-topicos\tp\archivos.c
 	"archivos.h"
 
 1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.c
@@ -192,14 +195,15 @@
 1780098644 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
-1779762544 c:\topicos\tp\tp-topicos\tp\comunes.h
+1780348000 c:\topicos\tp\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<ctype.h>
 
-1779576691 c:\topicos\tp\tp-topicos\tp\tipos.h
+1780254076 c:\topicos\tp\tp-topicos\tp\tipos.h
 
-1779745293 source:c:\topicos\tp\tp-topicos\tp\comunes.c
+1780347875 source:c:\topicos\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
 1780288210 source:c:\users\npabl\tp-topicos\tp\archivos.c

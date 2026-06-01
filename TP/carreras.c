@@ -6,7 +6,9 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
 
     do
     {
-        printf("\n--- CARRERAS ---\n");
+        puts("\n\n===============================================");
+        printf("\t\t   CARRERAS\n");
+        puts("===============================================");
         printf("1. Registrar carrera\n");
         printf("2. Dar de baja carrera\n");
         printf("3. Actualizar puntos (recalcular)\n");
@@ -14,7 +16,7 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
         printf("5. Combinar temporadas [EXTRA E]\n");
         printf("6. Exportar carreras\n");
         printf("0. Volver\n");
-        printf("Opción: ");
+        printf("\nOpción: ");
         scanf("%d", &op);
         while (getchar() != '\n');
 
@@ -89,19 +91,29 @@ int generarIdCarrera(FILE* archCarreras)
 //CARGA BASICA
 void cargarDatosCarrera(t_carrera* c)
 {
+    char fechaStr[20];
     //CIRCUITO
     printf("Circuito: ");
     scanf("%s", c->circuito);
     //FECHA
-    printf("Fecha: ");
-    scanf("%I64u", &c->fecha);
+    do {
+        printf("Fecha (AAAAMMDD): ");
+        fflush(stdin);
+        fgets(fechaStr, sizeof(fechaStr), stdin);
+        fechaStr[strlen(fechaStr) - 1] = '\0';
+    } while (ValidarFecha(fechaStr) != OK);
+    sscanf(fechaStr, "%I64u", &c->fecha);
     //ESTADO
     c->estado = 1;
     //CANT_RESULTADOS
-    printf("¿Cuántos pilotos finalizaron la carrera?: ");
+    /*printf("¿Cuántos pilotos finalizaron la carrera?: ");
     scanf("%d", &c->cant_resultados);
     if(c->cant_resultados > MAX_RESULTADOS)
-        c->cant_resultados = MAX_RESULTADOS;
+        c->cant_resultados = MAX_RESULTADOS;*/
+    do {
+        printf("Cuantos pilotos finalizaron la carrera?: ");
+        scanf("%d", &c->cant_resultados);
+    } while (c->cant_resultados < 1 || c->cant_resultados > MAX_RESULTADOS);
 }
 //MOSTRAR PILOTOS CON ID
 void listarPilotosCarrera(FILE* archPilotos)

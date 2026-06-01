@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
 #define MINTAM 5
 #define ERROR_MEMORIA -1
 #define OK    0
@@ -33,4 +35,6 @@ void intercambiar(void* a, void* b, size_t tam);
 void* bSearch(const void* clave, const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
 int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem);
 int ValidarFecha(char* fecha);
+
+int confirmarModificacion(const char *mensaje);
 #endif // COMUNES_H_INCLUDED

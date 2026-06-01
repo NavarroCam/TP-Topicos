@@ -170,3 +170,20 @@ int ValidarFecha(char* fecha)
         aux = ERROR;
     return aux;
 }
+
+int confirmarModificacion(const char *mensaje)
+{
+    char opcion;
+
+    do{
+        printf("%s (S/N): ", mensaje);
+        scanf(" %c", &opcion);
+        opcion = toupper(opcion);
+        if(opcion != 'S' && opcion != 'N')
+        {
+            printf("Opcion invalida.\n");
+        }
+    }while(opcion != 'S' && opcion != 'N');
+
+    return opcion == 'S';
+}

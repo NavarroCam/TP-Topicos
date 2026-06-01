@@ -4,14 +4,18 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
 {
     int op;
     do{
-        printf("\n--- ESCUDERIAS ---\n");
+        puts("\n\n===============================================");
+        printf("\t\t ESCUDERIAS\n");
+        puts("===============================================");
         printf("1. Listar escuderias (Funciona)\n");
         printf("2. Alta escuderia (Funciona)\n");
-        printf("3. Baja escuderia\n");
-        printf("4. Listar pilotos x escuderia\n");
+        printf("3. Baja escuderia (Funciona)\n");
+        printf("4. Modificar escuderia\n");
         printf("0. Volver\n");
-        printf("Opción: ");
+
+        printf("\nOpción: ");
         scanf("%d", &op);
+
         while (getchar() != '\n');
         system("cls");
 
@@ -20,7 +24,7 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
             case 1: listarEscuderias(escuderias); break;
             case 2: altaEscuderias(escuderias); break;
             case 3: bajaEscuderia(escuderias); break;
-//            case 4: listarpilotosxescuderia(); break;
+            case 4: modificarEscuderia(escuderias); break;
             case 0: break;
             default:
                 printf("Opcion inválida.\n");
@@ -79,6 +83,7 @@ int escuderiaValida(unsigned idEsc, FILE* escuderias)
     printf("Escuderia no encontrada.\n");
     return ERROR;
 }
+
 void altaEscuderias(FILE* escuderias)
 {
     t_escuderia nuevo;
@@ -135,6 +140,7 @@ int BuscarCodigoEscuderia(FILE* escuderias, const char* cod)
 
     return band;
 }
+
 unsigned generarNuevoIdEscuderias(FILE* escuderias)
 {
     t_escuderia escuderia;
@@ -148,15 +154,51 @@ unsigned generarNuevoIdEscuderias(FILE* escuderias)
 
     return maxId + 1;
 }
-void bajaEscuderia(FILE* escuderias)
+
+int exportarBajasEscuderiasTxt(const char* binPath, const char* txtPath)
+{
+    t_escuderia e;
+    FILE* fbin;
+    FILE* ftxt;
+
+    fbin = fopen(binPath, "rb");
+    if(!fbin)
+    {
+        printf("Error al abrir %s\n", binPath);
+        return ERROR;
+    }
+
+    ftxt = fopen(txtPath, "wt");
+    if(!ftxt)
+    {
+        printf("Error al abrir %s\n", txtPath);
+        fclose(fbin);
+        return ERROR;
+    }
+
+    while(fread(&e, sizeof(t_escuderia), 1, fbin) == 1)
+    {
+        fprintf(ftxt, "%u;%s;%s;%s;%d\n",
+                e.id, e.codigo, e.nombre,
+                e.pais, e.estado);
+    }
+
+    fclose(fbin);
+    fclose(ftxt);
+    return OK;
+}
+
+int bajaEscuderia(FILE* escuderias)
 {
     unsigned idbuscado;
     t_escuderia esc;
+    FILE* fbajas;
     int encontrado=0;
 
     printf("\n==== BAJA DE ESCUDERIA ====\n");
     printf("ID de la escuderia a dar de baja: ");
     scanf("%u", &idbuscado);
+
     rewind(escuderias);
     while(!encontrado && fread(&esc,sizeof(t_escuderia),1,escuderias)==1)
     {
@@ -166,16 +208,87 @@ void bajaEscuderia(FILE* escuderias)
             if(esc.estado==0)
             {
                 printf("La escuderia ya fue dada de baja anteriormente.\n");
-                return;
+                return ERROR;
             }
+
             esc.estado=0;
             fseek(escuderias,-(long)sizeof(t_escuderia),SEEK_CUR);
             fwrite(&esc,sizeof(t_escuderia),1,escuderias);
             fflush(escuderias);
+
+            fbajas = fopen(BAJAS_ESCUDERIAS_DAT, "ab");
+            if(fbajas)
+            {
+                fwrite(&esc, sizeof(t_escuderia), 1, fbajas);
+                fclose(fbajas);
+                exportarBajasEscuderiasTxt(BAJAS_ESCUDERIAS_DAT, BAJAS_ESCUDERIAS_TXT); //Para leer los pilotos en el txt
+            }
             printf("Escuderia %s dada de baja exitosamente.\n",esc.nombre);
         }
     }
     if(!encontrado)
+    {
         printf("Escuderia no encontrada.\n");
+    }
+    return encontrado ? OK : ERROR;
+}
 
+
+int modificarEscuderia(FILE* escuderias)
+{
+    unsigned idBuscado;
+    t_escuderia e;
+
+    int encontrado=0;
+    char* p;
+
+    printf("\n==== MODIFICAR PILOTO ====\n");
+    printf("ID de la escuderia a modificar: ");
+    scanf("%u", &idBuscado);
+
+    rewind(escuderias);
+    while(!encontrado && fread(&e,sizeof(t_escuderia),1,escuderias)==1)
+    {
+        if(e.id==idBuscado)
+        {
+            encontrado=1;
+
+            printf("\nCodigo: %s\n", e.codigo);
+            if(confirmarModificacion("Modificar Codigo"))
+            {
+                printf("Codigo: ");
+                fflush(stdin);
+                fgets(e.codigo, sizeof(e.codigo), stdin);
+                if ((p = strchr(e.codigo, '\n')) != NULL)
+                    *p = '\0';
+            }
+
+            printf("\nNombre: %s\n", e.nombre);
+            if(confirmarModificacion("Modificar nombre"))
+            {
+                printf("Nombre: ");
+                fflush(stdin);
+                fgets(e.nombre, sizeof(e.nombre), stdin);
+                e.nombre[strlen(e.nombre) - 1] = '\0';
+            }
+
+            printf("\nPais: %s\n", e.pais);
+            if(confirmarModificacion("Modificar pais"))
+            {
+                printf("Pais: ");
+                fflush(stdin);
+                fgets(e.pais, sizeof(e.pais), stdin);
+                e.pais[strlen(e.pais) - 1] = '\0';
+            }
+
+            fseek(escuderias,-(long)sizeof(t_escuderia),SEEK_CUR);
+            fwrite(&e,sizeof(t_escuderia),1,escuderias);
+            fflush(escuderias);
+
+            printf("\nEscuderia modificada correctamente!\n");
+        }
+    }
+    if(!encontrado)
+        printf("Escuderia no encontrada.\n");
+    return encontrado ? OK : ERROR;
 }
