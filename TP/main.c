@@ -59,7 +59,7 @@ int main()
                 break;
             case 2:
                 ///REVISAR TODO LO DE ESCUDERIAS
-//                menuEscuderias(ESCUDERIAS_DAT);
+                menuEscuderias(pPilotos, pEscuderias);
                 break;
             case 3:
                 pCarreras = fopen(CARRERAS_DAT,"a+b");

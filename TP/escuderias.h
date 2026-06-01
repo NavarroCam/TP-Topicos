@@ -10,13 +10,15 @@
 #define ESCUDERIAS_TXT "../Archivos/escuderias.txt"
 
 
-void menuEscuderias(const char* escuderias);
-void listarEscuderias(const char* binPath);
-int compararIdEscuderia(const void* a, const void* b);
-int escuderiaValida(unsigned idEsc, const char* escuderias);
-int altaEscuderias(const char* esc);
-int compararCodEscuderia(const void* a, const void* b);
-int BuscarCodigoEscuderia(const char* escuderias, char* cod);
-unsigned generarNuevoIdEscuderias(const char* escuderias);
+void menuEscuderias(FILE* pilotos, FILE* escuderias);
+void listarEscuderias(FILE* escuderias);
+void altaEscuderias(FILE* escuderias);
+int BuscarCodigoEscuderia(FILE* escuderias, const char* cod);
+unsigned generarNuevoIdEscuderias(FILE* escuderias);
+void bajaEscuderia(FILE* escuderias);
+//int compararIdEscuderia(const void* a, const void* b);
+//int escuderiaValida(unsigned idEsc, const char* escuderias);
+//int compararCodEscuderia(const void* a, const void* b);
+
 
 #endif // ESCUDERIAS_H_INCLUDED
