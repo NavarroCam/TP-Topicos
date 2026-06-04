@@ -12,6 +12,7 @@
 int cargarPilotosTxtABin(const char *txtPath, const char *binPath);
 int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath);
 int exportarPilotosTxt(const char *binPath, const char *txtPath);
+int exportarEscuderiasTxt(const char *binPath, const char *txtPath);
 
 ///////////////
 int trozarPilotos(char* cad, t_piloto* p1);

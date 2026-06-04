@@ -13,7 +13,7 @@ int cargarPilotosTxtABin(const char *txtPath, const char *binPath)
     if (ftxt == NULL)
     {
         printf("Error al abrir %s\n", txtPath);
-        return ERROR;
+        return ERROR_ARCH;
     }
 
     fbin = fopen(binPath, "wb");
@@ -21,7 +21,7 @@ int cargarPilotosTxtABin(const char *txtPath, const char *binPath)
     {
         printf("Error al abrir %s\n", binPath);
         fclose(ftxt);
-        return ERROR;
+        return ERROR_ARCH;
     }
 
     while (fgets(cad, TAMCADENA, ftxt))
@@ -33,7 +33,7 @@ int cargarPilotosTxtABin(const char *txtPath, const char *binPath)
     fclose(ftxt);
     fclose(fbin);
 
-    return OK;
+    return TODOOK;
 }
 
 int trozarPilotos(char* cad, t_piloto* p1)
@@ -41,41 +41,41 @@ int trozarPilotos(char* cad, t_piloto* p1)
     char* p;
     p = strchr(cad,'\n');
     if(!p)
-        return ERROR;
+        return ERROR_;
     *p = '\0';
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     sscanf(p+1,"%I64u",&p1->fechaNacimiento);
     *p = '\0';
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     sscanf(p+1,"%c",&p1->estado);
     *p = '\0';
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     sscanf(p+1,"%u",&p1->puntos_acumulados);
     *p = '\0';
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     sscanf(p+1,"%u",&p1->id_escuderia);
     *p = '\0';
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     strcpy(p1->nacionalidad,p+1);
     *p = '\0';
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     strcpy(p1->nombre,p+1);
     *p = '\0';
 
     sscanf(cad,"%u",&p1->id);
-    return OK;
+    return TODOOK;
 }
 
 /* ESCUDERIAS: txt -> dat
@@ -91,7 +91,7 @@ int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath)
     if (ftxt == NULL)
     {
         printf("Error al abrir %s\n", txtPath);
-        return ERROR;
+        return ERROR_ARCH;
     }
 
     fbin = fopen(binPath, "wb");
@@ -99,7 +99,7 @@ int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath)
     {
         printf("Error al abrir %s\n", binPath);
         fclose(ftxt);
-        return ERROR;
+        return ERROR_ARCH;
     }
 
     while (fgets(cad, sizeof(cad), ftxt))
@@ -111,7 +111,7 @@ int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath)
     fclose(ftxt);
     fclose(fbin);
 
-    return OK;
+    return TODOOK;
 }
 
 int trozarEscuderias(char* cad, t_escuderia* e1)
@@ -119,35 +119,35 @@ int trozarEscuderias(char* cad, t_escuderia* e1)
     char* p;
     p = strchr(cad,'\n');
     if(!p)
-        return ERROR;
+        return ERROR_;
     *p = '\0';
 
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     sscanf(p+1,"%d",&e1->estado);
     *p = '\0';
 
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     strcpy(e1->pais,p+1);
     *p = '\0';
 
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     strcpy(e1->nombre,p+1);
     *p = '\0';
 
     p = strrchr(cad,SEPARADOR);
     if(!p)
-        return ERROR;
+        return ERROR_;
     strcpy(e1->codigo,p+1);
     *p = '\0';
     sscanf(cad,"%u",&e1->id);
 
-    return OK;
+    return TODOOK;
 }
 
 /* ---------------------------------------------------------------
@@ -155,8 +155,7 @@ int trozarEscuderias(char* cad, t_escuderia* e1)
    --------------------------------------------------------------- */
 int exportarPilotosTxt(const char *binPath, const char *txtPath)
 {
-    t_piloto p1;
-    t_piloto *piloto = &p1;
+    t_piloto piloto;
     FILE *fbin;
     FILE *ftxt;
 
@@ -164,7 +163,7 @@ int exportarPilotosTxt(const char *binPath, const char *txtPath)
     if (fbin == NULL)
     {
         printf("Error al abrir %s\n", binPath);
-        return ERROR;
+        return ERROR_ARCH;
     }
 
     ftxt = fopen(txtPath, "wt");
@@ -172,24 +171,51 @@ int exportarPilotosTxt(const char *binPath, const char *txtPath)
     {
         printf("Error al abrir %s\n", txtPath);
         fclose(fbin);
-        return ERROR;
+        return ERROR_ARCH;
     }
-
-    while (fread(piloto, sizeof(t_piloto), 1, fbin) == 1)
+    fread(&piloto, sizeof(t_piloto), 1, fbin);
+    while ( !feof(fbin))
     {
-        fprintf(ftxt,
-                "%u;%s;%s;%u;%u;%c;%I64u\n",
-                piloto->id,
-                piloto->nombre,
-                piloto->nacionalidad,
-                piloto->id_escuderia,
-                piloto->puntos_acumulados,
-                piloto->estado,
-                piloto->fechaNacimiento);
+        fprintf(ftxt,"%u;%s;%s;%u;%u;%c;%I64u\n",piloto.id,piloto.nombre,piloto.nacionalidad,piloto.id_escuderia,piloto.puntos_acumulados,
+                piloto.estado,piloto.fechaNacimiento);
+        fread(&piloto, sizeof(t_piloto), 1, fbin);
     }
 
     fclose(fbin);
     fclose(ftxt);
 
-    return OK;
+    return TODOOK;
+}
+
+int exportarEscuderiasTxt(const char *binPath, const char *txtPath)
+{
+    t_escuderia esc;
+    FILE *fbin;
+    FILE *ftxt;
+
+    fbin = fopen(binPath, "rb");
+    if (fbin == NULL)
+    {
+        printf("Error al abrir %s\n", binPath);
+        return ERROR_ARCH;
+    }
+
+    ftxt = fopen(txtPath, "wt");
+    if (ftxt == NULL)
+    {
+        printf("Error al abrir %s\n", txtPath);
+        fclose(fbin);
+        return ERROR_ARCH;
+    }
+    fread(&esc, sizeof(t_escuderia), 1, fbin);
+    while ( !feof(fbin))
+    {
+        fprintf(ftxt,"%u;%s;%s;%s;%d\n",esc.id,esc.codigo,esc.nombre,esc.pais,esc.estado);
+        fread(&esc, sizeof(t_escuderia), 1, fbin);
+    }
+
+    fclose(fbin);
+    fclose(ftxt);
+
+    return TODOOK;
 }

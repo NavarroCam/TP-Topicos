@@ -69,7 +69,7 @@ int registrarCarrera(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
 
     destruir_Vector(&puntos);
     destruir_Vector(&pilotos);
-    return OK;
+    return TODOOK;
 }
 
 //GENERAR ID
@@ -106,7 +106,7 @@ void cargarDatosCarrera(t_carrera* c)
         if((p = strchr(fechaStr, '\n')) != NULL)
             *p = '\0';
         else while(getchar() != '\n');
-    } while (ValidarFecha(fechaStr) != OK);
+    } while (ValidarFecha(fechaStr) != TODOOK);
     sscanf(fechaStr, "%I64u", &c->fecha);
     //ESTADO
     c->estado = 1;
@@ -152,7 +152,7 @@ int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
             printf("Error obteniendo el puntaje\n");
         puesto->puntos = puntaje->puntos;
     }
-    return OK;
+    return TODOOK;
 }
 void mostrarResultadosCarrera(const t_carrera* c)
 {
@@ -178,7 +178,7 @@ int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos)
         fread(&p,sizeof(t_piloto),1,archPilotos);
         insertarAlFinal_Vector(pilotos,&p);
     }
-    return OK;
+    return TODOOK;
 }
 
 void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c)
@@ -207,8 +207,8 @@ void guardarPilotos(FILE* archPilotos, const tda_vector* pilotos)
 int guardarCarrera(FILE* archCarreras, const t_carrera* c)
 {
     if(fwrite(c,sizeof(t_carrera),1,archCarreras) != 1)
-        return ERROR;
-    return OK;
+        return ERROR_;
+    return TODOOK;
 }
 
 
@@ -235,7 +235,7 @@ int cargarVectorPuntos(tda_vector* v,FILE* pf)
         insertarAlFinal_Vector(v,&p);
     }
 
-    return OK;
+    return TODOOK;
 }
 
 void mostrarPuntos(void* elem)
@@ -249,14 +249,14 @@ int trozarPuntajes(const char* cad,t_puntajes* puntos)
     char* p;
     p = strrchr(cad,'\n');
     if(!p)
-        return ERROR;
+        return ERROR_;
     *p = '\0';
 
     p = strrchr(cad,'|');
     if(!p)
-        return ERROR;
+        return ERROR_;
     sscanf(p + 1,"%u",&puntos->puntos);
     *p = '\0';
     sscanf(cad,"%u",&puntos->posicion);
-    return OK;
+    return TODOOK;
 }

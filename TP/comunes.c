@@ -11,7 +11,7 @@ int crear_Vector(tda_vector* v, size_t tam)
 
     v->maxElem = MINTAM;
     v->ce = 0;
-    return OK;
+    return TODOOK;
 }
 
 int insertarAlFinal_Vector(tda_vector* v, const void* dato)
@@ -31,7 +31,7 @@ int insertarAlFinal_Vector(tda_vector* v, const void* dato)
 
     memcpy(v->vec + (v->ce * v->tam), dato, v->tam);
     (v->ce)++;
-    return OK;
+    return TODOOK;
 }
 
 void destruir_Vector(tda_vector* v)
@@ -130,7 +130,7 @@ int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
 
     pf = fopen(archNom, "rb");
     if(!pf)
-        return ERROR;
+        return ERROR_;
 
     elem = malloc(tamElem);
     if(!elem)
@@ -147,27 +147,27 @@ int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
     }
     fclose(pf);
     free(elem);
-    return OK;
+    return TODOOK;
 }
 int ValidarFecha(char* fecha)
 {
-    int dia, mes, anio, aux = OK;
+    int dia, mes, anio, aux = TODOOK;
     sscanf(fecha,"%4d%2d%2d",&anio,&mes,&dia);
     if(anio < 0)
-        aux = ERROR;
+        aux = ERROR_;
     if(mes < 1 || mes > 12)
-        aux = ERROR;
+        aux = ERROR_;
     if((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && dia > 31)
-        aux = ERROR;
+        aux = ERROR_;
     if((mes == 4 || mes == 6 || mes == 9 || mes ==11) && dia >30)
-        aux = ERROR;
+        aux = ERROR_;
     if((anio % 4 == 0 && anio % 100 != 0)|| (anio % 400 == 0))//Bisiesto
     {
         if(mes == 2 && dia > 29)
-            aux = ERROR;
+            aux = ERROR_;
     }
     else if(mes == 2 && dia > 28)
-        aux = ERROR;
+        aux = ERROR_;
     return aux;
 }
 

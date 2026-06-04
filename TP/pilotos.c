@@ -122,7 +122,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
     do{
         printf("ID escuderia: ");
         scanf("%u", &nuevo.id_escuderia);
-    }while(escuderiaValida(nuevo.id_escuderia, escuderias) != OK);
+    }while(escuderiaValida(nuevo.id_escuderia, escuderias) != TODOOK);
 
     nuevo.puntos_acumulados = 0;
     nuevo.estado = 'A';
@@ -135,7 +135,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
             *p = '\0';
         else while(getchar() != '\n');
 
-    } while (ValidarFecha(fechaStr) != OK);
+    } while (ValidarFecha(fechaStr) != TODOOK);
     sscanf(fechaStr, "%I64u", &nuevo.fechaNacimiento);
 
     fseek(pilotos,0,SEEK_END);
@@ -144,7 +144,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
 
 
     printf("Piloto %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
-    return OK;
+    return TODOOK;
 }
 
 int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
@@ -157,7 +157,7 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
     if(!fbin)
     {
         printf("Error al abrir %s\n", binPath);
-        return ERROR;
+        return ERROR_;
     }
 
     ftxt = fopen(txtPath, "wt");
@@ -165,7 +165,7 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
     {
         printf("Error al abrir %s\n", txtPath);
         fclose(fbin);
-        return ERROR;
+        return ERROR_;
     }
 
     while(fread(&p, sizeof(t_piloto), 1, fbin) == 1)
@@ -178,7 +178,7 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
 
     fclose(fbin);
     fclose(ftxt);
-    return OK;
+    return TODOOK;
 }
 
 int bajaPiloto(FILE* pilotos)
@@ -201,7 +201,7 @@ int bajaPiloto(FILE* pilotos)
                     if(pil.estado=='R')
                     {
                         printf("El piloto ya fue dado de baja.\n");
-                        return ERROR;
+                        return ERROR_;
                     }
                     pil.estado='R';
                     fseek(pilotos, -(long)sizeof(t_piloto),SEEK_CUR);
@@ -221,7 +221,7 @@ int bajaPiloto(FILE* pilotos)
           }
 
     if(!encontrado) printf("Piloto no encontrado.\n");
-    return encontrado ? OK : ERROR;
+    return encontrado ? TODOOK : ERROR_;
 }
 
 
@@ -276,7 +276,7 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
                 do{
                     printf("ID escuderia: ");
                     scanf("%u", &nuevoIdEsc);
-                }while(escuderiaValida(nuevoIdEsc, escuderias) != OK);
+                }while(escuderiaValida(nuevoIdEsc, escuderias) != TODOOK);
                 piloto.id_escuderia = nuevoIdEsc;
             }
 
@@ -301,7 +301,7 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
                     if((p = strchr(fechaStr, '\n')) != NULL)
                     *p = '\0';
                 else while(getchar() != '\n');
-                } while (ValidarFecha(fechaStr) != OK);
+                } while (ValidarFecha(fechaStr) != TODOOK);
                 sscanf(fechaStr, "%I64u", &piloto.fechaNacimiento);
             }
 
@@ -314,7 +314,7 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
     }
     if(!encontrado)
         printf("Piloto no encontrado.\n");
-    return encontrado ? OK : ERROR;
+    return encontrado ? TODOOK : ERROR_;
 }
 
 

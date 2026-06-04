@@ -11,6 +11,8 @@
 
 #define PILOTOS_DAT "../Archivos/pilotos.dat"
 #define PILOTOS_TXT "../Archivos/pilotos.txt"
+#define PILOTOS_ACT_TXT "../Archivos/pilotosActualizados.txt"
+
 
 #define BAJAS_PILOTOS_DAT "../Archivos/bajas_pilotos.dat"
 #define BAJAS_PILOTOS_TXT "../Archivos/bajas_pilotos.txt"

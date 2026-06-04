@@ -8,8 +8,9 @@
 
 #define MINTAM 5
 #define ERROR_MEMORIA -1
-#define OK    0
-#define ERROR -1
+#define TODOOK    0
+#define ERROR_ -2
+#define ERROR_ARCH -3
 
 // Macro para mostrar por pantalla la fecha
 #define FECHA_FORMATO(f, a, m, d) \

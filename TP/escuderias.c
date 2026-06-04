@@ -75,13 +75,13 @@ int escuderiaValida(unsigned idEsc, FILE* escuderias)
             if(esc.estado!=1)
             {
                 printf("La escuderia %s esta inactiva\n",esc.nombre);
-                return ERROR;
+                return ERROR_;
             }
-            return OK;
+            return TODOOK;
         }
     }
     printf("Escuderia no encontrada.\n");
-    return ERROR;
+    return ERROR_;
 }
 
 void altaEscuderias(FILE* escuderias)
@@ -98,13 +98,13 @@ void altaEscuderias(FILE* escuderias)
             *p = '\0';
         else while(getchar() != '\n');
         aux = BuscarCodigoEscuderia(escuderias,nuevo.codigo);
-        if(aux != ERROR)
+        if(aux != ERROR_)
         {
             printf("Codigo ya existente\n");
             system("pause");
             system("cls");
         }
-    }while(aux != ERROR);
+    }while(aux != ERROR_);
 
     printf("Nombre: ");
     fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
@@ -127,16 +127,16 @@ void altaEscuderias(FILE* escuderias)
     printf("Escuderia %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
 }
 
-int BuscarCodigoEscuderia(FILE* escuderias, const char* cod)
+int BuscarCodigoEscuderia(FILE* escuderias, const char* cod)///ACOMODAR
 {
     t_escuderia escuderia;
-    int band = ERROR;
+    int band = ERROR_;
 
     rewind(escuderias);
 
-    while(fread(&escuderia, sizeof(t_escuderia), 1, escuderias) == 1 && band != OK)
+    while(fread(&escuderia, sizeof(t_escuderia), 1, escuderias) == 1 && band != TODOOK)
         if (strcmp(escuderia.codigo, cod) == 0)
-            band = OK;
+            band = TODOOK;
 
     return band;
 }
@@ -165,7 +165,7 @@ int exportarBajasEscuderiasTxt(const char* binPath, const char* txtPath)
     if(!fbin)
     {
         printf("Error al abrir %s\n", binPath);
-        return ERROR;
+        return ERROR_;
     }
 
     ftxt = fopen(txtPath, "wt");
@@ -173,7 +173,7 @@ int exportarBajasEscuderiasTxt(const char* binPath, const char* txtPath)
     {
         printf("Error al abrir %s\n", txtPath);
         fclose(fbin);
-        return ERROR;
+        return ERROR_;
     }
 
     while(fread(&e, sizeof(t_escuderia), 1, fbin) == 1)
@@ -185,7 +185,7 @@ int exportarBajasEscuderiasTxt(const char* binPath, const char* txtPath)
 
     fclose(fbin);
     fclose(ftxt);
-    return OK;
+    return TODOOK;
 }
 
 int bajaEscuderia(FILE* escuderias)
@@ -208,7 +208,7 @@ int bajaEscuderia(FILE* escuderias)
             if(esc.estado==0)
             {
                 printf("La escuderia ya fue dada de baja anteriormente.\n");
-                return ERROR;
+                return ERROR_;
             }
 
             esc.estado=0;
@@ -230,7 +230,7 @@ int bajaEscuderia(FILE* escuderias)
     {
         printf("Escuderia no encontrada.\n");
     }
-    return encontrado ? OK : ERROR;
+    return encontrado ? TODOOK : ERROR_;
 }
 
 
@@ -290,5 +290,5 @@ int modificarEscuderia(FILE* escuderias)
     }
     if(!encontrado)
         printf("Escuderia no encontrada.\n");
-    return encontrado ? OK : ERROR;
+    return encontrado ? TODOOK : ERROR_;
 }

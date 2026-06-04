@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <locale.h>
+#include <windows.h>
 
 #include "archivos.h"
 #include "carreras.h"
-//#include "pilotos.h" //PREGUNTAR A CARO: Esta bien que la referencia venga de otro archivo?
-///PILOTOS.DAT ORDENAR y BUSCAR en el archivo
+
 int main()
 {
     setlocale(LC_ALL, "");
@@ -28,13 +28,13 @@ int main()
     pPilotos = fopen(PILOTOS_DAT,"r+b");
     if(!pPilotos)
     {
-        return ERROR;
+        return ERROR_ARCH;
     }
     pEscuderias = fopen(ESCUDERIAS_DAT, "r+b");
     if(!pEscuderias)
     {
         fclose(pPilotos);
-        return ERROR;
+        return ERROR_ARCH;
     }
 
     printf("=== SISTEMA DE GESTION TEMPORADA F1 ===\n");
@@ -68,7 +68,7 @@ int main()
                 {
                     fclose(pPilotos);
                     fclose(pEscuderias);
-                    return ERROR;
+                    return ERROR_ARCH;
                 }
                 pPuntajes = fopen(PUNTAJES_TXT,"rt");
                 if(!pPuntajes)
@@ -76,10 +76,10 @@ int main()
                     fclose(pPilotos);
                     fclose(pEscuderias);
                     fclose(pCarreras);
-                    return ERROR;
+                    return ERROR_ARCH;
                 }
                 menuCarreras(pCarreras,pPilotos,pPuntajes);
-                //lo pongo aca porque no se si seria correcto o como hacer para cerrarlo al final
+
                 fclose(pCarreras);
                 fclose(pPuntajes);
                 break;
@@ -89,15 +89,23 @@ int main()
                 break;
             case 0:
                 printf("Saliendo..\n");
+                Sleep(1000);
                 break;
             default:
                 printf("Opcion inválida.\n");
         }
     }while (op != 0);
-//guardar datos archivo -> reescribo?
-//exportar datos a txt -> pilotos y escuderias nomas? guardar los datos
-///MODIFICAR DONDE EL TDA NO SEA ESTRICTAMENTE NECESARIO
+
     fclose(pPilotos);
     fclose(pEscuderias);
+
+    exportarPilotosTxt(PILOTOS_DAT,PILOTOS_ACT_TXT);
+    exportarEscuderiasTxt(ESCUDERIAS_DAT,ESCUDERIAS_ACT_TXT);
+    remove(PILOTOS_TXT);
+    rename(PILOTOS_ACT_TXT,PILOTOS_TXT);
+    remove(ESCUDERIAS_TXT);
+    rename(ESCUDERIAS_ACT_TXT,ESCUDERIAS_TXT);
+    system("cls");
+    puts("Archivos exportados exitosamente.");
     return 0;
 }

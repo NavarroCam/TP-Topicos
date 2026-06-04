@@ -9,6 +9,7 @@
 
 #define ESCUDERIAS_DAT "../Archivos/escuderias.dat"
 #define ESCUDERIAS_TXT "../Archivos/escuderias.txt"
+#define ESCUDERIAS_ACT_TXT "../Archivos/escuderiasActualizado.txt"
 
 #define BAJAS_ESCUDERIAS_DAT "../Archivos/bajas_escuderias.dat"
 #define BAJAS_ESCUDERIAS_TXT "../Archivos/bajas_escuderias.txt"
