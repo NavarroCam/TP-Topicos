@@ -75,7 +75,7 @@ void listarPilotos(FILE* pilotos)
 
     while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
     {
-        if(pil.estado=='A'||pil.estado=='S')
+        if(pil.estado=='A' || pil.estado=='S')
             printf("| %-30s | %-6u |\n",pil.nombre,pil.puntos_acumulados);
     }
     puts("===========================================");

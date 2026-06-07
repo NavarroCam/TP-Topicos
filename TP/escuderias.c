@@ -37,7 +37,6 @@ void listarEscuderias(FILE* escuderias)
 
     rewind(escuderias);
     system("cls");
-    system("cls");
     puts("==================================================================================");
     printf("| %-3s | %-6s | %-30s | %-30s |\n", "ID", "CODIGO", "NOMBRE", "PAIS");
     puts("==================================================================================");

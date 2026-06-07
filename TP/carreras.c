@@ -172,11 +172,11 @@ int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos)
     rewind(archPilotos);
 
     fread(&p,sizeof(t_piloto),1,archPilotos);
-    insertarAlFinal_Vector(pilotos,&p);
+   // insertarAlFinal_Vector(pilotos,&p);
     while(!feof(archPilotos))
     {
-        fread(&p,sizeof(t_piloto),1,archPilotos);
         insertarAlFinal_Vector(pilotos,&p);
+        fread(&p,sizeof(t_piloto),1,archPilotos);
     }
     return TODOOK;
 }

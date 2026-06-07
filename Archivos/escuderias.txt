@@ -1,5 +1,5 @@
-1;RBR;Red Bull Racing;Austria;0
-2;MER;Mercedes;Alemania;0
+1;RBR;Red Bull Racing;Austria;1
+2;MER;Mercedes;Alemania;1
 3;FER;Ferrari;Italia;1
 4;MCL;McLaren;Reino Unido;1
 5;AST;Aston Martin;Reino Unido;1
@@ -7,3 +7,5 @@
 7;WIL;Williams;Reino Unido;1
 8;RBT;RB Team;Italia;1
 9;SBR;Sauber;Suiza;1
+10;HAA;Haas;Estados Unidos;1
+11;CAD;Cadillac;Estados Unidos;1
