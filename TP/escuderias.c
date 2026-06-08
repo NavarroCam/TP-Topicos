@@ -216,8 +216,12 @@ int bajaEscuderia(FILE* escuderias)
             fflush(escuderias);
 
             fbajas = fopen(BAJAS_ESCUDERIAS_DAT, "ab");
-            if(fbajas)
+            if(!fbajas)
             {
+                printf("Error al abrir %s\n", fbajas);
+                return ERROR_;
+            }
+            else{
                 fwrite(&esc, sizeof(t_escuderia), 1, fbajas);
                 fclose(fbajas);
                 exportarBajasEscuderiasTxt(BAJAS_ESCUDERIAS_DAT, BAJAS_ESCUDERIAS_TXT); //Para leer los pilotos en el txt

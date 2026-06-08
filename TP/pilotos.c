@@ -209,8 +209,12 @@ int bajaPiloto(FILE* pilotos)
                     fflush(pilotos);
 
                     fbajas = fopen(BAJAS_PILOTOS_DAT, "ab");
-                    if(fbajas)
+                    if(!fbajas)
                     {
+                        printf("Error al abrir %s\n", BAJAS_PILOTOS_DAT);
+                        return ERROR_ARCH;
+                    }
+                    else{
                         fwrite(&pil, sizeof(t_piloto), 1, fbajas);
                         fclose(fbajas);
                         exportarBajasPilotosTxt(BAJAS_PILOTOS_DAT, BAJAS_PILOTOS_TXT); //Para leer los pilotos en el txt

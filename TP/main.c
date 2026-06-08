@@ -63,12 +63,19 @@ int main()
                 menuEscuderias(pPilotos, pEscuderias);
                 break;
             case 3:
-                pCarreras = fopen(CARRERAS_DAT,"a+b");
+                pCarreras = fopen(CARRERAS_DAT, "r+b");
+
                 if(!pCarreras)
                 {
-                    fclose(pPilotos);
-                    fclose(pEscuderias);
-                    return ERROR_ARCH;
+                    pCarreras = fopen(CARRERAS_DAT, "w+b");
+
+                    if(!pCarreras)
+                    {
+                        printf("Error al abrir el archivo\n");
+                        fclose(pPilotos);
+                        fclose(pEscuderias);
+                        return ERROR_ARCH;
+                    }
                 }
                 pPuntajes = fopen(PUNTAJES_TXT,"rt");
                 if(!pPuntajes)

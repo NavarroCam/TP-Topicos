@@ -6,6 +6,7 @@
 #define CANT_CAMPOS_POSICION 3
 #define CARRERAS_DAT "../Archivos/carreras.dat"
 #define PUNTAJES_TXT "../Archivos/puntajes.txt"
+#define BAJAS_CAR_DAT "../Archivos/bajas_car.dat"
 
 void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes);
 
@@ -25,6 +26,8 @@ int guardarCarrera(FILE* archCarreras, const t_carrera* c);
 int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos);
 int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos);
 void guardarPilotos(FILE* archPilotos, const tda_vector* pilotos);
-void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c);
+void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c, const char* tipo);
 
+void bajaCarrera(FILE* archCarreras, FILE* archPilotos);
+void MostrarCarrera(FILE* archCarreras);
 #endif // CARRERAS_H_INCLUDED

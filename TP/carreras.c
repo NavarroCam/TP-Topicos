@@ -16,15 +16,15 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
         printf("5. Combinar temporadas [EXTRA E]\n");
         printf("6. Exportar carreras\n");
         printf("0. Volver\n");
+        MostrarCarrera(archCarreras);
         printf("\nOpción: ");
         scanf("%d", &op);
         while (getchar() != '\n');
-
         switch (op)
         {
         case 1: registrarCarrera(archCarreras, archPilotos, archPuntajes);
             break;
-//            case 2: bajaCarrera(CARRERAS_DAT, BAJAS_CAR); break;
+        case 2: bajaCarrera(archCarreras, archPilotos); break;
 //            case 3: actualizarPuntosDesdeCarreras(CARRERAS_DAT, PILOTOS_DAT, PILOTOS_IDX);
 //                    printf("Puntos recalculados.\n"); break;
 //            case 4: simularCarrera(CARRERAS_DAT, PILOTOS_DAT, PILOTOS_IDX); break;
@@ -62,7 +62,7 @@ int registrarCarrera(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
     mostrarResultadosCarrera(&c);
     //ACTUALIZAR PILOTOS
     cargarPilotosAMemoria(&pilotos,archPilotos);
-    actualizarPuntosPilotos(&pilotos,&c);
+    actualizarPuntosPilotos(&pilotos,&c,"SUMA");
     guardarPilotos(archPilotos,&pilotos);
     //GUARDAR CARRERA
     guardarCarrera(archCarreras,&c);
@@ -77,6 +77,7 @@ int generarIdCarrera(FILE* archCarreras)
 {
     t_carrera auxCarrera;
     fseek(archCarreras,0,SEEK_END);
+
     if(ftell(archCarreras) > 0)
     {
         fseek(archCarreras,-(long)sizeof(t_carrera),SEEK_END);
@@ -147,6 +148,9 @@ int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
         printf("%u° ", i + 1);
         puesto->posicion = i + 1;
         scanf("%u", &puesto->id_piloto);
+
+//        printf("i=%d ce=%u\n", i, puntos->ce);
+
         puntaje = obtenerPuntaje(puntos,i);
         if(!puntaje)
             printf("Error obteniendo el puntaje\n");
@@ -172,7 +176,6 @@ int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos)
     rewind(archPilotos);
 
     fread(&p,sizeof(t_piloto),1,archPilotos);
-   // insertarAlFinal_Vector(pilotos,&p);
     while(!feof(archPilotos))
     {
         insertarAlFinal_Vector(pilotos,&p);
@@ -181,7 +184,7 @@ int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos)
     return TODOOK;
 }
 
-void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c)
+void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c, const char* tipo)
 {
     t_piloto* piloto;
     t_posicion* resultado;
@@ -193,7 +196,12 @@ void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c)
 
         piloto = bSearch(&(resultado->id_piloto),pil->vec,pil->ce,pil->tam,compararIdPiloto);
         if(piloto)
-            piloto->puntos_acumulados += resultado->puntos;
+        {
+            if(strcmp(tipo,"SUMA")==0)
+                piloto->puntos_acumulados += resultado->puntos;
+            if(strcmp(tipo,"RESTA")==0)
+                piloto->puntos_acumulados -= resultado->puntos;
+        }
     }
 }
 
@@ -206,6 +214,7 @@ void guardarPilotos(FILE* archPilotos, const tda_vector* pilotos)
 
 int guardarCarrera(FILE* archCarreras, const t_carrera* c)
 {
+    fseek(archCarreras,0,SEEK_END);
     if(fwrite(c,sizeof(t_carrera),1,archCarreras) != 1)
         return ERROR_;
     return TODOOK;
@@ -228,6 +237,8 @@ int cargarVectorPuntos(tda_vector* v,FILE* pf)
 {
     char cad[TAMCADENA];
     t_puntajes p;
+
+    rewind(pf);
 
     while(fgets(cad,TAMCADENA,pf))
     {
@@ -259,4 +270,64 @@ int trozarPuntajes(const char* cad,t_puntajes* puntos)
     *p = '\0';
     sscanf(cad,"%u",&puntos->posicion);
     return TODOOK;
+}
+void bajaCarrera(FILE* archCarreras, FILE* archPilotos)
+{
+    int idbuscado;
+    t_carrera car;
+    FILE* fbajas;
+    int encontrado=0;
+    tda_vector pilotos;
+
+    printf("\n==== BAJA DE CARRERA ====\n");
+    printf("ID de la carrera a dar de baja: ");
+    scanf("%d",&idbuscado);
+
+    rewind(archCarreras);
+    while(!encontrado && fread(&car,sizeof(t_carrera),1,archCarreras)==1)
+    {
+        if(car.id==idbuscado)
+        {
+            encontrado=1;
+            if(car.estado == 0)
+            {
+                printf("La carrera ya fue dado de baja.\n");
+                return;
+            }
+            else
+            {
+                car.estado=0;
+                fseek(archCarreras, -(long)sizeof(t_carrera),SEEK_CUR);
+                fwrite(&car,sizeof(t_carrera),1,archCarreras);
+
+                crear_Vector(&pilotos,sizeof(t_piloto));
+                cargarPilotosAMemoria(&pilotos,archPilotos);
+                actualizarPuntosPilotos(&pilotos,&car,"RESTA");
+                guardarPilotos(archPilotos,&pilotos);
+                destruir_Vector(&pilotos);
+
+                fbajas = fopen(BAJAS_CAR_DAT, "ab");
+                if(!fbajas)
+                {
+                    printf("Error al abrir el archivo");
+                    return;
+                }
+                else{
+                    fwrite(&car,sizeof(t_carrera),1,fbajas);
+                    fclose(fbajas);
+                }
+                printf("Carrera %s dada de baja.\n", car.circuito);
+            }
+        }
+    }
+    if(!encontrado)
+        printf("Carrera no encontrada.\n");
+}
+void MostrarCarrera(FILE* archCarreras)
+{
+    t_carrera carreras;
+    rewind(archCarreras);
+    printf("ID\tNOMBRE\tESTADO\n");
+    while(fread(&carreras, sizeof(t_carrera),1,archCarreras)==1)
+        printf("%d\t%s\t%d\n",carreras.id, carreras.circuito, carreras.estado);
 }
