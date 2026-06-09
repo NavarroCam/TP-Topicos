@@ -9,12 +9,13 @@ void __menuPilotos(FILE* pilotos, FILE* escuderias)
         puts("\n\n===============================================");
         printf("\t\t   PILOTOS\n");
         puts("===============================================");
-        printf("1. Listar pilotos y puntajes)\n");
+        printf("1. Listar pilotos y puntajes\n");
         printf("2. Alta piloto\n");
         printf("3. Baja piloto\n");
         printf("4. Modificar piloto\n");
         printf("5. Mostrar ranking\n");
-        printf("6. Exportar pilotos\n");
+        printf("6. Listar pilotos por escuderias\n");
+        printf("7. Exportar pilotos\n");
         printf("0. Volver\n");
 
         printf("\nOpcion: ");
@@ -29,7 +30,8 @@ void __menuPilotos(FILE* pilotos, FILE* escuderias)
             case 3: bajaPiloto(pilotos); break;
             case 4: modificarPiloto(pilotos, escuderias); break;
             case 5: mostrarRanking(pilotos); break;
-            case 6: puts("Exportar pilotos"); break;
+            case 6: listarPilotosPorEscuderia(pilotos, escuderias); break;
+            case 7: puts("Exportar pilotos"); break;
             case 0: break;
             default: printf("Opción inválida.\n");
         }
@@ -128,7 +130,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
     nuevo.puntos_acumulados = 0;
     nuevo.estado = 'A';
     getchar();
-    do {
+    do{
         printf("Fecha nacimiento (AAAAMMDD): ");
         fflush(stdin);
         fgets(fechaStr, sizeof(fechaStr), stdin);
@@ -228,7 +230,6 @@ int bajaPiloto(FILE* pilotos)
     if(!encontrado) printf("Piloto no encontrado.\n");
     return encontrado ? TODOOK : ERROR_;
 }
-
 
 
 int modificarPiloto(FILE* pilotos, FILE* escuderias)
@@ -386,5 +387,47 @@ void mostrarPilotoCarrera(void* pilotos)
         printf("| %-8u | %-30s |\n",
                pil->id,
                pil->nombre);
+    }
+}
+
+void listarPilotosPorEscuderia(FILE* pilotos, FILE* escuderias)
+{
+    int ce, cp, i, j;
+    t_escuderia escu;
+    t_piloto pil;
+
+    fseek(escuderias, 0, SEEK_END);
+    ce = ftell(escuderias) / sizeof(t_escuderia);
+
+    fseek(pilotos, 0, SEEK_END);
+    cp = ftell(pilotos) / sizeof(t_piloto);
+
+    for(i = 0; i < ce; i++)
+    {
+        fseek(escuderias, i * sizeof(t_escuderia), SEEK_SET);
+        fread(&escu, sizeof(t_escuderia), 1, escuderias);
+
+
+        printf("\n\n=============\t %15s \t=============\n", escu.nombre);
+        puts("-----------------------------------------------------");
+        printf("| %-3s | %-30s | %6s | %s |\n",
+               "ID", "NOMBRE", "PUNTOS", "E");
+        puts("-----------------------------------------------------");
+
+        for(j = 0; j < cp; j++)
+        {
+            fseek(pilotos, j * sizeof(t_piloto), SEEK_SET);
+            fread(&pil, sizeof(t_piloto), 1, pilotos);
+
+            if(pil.id_escuderia == escu.id &&(pil.estado == 'A' || pil.estado == 'S'))
+            {
+                printf("| %-3u | %-30s | %6u | %c |\n",
+                       pil.id,
+                       pil.nombre,
+                       pil.puntos_acumulados,
+                       pil.estado);
+            }
+        }
+        puts("=====================================================");
     }
 }

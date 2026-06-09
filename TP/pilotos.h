@@ -10,7 +10,7 @@
 #include "comunes.h"
 
 #define PILOTOS_DAT "../Archivos/pilotos.dat"
-#define PILOTOS_TXT "../Archivos/pilotos.txt"
+#define PILOTOS_TXT "../Archivos/pilotos1.txt"  //cambio por txt de Caro
 #define PILOTOS_ACT_TXT "../Archivos/pilotosActualizados.txt"
 
 
@@ -43,5 +43,6 @@ void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias);
 //void listarPilotosPorEscuderia_Op2(FILE* pilotos, FILE* escuderias);
 
 void mostrarPilotoCarrera(void* pilotos);
+void listarPilotosPorEscuderia(FILE* pilotos, FILE* escuderias);
 
 #endif // PILOTOS_H_INCLUDED
