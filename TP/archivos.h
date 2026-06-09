@@ -7,7 +7,7 @@
 #include "carreras.h"
 
 #define TAMCADENA 256
-#define SEPARADOR ';'
+#define SEPARADOR '|'
 
 int cargarPilotosTxtABin(const char *txtPath, const char *binPath);
 int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath);

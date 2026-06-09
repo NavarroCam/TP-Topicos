@@ -26,7 +26,7 @@ void listarPilotos(FILE* pilotos);
 int compararPuntos(const void* a, const void* b);
 int compararIdPiloto(const void* a, const void* b);
 
-unsigned generarNuevoId(FILE* pilotos);
+unsigned generarNuevoIdPilotos(FILE* pilotos);
 int altaPiloto(FILE* pilotos, FILE* escuderias);
 
 int exportarBajasPilotosTxt(const char* binPath, const char* txtPath);

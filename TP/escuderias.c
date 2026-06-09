@@ -143,15 +143,16 @@ int BuscarCodigoEscuderia(FILE* escuderias, const char* cod)///ACOMODAR
 unsigned generarNuevoIdEscuderias(FILE* escuderias)
 {
     t_escuderia escuderia;
-    unsigned maxId = 0;
+    unsigned Id = 1;
 
-    rewind(escuderias);
-
-    while (fread(&escuderia, sizeof(t_escuderia), 1, escuderias) == 1)
-        if (escuderia.id > maxId)
-            maxId = escuderia.id;
-
-    return maxId + 1;
+    fseek(escuderias,0,SEEK_END);
+    if(ftell(escuderias) > 0)
+    {
+        fseek(escuderias,-(long)sizeof(t_escuderia),SEEK_END);
+        fread(&escuderia,sizeof(t_escuderia),1,escuderias);
+        Id = escuderia.id + 1;
+    }
+    return Id;
 }
 
 int exportarBajasEscuderiasTxt(const char* binPath, const char* txtPath)
@@ -218,7 +219,7 @@ int bajaEscuderia(FILE* escuderias)
             fbajas = fopen(BAJAS_ESCUDERIAS_DAT, "ab");
             if(!fbajas)
             {
-                printf("Error al abrir %s\n", fbajas);
+                printf("Error al abrir %s\n", BAJAS_ESCUDERIAS_DAT);
                 return ERROR_;
             }
             else{

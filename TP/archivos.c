@@ -176,7 +176,7 @@ int exportarPilotosTxt(const char *binPath, const char *txtPath)
     fread(&piloto, sizeof(t_piloto), 1, fbin);
     while ( !feof(fbin))
     {
-        fprintf(ftxt,"%u;%s;%s;%u;%u;%c;%I64u\n",piloto.id,piloto.nombre,piloto.nacionalidad,piloto.id_escuderia,piloto.puntos_acumulados,
+        fprintf(ftxt,"%u|%s|%s|%u|%u|%c|%I64u\n",piloto.id,piloto.nombre,piloto.nacionalidad,piloto.id_escuderia,piloto.puntos_acumulados,
                 piloto.estado,piloto.fechaNacimiento);
         fread(&piloto, sizeof(t_piloto), 1, fbin);
     }
@@ -210,7 +210,7 @@ int exportarEscuderiasTxt(const char *binPath, const char *txtPath)
     fread(&esc, sizeof(t_escuderia), 1, fbin);
     while ( !feof(fbin))
     {
-        fprintf(ftxt,"%u;%s;%s;%s;%d\n",esc.id,esc.codigo,esc.nombre,esc.pais,esc.estado);
+        fprintf(ftxt,"%u|%s|%s|%s|%d\n",esc.id,esc.codigo,esc.nombre,esc.pais,esc.estado);
         fread(&esc, sizeof(t_escuderia), 1, fbin);
     }
 

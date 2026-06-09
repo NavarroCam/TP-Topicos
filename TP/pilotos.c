@@ -81,18 +81,19 @@ void listarPilotos(FILE* pilotos)
     puts("===========================================");
 }
 
-unsigned generarNuevoId(FILE* pilotos)
+unsigned generarNuevoIdPilotos(FILE* pilotos)
 {
     t_piloto pil;
-    unsigned maxId = 0;
-    rewind(pilotos);
+    fseek(pilotos,0,SEEK_END);
+    unsigned Id = 1;
 
-    while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
+    if(ftell(pilotos) > 0)
     {
-        if(pil.id>maxId)
-            maxId=pil.id;
+        fseek(pilotos,-(long)sizeof(t_piloto),SEEK_END);
+        fread(&pil,sizeof(t_piloto),1,pilotos);
+        Id = pil.id + 1;
     }
-    return maxId + 1;
+    return Id;
 }
 
 int altaPiloto(FILE* pilotos, FILE* escuderias)
@@ -101,7 +102,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
     char fechaStr[20];
     char *p;
 
-    nuevo.id = generarNuevoId(pilotos);
+    nuevo.id = generarNuevoIdPilotos(pilotos);
 
     puts("==== ALTA DE PILOTO ====");
 

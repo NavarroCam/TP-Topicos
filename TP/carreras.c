@@ -96,7 +96,8 @@ void cargarDatosCarrera(t_carrera* c)
     char *p;
     //CIRCUITO
     printf("Circuito: ");
-    scanf("%s", c->circuito);
+    fflush(stdin);
+    fgets(c->circuito, sizeof(c->circuito), stdin);
     if((p = strchr(c->circuito, '\n')) != NULL)
             *p = '\0';
         else while(getchar() != '\n');
@@ -327,7 +328,7 @@ void MostrarCarrera(FILE* archCarreras)
 {
     t_carrera carreras;
     rewind(archCarreras);
-    printf("ID\tNOMBRE\tESTADO\n");
+    printf("ID\tNOMBRE\t\tESTADO\n");
     while(fread(&carreras, sizeof(t_carrera),1,archCarreras)==1)
-        printf("%d\t%s\t%d\n",carreras.id, carreras.circuito, carreras.estado);
+        printf("%4d%20s%4d\n",carreras.id, carreras.circuito, carreras.estado);
 }
