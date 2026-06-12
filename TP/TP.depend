@@ -1,23 +1,23 @@
 # depslib dependency file v1.0
-1780536955 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.c
+1781302346 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.c
 	"archivos.h"
 
-1780536733 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
+1781303525 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
 	"carreras.h"
 
-1780536807 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
+1781226920 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
 1780247323 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
 
-1780537008 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
+1781304114 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	<windows.h>
 	"archivos.h"
 	"carreras.h"
 
-1780536849 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
+1781227226 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -164,19 +164,19 @@
 	"pilotos.h"
 	<ctype.h>
 
-1780532958 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.h
+1781227288 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.h
 	"comunes.h"
 	"pilotos.h"
 	"escuderias.h"
 	"carreras.h"
 
-1780536834 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.h
+1781303329 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1780533224 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.h
+1781228150 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -186,13 +186,13 @@
 
 1780247323 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\tipos.h
 
-1780533224 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.h
+1781228150 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.h
 	<stdio.h>
 	<string.h>
 	"tipos.h"
 	"comunes.h"
 
-1780247323 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
+1781303393 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
 	"pilotos.h"
 
 1780536758 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c

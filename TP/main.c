@@ -19,7 +19,9 @@ int main()
     {
         puts("Cargando datos iniciales...");
         cargarPilotosTxtABin(PILOTOS_TXT,PILOTOS_DAT);//para poder modificarlos
+        generarArchivoOrdenado(PILOTOS_DAT,sizeof(t_piloto),compararIdPiloto);
         cargarEscuderiasTxtABin(ESCUDERIAS_TXT,ESCUDERIAS_DAT);//para poder modificarlos
+        generarArchivoOrdenado(ESCUDERIAS_DAT,sizeof(t_escuderia),compararIdEscuderia);
 //        reconstruirIndice(PILOTOS_DAT,PILOTOS_IDX);
     }
     else
@@ -37,10 +39,10 @@ int main()
         return ERROR_ARCH;
     }
 
-    printf("=== SISTEMA DE GESTION TEMPORADA F1 ===\n");
+    printf("=== SISTEMA DE GESTION TEMPORADA F1 ===");
     do
     {
-        puts("\n\n===============================================");
+        puts("\n===============================================");
         puts("\t\t   MENU PRINCIPAL");
         puts("===============================================");
         printf("1. Pilotos\n");
@@ -59,7 +61,6 @@ int main()
                 __menuPilotos(pPilotos, pEscuderias);
                 break;
             case 2:
-                ///REVISAR TODO LO DE ESCUDERIAS
                 menuEscuderias(pPilotos, pEscuderias);
                 break;
             case 3:

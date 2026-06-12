@@ -10,7 +10,7 @@
 #include "comunes.h"
 
 #define PILOTOS_DAT "../Archivos/pilotos.dat"
-#define PILOTOS_TXT "../Archivos/pilotos1.txt"  //cambio por txt de Caro
+#define PILOTOS_TXT "../Archivos/pilotos.txt"  //cambio por txt de Caro
 #define PILOTOS_ACT_TXT "../Archivos/pilotosActualizados.txt"
 
 
@@ -25,7 +25,7 @@ void listarPilotos(FILE* pilotos);
 
 int compararPuntos(const void* a, const void* b);
 int compararIdPiloto(const void* a, const void* b);
-
+int compararIdPilotoBusqueda(const void* a, const void* b);
 unsigned generarNuevoIdPilotos(FILE* pilotos);
 int altaPiloto(FILE* pilotos, FILE* escuderias);
 

@@ -27,6 +27,7 @@ int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos);
 int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos);
 void guardarPilotos(FILE* archPilotos, const tda_vector* pilotos);
 void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c, const char* tipo);
+int pilotoYaIngresado(const t_carrera* c, unsigned idPiloto, int cantCargados);
 
 int bajaCarrera(FILE* archCarreras, FILE* archPilotos);
 void MostrarCarrera(FILE* archCarreras);

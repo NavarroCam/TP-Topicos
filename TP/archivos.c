@@ -40,9 +40,9 @@ int trozarPilotos(char* cad, t_piloto* p1)
 {
     char* p;
     p = strchr(cad,'\n');
-    if(!p)
-        return ERROR_;
-    *p = '\0';
+    if(p)
+        *p = '\0';
+
     p = strrchr(cad,SEPARADOR);
     if(!p)
         return ERROR_;
@@ -105,6 +105,7 @@ int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath)
     while (fgets(cad, sizeof(cad), ftxt))
     {
         trozarEscuderias(cad,&e1);
+
         fwrite(&e1, sizeof(t_escuderia), 1, fbin);
     }
 
@@ -118,9 +119,8 @@ int trozarEscuderias(char* cad, t_escuderia* e1)
 {
     char* p;
     p = strchr(cad,'\n');
-    if(!p)
-        return ERROR_;
-    *p = '\0';
+    if(p)
+        *p = '\0';
 
     p = strrchr(cad,SEPARADOR);
     if(!p)
@@ -217,5 +217,37 @@ int exportarEscuderiasTxt(const char *binPath, const char *txtPath)
     fclose(fbin);
     fclose(ftxt);
 
+    return TODOOK;
+}
+
+int generarArchivoOrdenado(const char* nomArch,size_t tamRegistro, int cmp(const void*, const void*))
+{
+    FILE* pf;
+    size_t cantRegistros;
+    long tamArchivo;
+    void* vec;
+    pf = fopen(nomArch,"r+b");
+    if(!pf)
+    {
+        return ERROR_ARCH;
+    }
+
+    fseek(pf,0,SEEK_END);
+    tamArchivo = ftell(pf);
+    cantRegistros = tamArchivo / tamRegistro;
+    vec = malloc(cantRegistros * tamRegistro);
+    if(!vec)
+    {
+        fclose(pf);
+        return ERROR_MEMORIA;
+    }
+    rewind(pf);
+    fread(vec,tamRegistro,cantRegistros,pf);
+    sSort(vec,cantRegistros,tamRegistro,cmp);
+    rewind(pf);
+    fwrite(vec,tamRegistro,cantRegistros,pf);
+
+    free(vec);
+    fclose(pf);
     return TODOOK;
 }

@@ -13,7 +13,7 @@ int cargarPilotosTxtABin(const char *txtPath, const char *binPath);
 int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath);
 int exportarPilotosTxt(const char *binPath, const char *txtPath);
 int exportarEscuderiasTxt(const char *binPath, const char *txtPath);
-
+int generarArchivoOrdenado(const char* nomArch,size_t tamRegistro, int cmp(const void*, const void*));
 ///////////////
 int trozarPilotos(char* cad, t_piloto* p1);
 int trozarEscuderias(char* cad, t_escuderia* e1);

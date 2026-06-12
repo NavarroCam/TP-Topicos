@@ -15,7 +15,6 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
         printf("5. Combinar temporadas [EXTRA E]\n");
         printf("6. Exportar carreras\n");
         printf("0. Volver\n");
-        MostrarCarrera(archCarreras);
         printf("\nOpción: ");
         scanf("%d", &op);
         while (getchar() != '\n');
@@ -25,11 +24,8 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
                 break;
             case 2: bajaCarrera(archCarreras, archPilotos);
                 break;
-//            case 3: actualizarPuntosDesdeCarreras(CARRERAS_DAT, PILOTOS_DAT, PILOTOS_IDX);
-//                    printf("Puntos recalculados.\n"); break;
 //            case 4: simularCarrera(CARRERAS_DAT, PILOTOS_DAT, PILOTOS_IDX); break;
 //            case 5: combinarTemporadas(CARRERAS_DAT, TEMPORADA_2, COMBINADA); break;
-//            case 6: exportarCarreras(CARRERAS_DAT, EXP_CAR); break;
             case 0:
                 break;
             default:
@@ -116,11 +112,7 @@ void cargarDatosCarrera(t_carrera* c)
     sscanf(fechaStr, "%I64u", &c->fecha);
     //ESTADO
     c->estado = 1;
-    //CANT_RESULTADOS
-    /*printf("¿Cuántos pilotos finalizaron la carrera?: ");
-    scanf("%d", &c->cant_resultados);
-    if(c->cant_resultados > MAX_RESULTADOS)
-        c->cant_resultados = MAX_RESULTADOS;*/
+
     do {
         printf("Cuantos pilotos finalizaron la carrera?: ");
         scanf("%d", &c->cant_resultados);
@@ -153,9 +145,13 @@ int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
         puesto = c->resultados + i;
         printf("%u° ", i + 1);
         puesto->posicion = i + 1;
-        scanf("%u", &puesto->id_piloto);
 
-//        printf("i=%d ce=%u\n", i, puntos->ce);
+        do{
+            scanf("%u", &puesto->id_piloto);
+            if(pilotoYaIngresado(c,puesto->id_piloto,i))
+                printf("Ese piloto ya fue asignado a otra posición. Ingrese otro ID: ");
+        }while(pilotoYaIngresado(c,puesto->id_piloto,i));
+
 
         puntaje = obtenerPuntaje(puntos,i);
         if(!puntaje)
@@ -163,6 +159,20 @@ int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
         puesto->puntos = puntaje->puntos;
     }
     return TODOOK;
+}
+
+int pilotoYaIngresado(const t_carrera* c, unsigned idPiloto, int cantCargados)
+{
+    t_posicion* act = (t_posicion*)c->resultados;
+    t_posicion* fin = (t_posicion*)(c->resultados + cantCargados);
+
+    while(act < fin)
+    {
+        if(act->id_piloto == idPiloto)
+            return ENCONTRADO;
+        act++;
+    }
+    return NO_ENCONTRADO;
 }
 void mostrarResultadosCarrera(const t_carrera* c)
 {

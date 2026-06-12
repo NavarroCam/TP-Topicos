@@ -50,16 +50,16 @@ void listarEscuderias(FILE* escuderias)
     }
     puts("==================================================================================");
 }
-//
-//int compararIdEscuderia(const void* a, const void* b)
-//{
-//    unsigned idBuscado = *(unsigned*)a;
-//    unsigned idEsc = ((t_escuderia*)b)->id;
-//    if(idBuscado < idEsc) return -1;
-//    if(idBuscado > idEsc) return  1;
-//    return 0;
-//}
-//
+
+int compararIdEscuderia(const void* a, const void* b)
+{
+    unsigned idA = ((t_escuderia*)a)->id;
+    unsigned idB = ((t_escuderia*)b)->id;
+    if(idA < idB) return -1;
+    if(idA > idB) return  1;
+    return 0;
+}
+
 int escuderiaValida(unsigned idEsc, FILE* escuderias)
 {
     t_escuderia esc;

@@ -4,4 +4,8 @@
 4|RBR|Red Bull Racing|Austria|1
 5|ALP|Alpine F1 Team|Francia|1
 6|HAS|Haas|Estados Unidos|1
-7|WIL|Williams|Reino Unido|1
+7|RAB|Racing Bulls|Italia|1
+8|WIL|Williams|Reino Unido|1
+9|AUD|Audi|Alemania|1
+10|CAD|Cadillac|Estados Unidos|1
+11|AST|Aston Martin|Reino Unido|1

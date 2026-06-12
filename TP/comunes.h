@@ -11,6 +11,8 @@
 #define TODOOK    0
 #define ERROR_ -2
 #define ERROR_ARCH -3
+#define ENCONTRADO 1
+#define NO_ENCONTRADO 0
 
 // Macro para mostrar por pantalla la fecha
 #define FECHA_FORMATO(f, a, m, d) \

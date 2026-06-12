@@ -45,12 +45,21 @@ int compararPuntos(const void* a, const void* b)
     return pil2->puntos_acumulados - pil1->puntos_acumulados;
 }
 
-int compararIdPiloto(const void* a, const void* b)
+int compararIdPilotoBusqueda(const void* a, const void* b)
 {
     unsigned idBuscado = *(unsigned*)a;
     unsigned idPiloto = ((t_piloto*)b)->id;
     if(idBuscado < idPiloto) return -1;
     if(idBuscado > idPiloto) return  1;
+    return 0;
+}
+
+int compararIdPiloto(const void* a, const void* b)
+{
+    unsigned idA = ((t_piloto*)a)->id;
+    unsigned idB = ((t_piloto*)b)->id;
+    if(idA < idB) return -1;
+    if(idA > idB) return  1;
     return 0;
 }
 
