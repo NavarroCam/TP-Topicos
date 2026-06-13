@@ -50,6 +50,7 @@ typedef struct {
     unsigned total_puntos;
     unsigned mejor_posicion;
     unsigned peor_posicion;
+    unsigned suma_posiciones; //para promedio de posición
 } t_estadistica;
 
 #endif // TIPOS_H_INCLUDED

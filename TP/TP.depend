@@ -23,28 +23,30 @@
 	"pilotos.h"
 	<ctype.h>
 
-1781036767 source:c:\topicos\tp\tp-topicos\tp\carreras.c
+1781389572 source:c:\topicos\tp\tp-topicos\tp\carreras.c
 	"carreras.h"
 
-1781034546 source:c:\topicos\tp\tp-topicos\tp\escuderias.c
+1781385671 source:c:\topicos\tp\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
-1778202184 source:c:\topicos\tp\tp-topicos\tp\estadisticas.c
+1781389768 source:c:\topicos\tp\tp-topicos\tp\estadisticas.c
+	"estadisticas.h"
 
-1781034546 source:c:\topicos\tp\tp-topicos\tp\main.c
+1781385671 source:c:\topicos\tp\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	<windows.h>
 	"archivos.h"
 	"carreras.h"
+	"estadisticas.h"
 
-1781034546 c:\topicos\tp\tp-topicos\tp\archivos.h
+1781385671 c:\topicos\tp\tp-topicos\tp\archivos.h
 	"comunes.h"
 	"pilotos.h"
 	"escuderias.h"
 	"carreras.h"
 
-1781041227 c:\topicos\tp\tp-topicos\tp\pilotos.h
+1781385671 c:\topicos\tp\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -52,20 +54,21 @@
 	"tipos.h"
 	"comunes.h"
 
-1781041227 c:\topicos\tp\tp-topicos\tp\escuderias.h
+1781385671 c:\topicos\tp\tp-topicos\tp\escuderias.h
 	<stdio.h>
 	<string.h>
 	"tipos.h"
 	"comunes.h"
 
-1781036721 c:\topicos\tp\tp-topicos\tp\carreras.h
+1781385671 c:\topicos\tp\tp-topicos\tp\carreras.h
 	"pilotos.h"
+	"estadisticas.h"
 
-1781039197 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
+1781385671 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
-1781034546 source:c:\topicos\tp\tp-topicos\tp\archivos.c
+1781385671 source:c:\topicos\tp\tp-topicos\tp\archivos.c
 	"archivos.h"
 
 1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.c
@@ -201,13 +204,13 @@
 1780536758 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
-1781034546 c:\topicos\tp\tp-topicos\tp\comunes.h
+1781385671 c:\topicos\tp\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1780254076 c:\topicos\tp\tp-topicos\tp\tipos.h
+1781387169 c:\topicos\tp\tp-topicos\tp\tipos.h
 
 1781034546 source:c:\topicos\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
@@ -267,5 +270,8 @@
 	<ctype.h>
 
 1781318607 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.h
+	"archivos.h"
+
+1781387470 c:\topicos\tp\tp-topicos\tp\estadisticas.h
 	"archivos.h"
 

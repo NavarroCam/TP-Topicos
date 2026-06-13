@@ -10,10 +10,6 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
         puts("===============================================");
         printf("1. Registrar carrera\n");
         printf("2. Dar de baja carrera\n");
-        printf("3. Actualizar puntos (recalcular)\n");
-        printf("4. Simular carrera [EXTRA C]\n");
-        printf("5. Combinar temporadas [EXTRA E]\n");
-        printf("6. Exportar carreras\n");
         printf("0. Volver\n");
         printf("\nOpción: ");
         scanf("%d", &op);
@@ -24,8 +20,6 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
                 break;
             case 2: bajaCarrera(archCarreras, archPilotos);
                 break;
-//            case 4: simularCarrera(CARRERAS_DAT, PILOTOS_DAT, PILOTOS_IDX); break;
-//            case 5: combinarTemporadas(CARRERAS_DAT, TEMPORADA_2, COMBINADA); break;
             case 0:
                 break;
             default:

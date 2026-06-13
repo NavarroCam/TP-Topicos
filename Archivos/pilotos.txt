@@ -1,22 +1,22 @@
-101|George Russell|Britanica|1|25|A|19980215
-102|Andrea Kimi Antonelli|Italiana|1|18|A|20060825
-103|Charles Leclerc|Monegasca|2|15|A|19971016
-104|Lewis Hamilton|Britanica|2|12|A|19850107
+101|George Russell|Britanica|1|75|A|19980215
+102|Andrea Kimi Antonelli|Italiana|1|36|A|20060825
+103|Charles Leclerc|Monegasca|2|72|A|19971016
+104|Lewis Hamilton|Britanica|2|37|A|19850107
 105|Lando Norris|Britanica|3|10|A|19991113
 106|Oscar Piastri|Australiana|3|8|A|20010406
-107|Max Verstappen|Neerlandesa|4|6|A|19970930
+107|Max Verstappen|Neerlandesa|4|49|A|19970930
 108|Isack Hadjar|Francesa|4|4|A|20040928
 109|Pierre Gasly|Francesa|5|2|A|19960207
-110|Franco Colapinto|Argentina|5|1|A|20030527
+110|Franco Colapinto|Argentina|5|31|A|20030527
 111|Esteban Ocon|Francesa|6|0|A|19960917
 112|Oliver Bearman|Britanica|6|0|A|20050508
 113|Liam Lawson|Neozelandesa|7|0|A|20020211
 114|Arvid Lindblad|Britanica|7|0|A|20070808
-115|Alexander Albon|Tailandesa|8|0|A|19960323
-116|Carlos Sainz Jr.|Espanola|8|0|A|19940901
+115|Alexander Albon|Tailandesa|8|15|A|19960323
+116|Carlos Sainz Jr.|Espanola|8|10|A|19940901
 117|Nico Hulkenberg|Alemana|9|0|A|19870819
 118|Gabriel Bortoleto|Brasilena|9|0|A|20041014
-119|Sergio Perez|Mexicana|10|0|A|19900126
+119|Sergio Perez|Mexicana|10|12|A|19900126
 120|Valtteri Bottas|Finlandesa|10|0|A|19890828
-121|Fernando Alonso|Espanola|11|0|A|19810729
+121|Fernando Alonso|Espanola|11|18|A|19810729
 122|Lance Stroll|Canadiense|11|0|A|19981029
