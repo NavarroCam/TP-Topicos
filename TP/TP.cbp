@@ -50,6 +50,7 @@
 		<Unit filename="estadisticas.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="estadisticas.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

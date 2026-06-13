@@ -2,15 +2,16 @@
 #define CARRERAS_H_INCLUDED
 
 #include "pilotos.h"
+#include "estadisticas.h"
 #define MAX_PUNTAJES 10
 #define CANT_CAMPOS_POSICION 3
 #define CARRERAS_DAT "../Archivos/carreras.dat"
 #define PUNTAJES_TXT "../Archivos/puntajes.txt"
 #define BAJAS_CAR_DAT "../Archivos/bajas_car.dat"
 
-void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes);
+void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas);
 
-int registrarCarrera(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes);
+int registrarCarrera(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas);
 void mostrarPuntos(void* elem);
 int cargarVectorPuntos(tda_vector* v,FILE* pf);
 int trozarPuntajes(const char* cad,t_puntajes* puntos);

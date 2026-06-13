@@ -1,6 +1,6 @@
 #include "carreras.h"
 
-void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
+void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas)
 {
     int op;
 
@@ -20,7 +20,7 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
         while (getchar() != '\n');
         switch (op)
         {
-            case 1: registrarCarrera(archCarreras, archPilotos, archPuntajes);
+            case 1: registrarCarrera(archCarreras, archPilotos, archPuntajes, archEstadisticas);
                 break;
             case 2: bajaCarrera(archCarreras, archPilotos);
                 break;
@@ -34,7 +34,7 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
     }while(op != 0);
 }
 
-int registrarCarrera(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
+int registrarCarrera(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas)
 {
     t_carrera c;
     tda_vector puntos;
@@ -59,6 +59,8 @@ int registrarCarrera(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes)
     cargarPilotosAMemoria(&pilotos,archPilotos);
     actualizarPuntosPilotos(&pilotos,&c,"SUMA");
     guardarPilotos(archPilotos,&pilotos);
+    //ACTUALIZAR ESTADISTICAS
+    actualizarEstadisticas(archEstadisticas, &c);
     //GUARDAR CARRERA
     guardarCarrera(archCarreras,&c);
 
