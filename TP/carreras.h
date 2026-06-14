@@ -3,6 +3,8 @@
 
 #include "pilotos.h"
 #include "estadisticas.h"
+#include "comunes.h"
+#include "tipos.h"
 #define MAX_PUNTAJES 10
 #define CANT_CAMPOS_POSICION 3
 #define CARRERAS_DAT "../Archivos/carreras.dat"
@@ -31,5 +33,5 @@ void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c, const char* ti
 int pilotoYaIngresado(const t_carrera* c, unsigned idPiloto, int cantCargados);
 
 int bajaCarrera(FILE* archCarreras, FILE* archPilotos);
-void MostrarCarrera(FILE* archCarreras);
+int MostrarCarrera(FILE* archCarreras);
 #endif // CARRERAS_H_INCLUDED

@@ -53,4 +53,10 @@ typedef struct {
     unsigned suma_posiciones; //para promedio de posición
 } t_estadistica;
 
+typedef struct{
+    unsigned dia;
+    unsigned mes;
+    unsigned anio;
+} t_fecha;
+
 #endif // TIPOS_H_INCLUDED

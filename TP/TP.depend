@@ -275,3 +275,68 @@
 1781387470 c:\topicos\tp\tp-topicos\tp\estadisticas.h
 	"archivos.h"
 
+1781396700 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\archivos.c
+	"archivos.h"
+
+1781396700 c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\archivos.h
+	"comunes.h"
+	"pilotos.h"
+	"escuderias.h"
+	"carreras.h"
+
+1781406314 c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\comunes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"tipos.h"
+
+1781396700 c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\pilotos.h
+	<stdio.h>
+	<string.h>
+	"archivos.h"
+	"escuderias.h"
+	"tipos.h"
+	"comunes.h"
+
+1781396700 c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\escuderias.h
+	<stdio.h>
+	<string.h>
+	"tipos.h"
+	"comunes.h"
+
+1781400656 c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\tipos.h
+
+1781405942 c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\carreras.h
+	"pilotos.h"
+	"estadisticas.h"
+	"comunes.h"
+	"tipos.h"
+
+1781396700 c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\estadisticas.h
+	"archivos.h"
+
+1781401816 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\comunes.c
+	"comunes.h"
+
+1781397817 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\escuderias.c
+	"escuderias.h"
+
+1781397745 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\estadisticas.c
+	"estadisticas.h"
+
+1781396700 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\main.c
+	<stdio.h>
+	<locale.h>
+	<windows.h>
+	"archivos.h"
+	"carreras.h"
+	"estadisticas.h"
+
+1781397745 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\pilotos.c
+	"pilotos.h"
+	<ctype.h>
+
+1781407409 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\carreras.c
+	"carreras.h"
+

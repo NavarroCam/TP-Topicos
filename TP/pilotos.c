@@ -6,7 +6,7 @@ void __menuPilotos(FILE* pilotos, FILE* escuderias)
     int op;
 
     do{
-        puts("\n\n===============================================");
+        puts("\n===============================================");
         printf("\t\t   PILOTOS\n");
         puts("===============================================");
         printf("1. Listar pilotos y puntajes\n");

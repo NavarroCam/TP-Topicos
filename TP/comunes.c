@@ -187,3 +187,13 @@ int confirmarModificacion(const char *mensaje)
 
     return opcion == 'S';
 }
+void Separar_a_tfecha(unsigned long long dato, t_fecha *fecha)
+{
+    unsigned dia, mes, anio;
+    dia=dato%100;
+    mes=(dato%10000)/100;
+    anio=dato/10000;
+    fecha->dia=dia;
+    fecha->mes=mes;
+    fecha->anio=anio;
+}

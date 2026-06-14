@@ -6,8 +6,8 @@ void menuEstadisticas(FILE* Estadisticas)
 
     do
     {
-        puts("\n\n===============================================");
-        printf("\t\t   CARRERAS\n");
+        puts("\n===============================================");
+        printf("\t\t   ESTADISTICAS\n");
         puts("===============================================");
         printf("1. Estadísticas de un piloto\n");
         printf("2. Top 5 pilotos con más victorias\n");
@@ -16,6 +16,7 @@ void menuEstadisticas(FILE* Estadisticas)
         printf("\nOpción: ");
         scanf("%d", &op);
         while (getchar() != '\n');
+        system("cls");
         switch (op)
         {
             case 1:

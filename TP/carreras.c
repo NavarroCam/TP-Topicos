@@ -5,20 +5,24 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
     int op;
 
     do{
-        puts("\n\n===============================================");
+        puts("\n===============================================");
         printf("\t\t   CARRERAS\n");
         puts("===============================================");
         printf("1. Registrar carrera\n");
         printf("2. Dar de baja carrera\n");
+        printf("3. Mostrar carrera\n");
         printf("0. Volver\n");
         printf("\nOpción: ");
         scanf("%d", &op);
         while (getchar() != '\n');
+        system("cls");
         switch (op)
         {
             case 1: registrarCarrera(archCarreras, archPilotos, archPuntajes, archEstadisticas);
                 break;
             case 2: bajaCarrera(archCarreras, archPilotos);
+                break;
+            case 3:MostrarCarrera(archCarreras);
                 break;
             case 0:
                 break;
@@ -340,13 +344,38 @@ int bajaCarrera(FILE* archCarreras, FILE* archPilotos)
     return encontrado ? TODOOK : ERROR_;
 }
 
-void MostrarCarrera(FILE* archCarreras)
+int MostrarCarrera(FILE* archCarreras)
 {
-    t_carrera carreras;
+    t_carrera carrera;
+    t_fecha fecha;
+    int idBuscado, encontrado=0;
+
+    printf("\n==== MOSTRAR CARRERA ====\n");
+    printf("ID de la carrera a buscar: ");
+    scanf("%d", &idBuscado);
+
     rewind(archCarreras);
-    printf("ID\tNOMBRE\t\tESTADO\n");
-    while(fread(&carreras, sizeof(t_carrera),1,archCarreras) == 1)
+
+    while(!encontrado && fread(&carrera,sizeof(t_carrera),1,archCarreras)==1)
     {
-        printf("%4d%20s%4d\n",carreras.id, carreras.circuito, carreras.estado);
+        if(carrera.id==idBuscado)
+        {
+            encontrado=1;
+            Separar_a_tfecha(carrera.fecha,&fecha);
+            printf("\n%4s| %20s| %10s| %8s| %6s\n","ID","CIRCUITO","FECHA","CANT. R", "ESTADO");
+            printf("--------------------------------------------------------\n");
+            printf("%4d| %20s| %4u/%2u/%2u| %8d| %6d\n\n",carrera.id, carrera.circuito,
+                                                    fecha.anio, fecha.mes, fecha.dia,
+                                                    carrera.cant_resultados,
+                                                    carrera.estado);
+            if(confirmarModificacion("¿Desea ver los resultados?"))
+            {
+                getchar();
+                mostrarResultadosCarrera(&carrera);
+            }
+        }
     }
+    if(!encontrado)
+        printf("Carrera no encontrada.\n");
+    return encontrado ? TODOOK : ERROR_;
 }

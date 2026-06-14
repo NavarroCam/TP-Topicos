@@ -4,7 +4,7 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
 {
     int op;
     do{
-        puts("\n\n===============================================");
+        puts("\n===============================================");
         printf("\t\t ESCUDERIAS\n");
         puts("===============================================");
         printf("1. Listar escuderias\n");
