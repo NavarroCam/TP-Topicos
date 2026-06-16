@@ -246,7 +246,7 @@ int modificarEscuderia(FILE* escuderias)
     int encontrado=0;
     char* p;
 
-    printf("\n==== MODIFICAR PILOTO ====\n");
+    printf("\n==== MODIFICAR ESCUDERIA ====\n");
     printf("ID de la escuderia a modificar: ");
     scanf("%u", &idBuscado);
 

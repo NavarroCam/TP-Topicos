@@ -10,7 +10,6 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
         puts("===============================================");
         printf("1. Registrar carrera\n");
         printf("2. Dar de baja carrera\n");
-        printf("3. Mostrar carrera\n");
         printf("0. Volver\n");
         printf("\nOpción: ");
         scanf("%d", &op);
@@ -21,8 +20,6 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
             case 1: registrarCarrera(archCarreras, archPilotos, archPuntajes, archEstadisticas);
                 break;
             case 2: bajaCarrera(archCarreras, archPilotos);
-                break;
-            case 3:MostrarCarrera(archCarreras);
                 break;
             case 0:
                 break;
