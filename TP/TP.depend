@@ -218,21 +218,23 @@
 1781034546 source:c:\topicos\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
-1780288210 source:c:\users\npabl\tp-topicos\tp\archivos.c
+1781711921 source:c:\users\npabl\tp-topicos\tp\archivos.c
 	"archivos.h"
 
-1780006478 c:\users\npabl\tp-topicos\tp\archivos.h
+1781711921 c:\users\npabl\tp-topicos\tp\archivos.h
 	"comunes.h"
 	"pilotos.h"
 	"escuderias.h"
 	"carreras.h"
 
-1780277289 c:\users\npabl\tp-topicos\tp\comunes.h
+1781711921 c:\users\npabl\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<ctype.h>
+	"tipos.h"
 
-1780280322 c:\users\npabl\tp-topicos\tp\pilotos.h
+1781711921 c:\users\npabl\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -240,35 +242,40 @@
 	"tipos.h"
 	"comunes.h"
 
-1780281659 c:\users\npabl\tp-topicos\tp\escuderias.h
+1781711921 c:\users\npabl\tp-topicos\tp\escuderias.h
 	<stdio.h>
 	<string.h>
 	"tipos.h"
 	"comunes.h"
 
-1780276758 c:\users\npabl\tp-topicos\tp\tipos.h
+1781711921 c:\users\npabl\tp-topicos\tp\tipos.h
 
-1780276758 c:\users\npabl\tp-topicos\tp\carreras.h
+1781711921 c:\users\npabl\tp-topicos\tp\carreras.h
 	"pilotos.h"
+	"estadisticas.h"
+	"comunes.h"
+	"tipos.h"
 
-1780288210 source:c:\users\npabl\tp-topicos\tp\carreras.c
+1781711921 source:c:\users\npabl\tp-topicos\tp\carreras.c
 	"carreras.h"
 
-1780277289 source:c:\users\npabl\tp-topicos\tp\comunes.c
+1781711921 source:c:\users\npabl\tp-topicos\tp\comunes.c
 	"comunes.h"
 
 1780006478 source:c:\users\npabl\tp-topicos\tp\estadisticas.c
 
-1780288210 source:c:\users\npabl\tp-topicos\tp\main.c
+1781711921 source:c:\users\npabl\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
+	<windows.h>
 	"archivos.h"
 	"carreras.h"
+	"estadisticas.h"
 
-1780286522 source:c:\users\npabl\tp-topicos\tp\escuderias.c
+1781711921 source:c:\users\npabl\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
-1780288210 source:c:\users\npabl\tp-topicos\tp\pilotos.c
+1781711921 source:c:\users\npabl\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -342,4 +349,7 @@
 
 1781407409 source:c:\users\iriel\onedrive\documentos\github\tp-topicos\tp-topicos\tp\carreras.c
 	"carreras.h"
+
+1781711921 c:\users\npabl\tp-topicos\tp\estadisticas.h
+	"archivos.h"
 

@@ -3,7 +3,7 @@
 void menuEstadisticas(FILE* Estadisticas)
 {
     int op;
-
+    t_estadistica mejorPiloto;
     do
     {
         puts("\n===============================================");
@@ -19,19 +19,29 @@ void menuEstadisticas(FILE* Estadisticas)
         system("cls");
         switch (op)
         {
-            case 1:
-                EstadisticasPiloto(Estadisticas);
-                break;
-            case 2:
-                top5MasVictorias(Estadisticas);
-                break;
-            case 3:
-                mejorPromedioPosicion(Estadisticas);
-                break;
-            case 0:
-                break;
-            default:
-                printf("Opción inválida.\n");
+        case 1:
+            EstadisticasPiloto(Estadisticas);
+            break;
+        case 2:
+            top5MasVictorias(Estadisticas);
+            break;
+        case 3:
+            mejorPromedioPosicion(Estadisticas);
+            break;
+        case 4:
+            if(pilotoMasVictorias(Estadisticas,&mejorPiloto)==TODOOK)
+            {
+                printf("\n--- RECORD DE VICTORIAS ---\n");
+                printf("ID del Piloto: %u\n", mejorPiloto.id_piloto);
+                printf("Cantidad de Victorias: %u\n", mejorPiloto.victorias);
+            }
+            else
+                printf("No se pudieron calcular las estadisticas.\n");
+            break;
+        case 0:
+            break;
+        default:
+            printf("Opción inválida.\n");
         }
     }
     while(op != 0);
@@ -124,24 +134,24 @@ int EstadisticasPiloto(FILE* pf)
     return TODOOK;
 }
 
-int pilotoMasVictorias(FILE* pf, t_estadistica* mejor)
-{
-    t_estadistica est;
-
-    rewind(pf);
-
-    if(!fread(mejor,sizeof(t_estadistica),1,pf))
-        return ERROR_ARCH;
-    fread(&est,sizeof(t_estadistica),1,pf);
-    while(!feof(pf))
+    int pilotoMasVictorias(FILE* pf, t_estadistica* mejor)
     {
-        if(est.victorias > mejor->victorias)
-            *mejor = est;
-        fread(&est,sizeof(t_estadistica),1,pf);
-    }
+        t_estadistica est;
 
-    return TODOOK;
-}
+        rewind(pf);
+
+        if(!fread(mejor,sizeof(t_estadistica),1,pf))
+            return ERROR_ARCH;
+        fread(&est,sizeof(t_estadistica),1,pf);
+        while(!feof(pf))
+        {
+            if(est.victorias > mejor->victorias)
+                *mejor = est;
+            fread(&est,sizeof(t_estadistica),1,pf);
+        }
+
+        return TODOOK;
+    }
 
 int top5MasVictorias(FILE* pf)
 {
