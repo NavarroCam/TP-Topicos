@@ -8,7 +8,7 @@
 
 
 #define ESCUDERIAS_DAT "../Archivos/escuderias.dat"
-#define ESCUDERIAS_TXT "../Archivos/escuderias.txt" //cambio por txt de Caro
+#define ESCUDERIAS_TXT "../Archivos/escuderias.txt"
 #define ESCUDERIAS_ACT_TXT "../Archivos/escuderiasActualizado.txt"
 
 #define BAJAS_ESCUDERIAS_DAT "../Archivos/bajas_escuderias.dat"
@@ -24,7 +24,6 @@ int exportarBajasEscuderiasTxt(const char* binPath, const char* txtPath);
 int bajaEscuderia(FILE* escuderias);
 int compararIdEscuderia(const void* a, const void* b);
 int escuderiaValida(unsigned idEsc, FILE* escuderias);
-//int compararCodEscuderia(const void* a, const void* b);
 int modificarEscuderia(FILE* escuderias);
 
 #endif // ESCUDERIAS_H_INCLUDED

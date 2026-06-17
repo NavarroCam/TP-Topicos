@@ -23,7 +23,6 @@ int main()
         generarArchivoOrdenado(PILOTOS_DAT,sizeof(t_piloto),compararIdPiloto);
         cargarEscuderiasTxtABin(ESCUDERIAS_TXT,ESCUDERIAS_DAT);//para poder modificarlos
         generarArchivoOrdenado(ESCUDERIAS_DAT,sizeof(t_escuderia),compararIdEscuderia);
-//        reconstruirIndice(PILOTOS_DAT,PILOTOS_IDX);
     }
     else
         fclose(test);
@@ -117,7 +116,6 @@ int main()
             {
                 puts("No fue posible abrir el archivo de estadisticas :(\n Puede agregar una carrera y volver a intentarlo\n");
                 break;
-//                return ERROR_ARCH;
             }
             menuEstadisticas(pEstadisticas);
             fclose(pEstadisticas);

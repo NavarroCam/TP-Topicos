@@ -123,32 +123,6 @@ void* bSearch(const void* clave, const void* vec, size_t ce, size_t tam, int cmp
     return NULL;
 }
 
-int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
-{
-    void* elem;
-    FILE* pf;
-
-    pf = fopen(archNom, "rb");
-    if(!pf)
-        return ERROR_;
-
-    elem = malloc(tamElem);
-    if(!elem)
-    {
-        fclose(pf);
-        return ERROR_MEMORIA;
-    }
-
-    fread(elem,tamElem,1,pf);
-    while(!feof(pf))
-    {
-        insertarAlFinal_Vector(v,elem);
-        fread(elem,tamElem,1,pf);
-    }
-    fclose(pf);
-    free(elem);
-    return TODOOK;
-}
 int ValidarFecha(char* fecha)
 {
     int dia, mes, anio, aux = TODOOK;

@@ -233,12 +233,6 @@ int guardarCarrera(FILE* archCarreras, const t_carrera* c)
     return TODOOK;
 }
 
-
-void mostrarResultados(void* elem)
-{
-    t_posicion aux = *(t_posicion*)elem;
-    printf("%-8u° %-8u %-8u\n", aux.posicion, aux.id_piloto, aux.puntos);
-}
 void* obtenerPuntaje(const tda_vector* v, unsigned pos)
 {
     if(pos >= v->ce)

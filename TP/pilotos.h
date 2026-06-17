@@ -25,7 +25,6 @@ void listarPilotos(FILE* pilotos);
 
 int compararPuntos(const void* a, const void* b);
 int compararIdPiloto(const void* a, const void* b);
-int compararIdPilotoBusqueda(const void* a, const void* b); //verificar si se usa
 unsigned generarNuevoIdPilotos(FILE* pilotos);
 int altaPiloto(FILE* pilotos, FILE* escuderias);
 
@@ -34,13 +33,9 @@ int bajaPiloto(FILE* pilotos);
 
 int modificarPiloto(FILE* pilotos, FILE* escuderias);
 
-
 void mostrarRanking(FILE* pilotos);
-char* obtenerNombre(const void* p); //verificar si se usa
-unsigned obtenerPuntos(const void* p); //verificar si se usa
 
 void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias);
-//void listarPilotosPorEscuderia_Op2(FILE* pilotos, FILE* escuderias);
 
 void mostrarPilotoCarrera(void* pilotos);
 void listarPilotosPorEscuderia(FILE* pilotos, FILE* escuderias);

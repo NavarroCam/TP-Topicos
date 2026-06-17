@@ -1,0 +1,60 @@
+int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem); //verificar si se usa
+int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem)
+{
+    void* elem;
+    FILE* pf;
+
+    pf = fopen(archNom, "rb");
+    if(!pf)
+        return ERROR_;
+
+    elem = malloc(tamElem);
+    if(!elem)
+    {
+        fclose(pf);
+        return ERROR_MEMORIA;
+    }
+
+    fread(elem,tamElem,1,pf);
+    while(!feof(pf))
+    {
+        insertarAlFinal_Vector(v,elem);
+        fread(elem,tamElem,1,pf);
+    }
+    fclose(pf);
+    free(elem);
+    return TODOOK;
+}
+
+int compararIdPilotoBusqueda(const void* a, const void* b); //verificar si se usa
+int compararIdPilotoBusqueda(const void* a, const void* b)
+{
+    unsigned idBuscado = *(unsigned*)a;
+    unsigned idPiloto = ((t_piloto*)b)->id;
+    if(idBuscado < idPiloto) return -1;
+    if(idBuscado > idPiloto) return  1;
+    return 0;
+}
+
+char* obtenerNombre(const void* p); //verificar si se usa
+char* obtenerNombre(const void* p)
+{
+    if(!p)
+        return NULL;
+    return ((t_piloto*)p)->nombre;
+}
+
+unsigned obtenerPuntos(const void* p); //verificar si se usa
+unsigned obtenerPuntos(const void* p)
+{
+    if(!p)
+        return 0;
+    return ((t_piloto*)p)->puntos_acumulados;
+}
+
+void mostrarResultados(void* elem); //verificar si se usa
+void mostrarResultados(void* elem)
+{
+    t_posicion aux = *(t_posicion*)elem;
+    printf("%-8u° %-8u %-8u\n", aux.posicion, aux.id_piloto, aux.puntos);
+}

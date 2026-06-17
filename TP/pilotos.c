@@ -45,15 +45,6 @@ int compararPuntos(const void* a, const void* b)
     return pil2->puntos_acumulados - pil1->puntos_acumulados;
 }
 
-int compararIdPilotoBusqueda(const void* a, const void* b)
-{
-    unsigned idBuscado = *(unsigned*)a;
-    unsigned idPiloto = ((t_piloto*)b)->id;
-    if(idBuscado < idPiloto) return -1;
-    if(idBuscado > idPiloto) return  1;
-    return 0;
-}
-
 int compararIdPiloto(const void* a, const void* b)
 {
     unsigned idA = ((t_piloto*)a)->id;
@@ -330,21 +321,6 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
     if(!encontrado)
         printf("Piloto no encontrado.\n");
     return encontrado ? TODOOK : ERROR_;
-}
-
-
-char* obtenerNombre(const void* p)
-{
-    if(!p)
-        return NULL;
-    return ((t_piloto*)p)->nombre;
-}
-
-unsigned obtenerPuntos(const void* p)
-{
-    if(!p)
-        return 0;
-    return ((t_piloto*)p)->puntos_acumulados;
 }
 
 void mostrarRanking(FILE* pilotos)

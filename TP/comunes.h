@@ -37,7 +37,6 @@ void sSort(void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
 void* buscarMenor(const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
 void intercambiar(void* a, void* b, size_t tam);
 void* bSearch(const void* clave, const void* vec, size_t ce, size_t tam, int cmp(const void*, const void*));
-int cargarEnTDA(const char* archNom, tda_vector* v, size_t tamElem); //verificar si se usa
 int ValidarFecha(char* fecha);
 void Separar_a_tfecha(unsigned long long dato, t_fecha *fecha);
 

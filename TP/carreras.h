@@ -18,7 +18,6 @@ void mostrarPuntos(void* elem);
 int cargarVectorPuntos(tda_vector* v,FILE* pf);
 int trozarPuntajes(const char* cad,t_puntajes* puntos);
 void* obtenerPuntaje(const tda_vector* v, unsigned pos);
-void mostrarResultados(void* elem); //verificar si se usa
 
 int generarIdCarrera(FILE* archCarreras);
 void cargarDatosCarrera(t_carrera* c);
