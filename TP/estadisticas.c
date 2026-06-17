@@ -12,6 +12,7 @@ void menuEstadisticas(FILE* Estadisticas)
         printf("1. Estadísticas de un piloto\n");
         printf("2. Top 5 pilotos con más victorias\n");
         printf("3. Piloto con mejor promedio de posición\n");
+        printf("4. Piloto con más victorias\n");
         printf("0. Volver\n");
         printf("\nOpción: ");
         scanf("%d", &op);
@@ -133,25 +134,24 @@ int EstadisticasPiloto(FILE* pf)
 
     return TODOOK;
 }
+int pilotoMasVictorias(FILE* pf, t_estadistica* mejor)
+{
+    t_estadistica est;
 
-    int pilotoMasVictorias(FILE* pf, t_estadistica* mejor)
+    rewind(pf);
+
+    if(!fread(mejor,sizeof(t_estadistica),1,pf))
+        return ERROR_ARCH;
+    fread(&est,sizeof(t_estadistica),1,pf);
+    while(!feof(pf))
     {
-        t_estadistica est;
-
-        rewind(pf);
-
-        if(!fread(mejor,sizeof(t_estadistica),1,pf))
-            return ERROR_ARCH;
+        if(est.victorias > mejor->victorias)
+            *mejor = est;
         fread(&est,sizeof(t_estadistica),1,pf);
-        while(!feof(pf))
-        {
-            if(est.victorias > mejor->victorias)
-                *mejor = est;
-            fread(&est,sizeof(t_estadistica),1,pf);
-        }
-
-        return TODOOK;
     }
+
+    return TODOOK;
+}
 
 int top5MasVictorias(FILE* pf)
 {

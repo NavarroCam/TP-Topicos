@@ -262,7 +262,8 @@
 1781711921 source:c:\users\npabl\tp-topicos\tp\comunes.c
 	"comunes.h"
 
-1780006478 source:c:\users\npabl\tp-topicos\tp\estadisticas.c
+1781721988 source:c:\users\npabl\tp-topicos\tp\estadisticas.c
+	"estadisticas.h"
 
 1781711921 source:c:\users\npabl\tp-topicos\tp\main.c
 	<stdio.h>
