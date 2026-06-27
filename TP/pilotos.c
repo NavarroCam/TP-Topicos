@@ -31,7 +31,7 @@ void __menuPilotos(FILE* pilotos, FILE* escuderias)
             case 4: modificarPiloto(pilotos, escuderias); break;
             case 5: mostrarRanking(pilotos); break;
             case 6: listarPilotosPorEscuderia(pilotos, escuderias); break;
-            case 7: puts("Exportar pilotos"); break;
+            case 7: puts("Exportando pilotos"); break;
             case 0: break;
             default: printf("Opción inválida.\n");
         }

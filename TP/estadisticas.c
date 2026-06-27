@@ -32,7 +32,10 @@ void menuEstadisticas(FILE* Estadisticas)
         case 4:
             if(pilotoMasVictorias(Estadisticas,&mejorPiloto)==TODOOK)
             {
-                printf("\n--- RECORD DE VICTORIAS ---\n");
+                puts("=============================================");
+                printf("\t\tRECORD DE VICTORIAS \n");
+                puts("=============================================");
+
                 printf("ID del Piloto: %u\n", mejorPiloto.id_piloto);
                 printf("Cantidad de Victorias: %u\n", mejorPiloto.victorias);
             }
@@ -117,15 +120,18 @@ int EstadisticasPiloto(FILE* pf)
         if(est.id_piloto == idBuscado)
         {
             encontrado = 1;
-            printf("\n--- ESTADISTICAS PILOTO ID: %u ---\n", est.id_piloto);
-            printf("Carreras corridas : %u\n",  est.carreras_corridas);
-            printf("Victorias         : %u\n",  est.victorias);
-            printf("Podios            : %u\n",  est.podios);
-            printf("Puntos totales    : %u\n",  est.total_puntos);
-            printf("Mejor posicion    : %u\n",  est.mejor_posicion);
-            printf("Peor posicion     : %u\n",  est.peor_posicion);
-            printf("Prom. posicion    : %.2f\n", (float)est.suma_posiciones / est.carreras_corridas);
-            printf("Prom. puntos/carr : %.2f\n", (float)est.total_puntos / est.carreras_corridas);
+            puts("===============================");
+            printf("| ESTADISTICAS PILOTO ID: %u |\n", est.id_piloto);
+            puts("===============================");
+            printf("| Carreras corridas : %7u |\n",  est.carreras_corridas);
+            printf("| Victorias         : %7u |\n",  est.victorias);
+            printf("| Podios            : %7u |\n",  est.podios);
+            printf("| Puntos totales    : %7u |\n",  est.total_puntos);
+            printf("| Mejor posicion    : %7u |\n",  est.mejor_posicion);
+            printf("| Peor posicion     : %7u |\n",  est.peor_posicion);
+            printf("| Prom. posicion    :    %3.2f |\n", (float)est.suma_posiciones / est.carreras_corridas);
+            printf("| Prom. puntos/carr :   %3.2f |\n", (float)est.total_puntos / est.carreras_corridas);
+            puts("===============================");
         }
         fread(&est, sizeof(t_estadistica), 1, pf);
     }
@@ -199,10 +205,12 @@ int top5MasVictorias(FILE* pf)
         return TODOOK;
     }
 
-    printf("\n--- TOP %d PILOTOS CON MAS VICTORIAS ---\n", cant);
+    puts("===================================");
+    printf("| TOP %d PILOTOS CON MAS VICTORIAS |\n", cant);
+    puts("===================================");
     for(i = 0; i < cant; i++)
-        printf("%d. ID: %u | Victorias: %u\n", i+1, top[i].id_piloto, top[i].victorias);
-
+        printf("| %d°   ID: %u   | Victorias: %u   |\n", i+1, top[i].id_piloto, top[i].victorias);
+    puts("===================================");
     return TODOOK;
 }
 
@@ -238,8 +246,10 @@ int mejorPromedioPosicion(FILE* pf)
         return TODOOK;
     }
 
-    printf("Piloto con mejor promedio de posicion:\n");
-    printf("ID: %u | Promedio: %.2f\n", mejor.id_piloto, promMejor);
+    puts("=============================================");
+    printf("   PILOTO CON MEJOR PROMEDIO DE POSICION \n");
+    puts("=============================================");
+    printf("ID: %u \nPromedio: %.2f\n", mejor.id_piloto, promMejor);
 
     return TODOOK;
 }
