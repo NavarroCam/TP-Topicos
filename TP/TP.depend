@@ -250,13 +250,14 @@
 
 1781711921 c:\users\npabl\tp-topicos\tp\tipos.h
 
-1781711921 c:\users\npabl\tp-topicos\tp\carreras.h
+1782585210 c:\users\npabl\tp-topicos\tp\carreras.h
 	"pilotos.h"
 	"estadisticas.h"
 	"comunes.h"
 	"tipos.h"
+	<time.h>
 
-1781711921 source:c:\users\npabl\tp-topicos\tp\carreras.c
+1782586086 source:c:\users\npabl\tp-topicos\tp\carreras.c
 	"carreras.h"
 
 1781711921 source:c:\users\npabl\tp-topicos\tp\comunes.c
@@ -276,7 +277,7 @@
 1781711921 source:c:\users\npabl\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
-1781711921 source:c:\users\npabl\tp-topicos\tp\pilotos.c
+1782583513 source:c:\users\npabl\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
