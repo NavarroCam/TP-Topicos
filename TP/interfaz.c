@@ -33,7 +33,7 @@ void tituloMenu(const char* titulo)
 {
     color(COLOR_MENU_PRINCIPAL);   // Amarillo
 
-    printf("\n                 %s\n\n", titulo);
+    printf("\n            %s\n\n", titulo);
 
     restaurarColor();
 }

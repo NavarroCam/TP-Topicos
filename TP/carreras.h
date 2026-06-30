@@ -17,7 +17,6 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
 void guardarCarreraCompleta(FILE* archCarreras, FILE* archPilotos, FILE* archEstadisticas, tda_vector* pilotos, t_carrera* carrera);
 int registrarCarreraManual(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas);
 int registrarCarreraSimulada(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas);
-void mostrarPuntos(void* elem);
 int cargarVectorPuntos(tda_vector* v,FILE* pf);
 int trozarPuntajes(const char* cad,t_puntajes* puntos);
 void* obtenerPuntaje(const tda_vector* v, unsigned pos);
@@ -36,7 +35,6 @@ int pilotoYaIngresado(const t_carrera* c, unsigned idPiloto, int cantCargados);
 
 int listarCarrerasActivas(FILE* archCarreras);
 int bajaCarrera(FILE* archCarreras, FILE* archPilotos);
-int MostrarCarrera(FILE* archCarreras);
 int simularResultadoCarrera(t_carrera* c, const tda_vector* pilotos, const tda_vector* puntos);
 
 #endif // CARRERAS_H_INCLUDED

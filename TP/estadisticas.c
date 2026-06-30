@@ -8,7 +8,7 @@ void menuEstadisticas(FILE* Estadisticas)
     {
         limpiarPantalla();
         tituloSistema();
-        tituloMenu("ESTADÍSTICAS");
+        tituloMenu("      ESTADÍSTICAS");
 
         color(COLOR_TEXTO);
 
@@ -39,12 +39,13 @@ void menuEstadisticas(FILE* Estadisticas)
             system("pause");
             break;
         case 4:
+            limpiarPantalla();
+            tituloSistema();
             if(pilotoMasVictorias(Estadisticas,&mejorPiloto)==TODOOK)
             {
-                puts("=============================================");
-                printf("\t\tRÉCORD DE VICTORIAS \n");
-                puts("=============================================");
-
+                color(COLOR_TEXTO);
+                tituloMenu("   RÉCORD DE VICTORIAS");
+                restaurarColor();
                 printf("ID del Piloto: %u\n", mejorPiloto.id_piloto);
                 printf("Cantidad de Victorias: %u\n", mejorPiloto.victorias);
             }
@@ -119,29 +120,38 @@ int EstadisticasPiloto(FILE* pf)
     unsigned idBuscado;
     int encontrado;
 
+    limpiarPantalla();
+    tituloSistema();
     printf("\nIngrese ID del piloto: ");
     scanf("%u", &idBuscado);
 
     rewind(pf);
     encontrado = 0;
     fread(&est, sizeof(t_estadistica), 1, pf);
+    limpiarPantalla();
+    tituloSistema();
     while(!feof(pf) && !encontrado)
     {
         if(est.id_piloto == idBuscado)
         {
             encontrado = 1;
-            puts("===============================");
-            printf("| ESTADISTICAS PILOTO ID: %u |\n", est.id_piloto);
-            puts("===============================");
-            printf("| Carreras corridas : %7u |\n",  est.carreras_corridas);
-            printf("| Victorias         : %7u |\n",  est.victorias);
-            printf("| Podios            : %7u |\n",  est.podios);
-            printf("| Puntos totales    : %7u |\n",  est.total_puntos);
-            printf("| Mejor posicion    : %7u |\n",  est.mejor_posicion);
-            printf("| Peor posicion     : %7u |\n",  est.peor_posicion);
-            printf("| Prom. posicion    :    %3.2f |\n", (float)est.suma_posiciones / est.carreras_corridas);
-            printf("| Prom. puntos/carr :   %3.2f |\n", (float)est.total_puntos / est.carreras_corridas);
-            puts("===============================");
+            color(COLOR_MENU_PRINCIPAL);
+
+            printf("         -------------------------------\n");
+            printf("         | ESTADISTICAS PILOTO ID: %u |\n", est.id_piloto);
+            printf("         -------------------------------\n");
+            restaurarColor();
+            printf("         | Carreras corridas : %7u |\n",  est.carreras_corridas);
+            printf("         | Victorias         : %7u |\n",  est.victorias);
+            printf("         | Podios            : %7u |\n",  est.podios);
+            printf("         | Puntos totales    : %7u |\n",  est.total_puntos);
+            printf("         | Mejor posicion    : %7u |\n",  est.mejor_posicion);
+            printf("         | Peor posicion     : %7u |\n",  est.peor_posicion);
+            printf("         | Prom. posicion    :    %3.2f |\n", (float)est.suma_posiciones / est.carreras_corridas);
+            printf("         | Prom. puntos/carr :   %3.2f |\n", (float)est.total_puntos / est.carreras_corridas);
+            color(COLOR_MENU_PRINCIPAL);
+            printf("         -------------------------------\n");
+            restaurarColor();
         }
         fread(&est, sizeof(t_estadistica), 1, pf);
     }
@@ -177,6 +187,8 @@ int top5MasVictorias(FILE* pf)
     int i, j;
 
     rewind(pf);
+    limpiarPantalla();
+    tituloSistema();
     fread(&est, sizeof(t_estadistica), 1, pf);
     while(!feof(pf))
     {
@@ -214,13 +226,20 @@ int top5MasVictorias(FILE* pf)
         printf("Sin estadísticas cargadas.\n");
         return TODOOK;
     }
+    color(COLOR_MENU_PRINCIPAL);
+    printf("      -----------------------------------\n");
+    printf("      | TOP %d PILOTOS CON MAS VICTORIAS |\n", cant);
+    printf("      -----------------------------------\n");
+    restaurarColor();
 
-    puts("===================================");
-    printf("| TOP %d PILOTOS CON MAS VICTORIAS |\n", cant);
-    puts("===================================");
     for(i = 0; i < cant; i++)
-        printf("| %d°   ID: %u   | Victorias: %u   |\n", i+1, top[i].id_piloto, top[i].victorias);
-    puts("===================================");
+    {
+        printf("      | %d°   ID: %u   | Victorias: %u   |\n", i+1, top[i].id_piloto, top[i].victorias);
+    }
+
+    color(COLOR_MENU_PRINCIPAL);
+    printf("      -----------------------------------\n");
+    restaurarColor();
     return TODOOK;
 }
 
@@ -232,6 +251,8 @@ int mejorPromedioPosicion(FILE* pf)
     float promActual;
     int primero;
 
+    limpiarPantalla();
+    tituloSistema();
     rewind(pf);
     primero = 1;
     fread(&est, sizeof(t_estadistica), 1, pf);
@@ -256,9 +277,11 @@ int mejorPromedioPosicion(FILE* pf)
         return TODOOK;
     }
 
-    puts("=============================================");
-    printf("   PILOTO CON MEJOR PROMEDIO DE POSICION \n");
-    puts("=============================================");
+    color(COLOR_MENU_PRINCIPAL);
+    tituloMenu("MEJOR PROMEDIO DE POSICIÓN");
+
+    restaurarColor();
+
     printf("ID: %u \nPromedio: %.2f\n", mejor.id_piloto, promMejor);
 
     return TODOOK;

@@ -46,7 +46,7 @@ int main()
     {
         limpiarPantalla();
         tituloSistema();
-        tituloMenu("MENÚ PRINCIPAL");
+        tituloMenu("     MENÚ PRINCIPAL");
         color(COLOR_TEXTO);
         printf("   [1] Gestion de Pilotos\n");
         printf("   [2] Gestion de Escuderias\n");

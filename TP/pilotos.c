@@ -9,7 +9,7 @@ void menuPilotos(FILE* pilotos, FILE* escuderias)
     {
         limpiarPantalla();
         tituloSistema();
-        tituloMenu("GESTIÓN DE PILOTOS");
+        tituloMenu("   GESTIÓN DE PILOTOS");
         color(COLOR_TEXTO);
 
         printf("   [1] Listar pilotos y puntajes\n");
@@ -84,7 +84,7 @@ void listarPilotos(FILE* pilotos)
     rewind(pilotos);
     limpiarPantalla();
     tituloSistema();
-    tituloMenu("LISTADO DE PILOTOS");
+    tituloMenu("  CAMPEONATO DE PILOTOS");
     color(COLOR_MENU_PRINCIPAL);
 
     printf("  ------------------------------------------------\n");
@@ -124,8 +124,9 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
     char *p;
 
     nuevo.id = generarNuevoIdPilotos(pilotos);
-
-    puts("==== ALTA DE PILOTO ====");
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("     ALTA DE PILOTO");
 
     printf("Nombre: ");
     fflush(stdin);

@@ -28,15 +28,19 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
         {
         case 1:
             listarEscuderias(escuderias);
+            system("pause");
             break;
         case 2:
             altaEscuderias(escuderias);
+            system("pause");
             break;
         case 3:
             bajaEscuderia(escuderias);
+            system("pause");
             break;
         case 4:
             modificarEscuderia(escuderias);
+            system("pause");
             break;
         case 0:
             break;
@@ -51,19 +55,27 @@ void listarEscuderias(FILE* escuderias)
     t_escuderia esc;
 
     rewind(escuderias);
-    system("cls");
-    puts("==================================================================================");
-    printf("| %-3s | %-6s | %-30s | %-30s |\n", "ID", "CODIGO", "NOMBRE", "PAIS");
-    puts("==================================================================================");
+
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("             ESCUDERÍAS");
+    color(COLOR_MENU_PRINCIPAL);
+
+    printf("  -------------------------------------------------------------------------\n");
+    printf("  | %-4s | %-6s | %-25s | %-25s |\n", "ID", "CODIGO", "NOMBRE", "PAIS");
+    printf("  -------------------------------------------------------------------------\n");
+    restaurarColor();
     while(fread(&esc,sizeof(t_escuderia),1,escuderias) == 1)
     {
         if(esc.estado == 1)
-            printf("| %-3u | %-6s | %-30s | %-30s |\n",esc.id,
+            printf("  | %-4u | %-6s | %-25s | %-25s |\n",esc.id,
                    esc.codigo,
                    esc.nombre,
                    esc.pais);
     }
-    puts("==================================================================================");
+    color(COLOR_MENU_PRINCIPAL);
+    printf("  -------------------------------------------------------------------------\n");
+    restaurarColor();
 }
 
 int compararIdEscuderia(const void* a, const void* b)
@@ -103,11 +115,13 @@ void altaEscuderias(FILE* escuderias)
     t_escuderia nuevo;
     int aux;
     char *p;
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("ALTA ESCUDERÍA");
     nuevo.id = generarNuevoIdEscuderias(escuderias);
     do
     {
-        printf("==== ALTA ESCUDERIA ====\n");
-        printf("Codigo: ");
+        printf("Código de escudería: ");
         fgets(nuevo.codigo, sizeof(nuevo.codigo), stdin);
         if((p = strchr(nuevo.codigo, '\n')) != NULL)
             *p = '\0';
@@ -212,8 +226,11 @@ int bajaEscuderia(FILE* escuderias)
     FILE* fbajas;
     int encontrado=0;
 
-    printf("\n==== BAJA DE ESCUDERIA ====\n");
-    printf("ID de la escuderia a dar de baja: ");
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("BAJA DE ESCUDERÍA");
+
+    printf("ID de la escudería a dar de baja: ");
     scanf("%u", &idbuscado);
 
     rewind(escuderias);
@@ -263,9 +280,11 @@ int modificarEscuderia(FILE* escuderias)
 
     int encontrado=0;
     char* p;
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("MODIFICAR ESCUDERÍA");
 
-    printf("\n==== MODIFICAR ESCUDERIA ====\n");
-    printf("ID de la escuderia a modificar: ");
+    printf("ID de la escudería a modificar: ");
     scanf("%u", &idBuscado);
 
     rewind(escuderias);

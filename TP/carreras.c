@@ -26,12 +26,15 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
         {
         case 1:
             registrarCarreraManual(archCarreras, archPilotos, archPuntajes, archEstadisticas);
+            system("pause");
             break;
         case 2:
             registrarCarreraSimulada(archCarreras, archPilotos, archPuntajes, archEstadisticas);
+            system("pause");
             break;
         case 3:
             bajaCarrera(archCarreras, archPilotos);
+            system("pause");
             break;
         case 0:
             break;
@@ -63,7 +66,7 @@ int registrarCarreraManual(FILE* archCarreras, FILE* archPilotos,FILE* archPunta
 
     cargarPilotosAMemoria(&pilotos,archPilotos);
 
-    memset(&c,0,sizeof(t_carrera));//setea la memoria de c en 0
+    memset(&c,0,sizeof(t_carrera));
 
     c.id = generarIdCarrera(archCarreras);
 
@@ -107,8 +110,8 @@ int registrarCarreraSimulada(FILE* archCarreras, FILE* archPilotos, FILE* archPu
     mostrarResultadosCarrera(&c);
 
     printf("\n¿Desea guardar esta simulación?\n");
-    printf("1. Si\n");
-    printf("2. No\n");
+    printf("[1] Sí\n");
+    printf("[2] No\n");
     printf("\nOpción: ");
     scanf("%d",&op);
 
@@ -189,10 +192,9 @@ void listarPilotosCarrera(FILE* archPilotos)
 {
     t_piloto p;
     fseek(archPilotos, 0, SEEK_SET);
-
-    puts("\n=============================================");
-    puts("\t\t   PILOTOS");
-    puts("=============================================");
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("PILOTOS ACTIVOS");
 
     fread(&p,sizeof(t_piloto),1,archPilotos);
     while(!feof(archPilotos))
@@ -200,7 +202,9 @@ void listarPilotosCarrera(FILE* archPilotos)
         mostrarPilotoCarrera(&p);
         fread(&p,sizeof(t_piloto),1,archPilotos);
     }
-    puts("=============================================");
+    color(COLOR_MENU_PRINCIPAL);
+    printf("  ------------------------------------------------\n");
+    restaurarColor();
 }
 //CARGAR RESULTADOS
 int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
@@ -250,19 +254,23 @@ void mostrarResultadosCarrera(const t_carrera* c)
 {
     int i;
     t_posicion* aux;
-    puts("\n============================");
-    puts("\tRESULTADOS");
-    puts("============================");
-    puts("----------------------------");
-    puts("| PUESTO | PILOTO | PUNTOS |");
-    puts("----------------------------");
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("RESULTADOS");
+    color(COLOR_MENU_PRINCIPAL);
 
+    printf("  ------------------------------------------------\n");
+    printf("  | %13s | %15s | %10s |\n", "PUESTO","PILOTO", "PUNTOS");
+    printf("  ------------------------------------------------\n");
+    restaurarColor();
     for(i=0; i< c->cant_resultados; i++)
     {
         aux = (t_posicion*)c->resultados + i;
-        printf("| %4u°  | %6u | %6u |\n", aux->posicion, aux->id_piloto, aux->puntos);
+        printf("  | %12u° | %15u | %10u |\n", aux->posicion, aux->id_piloto, aux->puntos);
     }
-    puts("----------------------------");
+    color(COLOR_MENU_PRINCIPAL);
+    printf("  ------------------------------------------------\n");
+    restaurarColor();
 }
 int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos)
 {
@@ -337,12 +345,6 @@ int cargarVectorPuntos(tda_vector* v,FILE* pf)
     return TODOOK;
 }
 
-void mostrarPuntos(void* elem)
-{
-    t_puntajes aux = *(t_puntajes*)elem;
-    printf("POS: %u     PUNTOS: %u\n", aux.posicion, aux.puntos);
-}
-
 int trozarPuntajes(const char* cad,t_puntajes* puntos)
 {
     char* p;
@@ -367,24 +369,26 @@ int listarCarrerasActivas(FILE* archCarreras)
     int cantidad = 0;
 
     rewind(archCarreras);
-
-    puts("\n============================================");
-    puts("\t\tCARRERAS ACTIVAS");
-    puts("============================================\n");
-    puts("-------------------------------------------");
-    printf("| %-4s | %-20s | %-10s|\n", "ID", "CIRCUITO", "FECHA");
-    puts("-------------------------------------------");
-
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("CARRERAS ACTIVAS");
+    color(COLOR_MENU_PRINCIPAL);
+    printf("  ------------------------------------------------\n");
+    printf("  | %-6s | %-20s | %-12s |\n", "ID", "CIRCUITO", "FECHA");
+    printf("  ------------------------------------------------\n");
+    restaurarColor();
     while(fread(&carrera,sizeof(t_carrera),1,archCarreras)==1)
     {
         if(carrera.estado == 1)
         {
             cantidad++;
             Separar_a_tfecha(carrera.fecha,&fecha);
-            printf("| %-4d | %-20s | %02u/%02u/%04u|\n", carrera.id, carrera.circuito, fecha.dia, fecha.mes, fecha.anio);
+            printf("  | %-6d | %-20s |  %02u/%02u/%04u  |\n", carrera.id, carrera.circuito, fecha.dia, fecha.mes, fecha.anio);
         }
     }
-    puts("-------------------------------------------\n");
+    color(COLOR_MENU_PRINCIPAL);
+    printf("  ------------------------------------------------\n");
+    restaurarColor();
     return cantidad;
 }
 
@@ -396,7 +400,6 @@ int bajaCarrera(FILE* archCarreras, FILE* archPilotos)
     int encontrado=0;
     tda_vector pilotos;
 
-    printf("\n==== BAJA DE CARRERA ====\n");
     if(listarCarrerasActivas(archCarreras)==0)
     {
         printf("\nNo hay carreras activas para dar de baja.\n");
@@ -447,42 +450,6 @@ int bajaCarrera(FILE* archCarreras, FILE* archPilotos)
     if(!encontrado)
         printf("Carrera no encontrada.\n");
 
-    return encontrado ? TODOOK : ERROR_;
-}
-
-int MostrarCarrera(FILE* archCarreras)
-{
-    t_carrera carrera;
-    t_fecha fecha;
-    int idBuscado, encontrado=0;
-
-    printf("\n==== MOSTRAR CARRERA ====\n");
-    printf("ID de la carrera a buscar: ");
-    scanf("%d", &idBuscado);
-
-    rewind(archCarreras);
-
-    while(!encontrado && fread(&carrera,sizeof(t_carrera),1,archCarreras)==1)
-    {
-        if(carrera.id==idBuscado)
-        {
-            encontrado=1;
-            Separar_a_tfecha(carrera.fecha,&fecha);
-            printf("\n%4s| %20s| %10s| %8s| %6s\n","ID","CIRCUITO","FECHA","CANT. R", "ESTADO");
-            printf("--------------------------------------------------------\n");
-            printf("%4d| %20s| %4u/%2u/%2u| %8d| %6d\n\n",carrera.id, carrera.circuito,
-                   fecha.anio, fecha.mes, fecha.dia,
-                   carrera.cant_resultados,
-                   carrera.estado);
-            if(confirmarModificacion("¿Desea ver los resultados?"))
-            {
-                getchar();
-                mostrarResultadosCarrera(&carrera);
-            }
-        }
-    }
-    if(!encontrado)
-        printf("Carrera no encontrada.\n");
     return encontrado ? TODOOK : ERROR_;
 }
 

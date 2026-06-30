@@ -97,23 +97,23 @@
 	"tipos.h"
 	"comunes.h"
 
-1782825896 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.h
+1782841892 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.h
 	"pilotos.h"
 	"estadisticas.h"
 	"comunes.h"
 	"tipos.h"
 	<time.h>
 
-1782834202 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.c
+1782841892 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.c
 	"carreras.h"
 
-1782834202 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\escuderias.c
+1782844152 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\escuderias.c
 	"escuderias.h"
 
-1782834202 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\estadisticas.c
+1782845637 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\estadisticas.c
 	"estadisticas.h"
 
-1782835604 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\main.c
+1782845683 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\main.c
 	<stdio.h>
 	<locale.h>
 	<windows.h>
@@ -121,7 +121,7 @@
 	"carreras.h"
 	"estadisticas.h"
 
-1782835604 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\pilotos.c
+1782845794 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -379,7 +379,7 @@
 1781648278 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\estadisticas.h
 	"archivos.h"
 
-1782833983 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\interfaz.c
+1782845671 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\interfaz.c
 	"interfaz.h"
 
 1782831816 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\interfaz.h
