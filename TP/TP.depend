@@ -23,16 +23,16 @@
 	"pilotos.h"
 	<ctype.h>
 
-1782602459 source:c:\topicos\tp\tp-topicos\tp\carreras.c
+1782849790 source:c:\topicos\tp\tp-topicos\tp\carreras.c
 	"carreras.h"
 
-1781715136 source:c:\topicos\tp\tp-topicos\tp\escuderias.c
+1782846223 source:c:\topicos\tp\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
-1782603595 source:c:\topicos\tp\tp-topicos\tp\estadisticas.c
+1782846223 source:c:\topicos\tp\tp-topicos\tp\estadisticas.c
 	"estadisticas.h"
 
-1781715136 source:c:\topicos\tp\tp-topicos\tp\main.c
+1782846223 source:c:\topicos\tp\tp-topicos\tp\main.c
 	<stdio.h>
 	<locale.h>
 	<windows.h>
@@ -46,7 +46,7 @@
 	"escuderias.h"
 	"carreras.h"
 
-1781715136 c:\topicos\tp\tp-topicos\tp\pilotos.h
+1782846223 c:\topicos\tp\tp-topicos\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
@@ -60,14 +60,14 @@
 	"tipos.h"
 	"comunes.h"
 
-1782600533 c:\topicos\tp\tp-topicos\tp\carreras.h
+1782846223 c:\topicos\tp\tp-topicos\tp\carreras.h
 	"pilotos.h"
 	"estadisticas.h"
 	"comunes.h"
 	"tipos.h"
 	<time.h>
 
-1781715136 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
+1782848867 source:c:\topicos\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -227,12 +227,13 @@
 1781702821 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
 
-1781715136 c:\topicos\tp\tp-topicos\tp\comunes.h
+1782846223 c:\topicos\tp\tp-topicos\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"tipos.h"
+	"interfaz.h"
 
 1781715136 c:\topicos\tp\tp-topicos\tp\tipos.h
 
@@ -386,4 +387,12 @@
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
+
+1782846223 c:\topicos\tp\tp-topicos\tp\interfaz.h
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1782846223 source:c:\topicos\tp\tp-topicos\tp\interfaz.c
+	"interfaz.h"
 

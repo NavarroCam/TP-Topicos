@@ -147,6 +147,6 @@ int main()
     remove(ESCUDERIAS_TXT);
     rename(ESCUDERIAS_ACT_TXT,ESCUDERIAS_TXT);
     system("cls");
-    puts("Archivos exportados exitosamente.");
+    puts("Archivos exportados exitosamente!");
     return 0;
 }

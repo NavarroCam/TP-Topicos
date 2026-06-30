@@ -122,6 +122,11 @@ int EstadisticasPiloto(FILE* pf)
 
     limpiarPantalla();
     tituloSistema();
+
+    color(COLOR_MENU_PRINCIPAL);
+    tituloMenu("ESTADISTICAS PILOTO");
+    restaurarColor();
+
     printf("\nIngrese ID del piloto: ");
     scanf("%u", &idBuscado);
 

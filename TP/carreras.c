@@ -59,6 +59,10 @@ int registrarCarreraManual(FILE* archCarreras, FILE* archPilotos,FILE* archPunta
     tda_vector puntos;
     tda_vector pilotos;
 
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("    REGISTRAR CARRERA");
+
     crear_Vector(&puntos,sizeof(t_puntajes));
     crear_Vector(&pilotos,sizeof(t_piloto));
 
@@ -92,6 +96,10 @@ int registrarCarreraSimulada(FILE* archCarreras, FILE* archPilotos, FILE* archPu
     tda_vector pilotos;
 
     int op;
+
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("    SIMULAR CARRERA");
 
     crear_Vector(&puntos,sizeof(t_puntajes));
     crear_Vector(&pilotos,sizeof(t_piloto));
@@ -194,8 +202,14 @@ void listarPilotosCarrera(FILE* archPilotos)
     fseek(archPilotos, 0, SEEK_SET);
     limpiarPantalla();
     tituloSistema();
-    tituloMenu("PILOTOS ACTIVOS");
+    tituloMenu("    REGISTRAR CARRERA");
+    tituloMenu("    PILOTOS ACTIVOS");
 
+    color(COLOR_MENU_PRINCIPAL);
+    printf("---------------------------------------------\n");
+    printf("| %-8s | %-30s |\n", "ID", "NOMBRE");
+    printf("---------------------------------------------\n");
+    restaurarColor();
     fread(&p,sizeof(t_piloto),1,archPilotos);
     while(!feof(archPilotos))
     {
@@ -203,7 +217,7 @@ void listarPilotosCarrera(FILE* archPilotos)
         fread(&p,sizeof(t_piloto),1,archPilotos);
     }
     color(COLOR_MENU_PRINCIPAL);
-    printf("  ------------------------------------------------\n");
+    printf("---------------------------------------------\n");
     restaurarColor();
 }
 //CARGAR RESULTADOS
@@ -256,7 +270,8 @@ void mostrarResultadosCarrera(const t_carrera* c)
     t_posicion* aux;
     limpiarPantalla();
     tituloSistema();
-    tituloMenu("RESULTADOS");
+    tituloMenu("    REGISTRAR CARRERA");
+    tituloMenu("       RESULTADOS");
     color(COLOR_MENU_PRINCIPAL);
 
     printf("  ------------------------------------------------\n");
@@ -371,7 +386,7 @@ int listarCarrerasActivas(FILE* archCarreras)
     rewind(archCarreras);
     limpiarPantalla();
     tituloSistema();
-    tituloMenu("CARRERAS ACTIVAS");
+    tituloMenu("    CARRERAS ACTIVAS");
     color(COLOR_MENU_PRINCIPAL);
     printf("  ------------------------------------------------\n");
     printf("  | %-6s | %-20s | %-12s |\n", "ID", "CIRCUITO", "FECHA");
@@ -405,6 +420,8 @@ int bajaCarrera(FILE* archCarreras, FILE* archPilotos)
         printf("\nNo hay carreras activas para dar de baja.\n");
         return ERROR_;
     }
+
+    tituloMenu("    BAJA DE CARRERA");
 
     printf("\nID de la carrera a dar de baja: ");
     scanf("%d",&idbuscado);

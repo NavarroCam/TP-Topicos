@@ -88,7 +88,7 @@ void listarPilotos(FILE* pilotos)
     color(COLOR_MENU_PRINCIPAL);
 
     printf("  ------------------------------------------------\n");
-    printf("  | %-30s | %11s |\n", "NOMBRE", "PUNTOS");
+    printf("  | %-30s | %-11s |\n", "NOMBRE", "PUNTOS");
     printf("  ------------------------------------------------\n");
     restaurarColor();
     while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
@@ -215,7 +215,10 @@ int bajaPiloto(FILE* pilotos)
     FILE* fbajas;
     int encontrado=0;
 
-    printf("\n==== BAJA DE PILOTO ====\n");
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("BAJA DE PILOTO");
+
     printf("ID del piloto a dar de baja: ");
     scanf("%u", &idbuscado);
 
@@ -256,7 +259,6 @@ int bajaPiloto(FILE* pilotos)
     return encontrado ? TODOOK : ERROR_;
 }
 
-
 int modificarPiloto(FILE* pilotos, FILE* escuderias)
 {
     unsigned idBuscado;
@@ -266,7 +268,9 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
     int encontrado=0;
     char *p;
 
-    printf("\n==== MODIFICAR PILOTO ====\n");
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("MODIFICAR PILOTO");
     printf("ID del piloto a modificar: ");
     scanf("%u", &idBuscado);
     rewind(pilotos);
@@ -369,10 +373,15 @@ void mostrarRanking(FILE* pilotos)
 
     sSort(ranking.vec,ranking.ce,ranking.tam,compararPuntos);
 
-    system("cls");
-    puts("=======================================================");
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("    RANKING DE PILOTOS");
+    color(COLOR_MENU_PRINCIPAL);
+
+    puts("-------------------------------------------------------");
     printf("| %-8s | %-30s | %-7s |\n","POSICIÓN", "PILOTO", "PUNTOS");
-    puts("=======================================================");
+    puts("-------------------------------------------------------");
+    restaurarColor();
 
     for(i=0; i<ranking.ce; i++)
     {
@@ -388,8 +397,9 @@ void mostrarRanking(FILE* pilotos)
         }
         printf("| %-8d | %-30s | %-4u pts|\n",puesto_real, piloto_actual->nombre, piloto_actual->puntos_acumulados);
     }
-
-    puts("=======================================================");
+    color(COLOR_MENU_PRINCIPAL);
+    printf("-------------------------------------------------------\n");
+    restaurarColor();
     destruir_Vector(&ranking);
 }
 
@@ -416,17 +426,22 @@ void listarPilotosPorEscuderia(FILE* pilotos, FILE* escuderias)
     fseek(pilotos, 0, SEEK_END);
     cp = ftell(pilotos) / sizeof(t_piloto);
 
+    limpiarPantalla();
+    tituloSistema();
+    tituloMenu("  PILOTOS POR ESCUDERIA");
+
     for(i = 0; i < ce; i++)
     {
         fseek(escuderias, i * sizeof(t_escuderia), SEEK_SET);
         fread(&escu, sizeof(t_escuderia), 1, escuderias);
 
-
-        printf("\n\n=============\t %15s \t=============\n", escu.nombre);
-        puts("-----------------------------------------------------");
-        printf("| %-3s | %-30s | %6s | %s |\n",
-               "ID", "NOMBRE", "PUNTOS", "E");
-        puts("-----------------------------------------------------");
+        color(COLOR_MENU_PRINCIPAL);
+        printf("\n-----------------------------------------------------\n");
+        printf("\t\t%s\n", escu.nombre);
+        printf("-----------------------------------------------------\n");
+        printf("| %-3s | %-30s | %6s | %s |\n", "ID", "NOMBRE", "PUNTOS", "E");
+        printf("-----------------------------------------------------\n");
+        restaurarColor();
 
         for(j = 0; j < cp; j++)
         {
@@ -442,6 +457,8 @@ void listarPilotosPorEscuderia(FILE* pilotos, FILE* escuderias)
                        pil.estado);
             }
         }
-        puts("=====================================================");
+        color(COLOR_MENU_PRINCIPAL);
+        printf("-----------------------------------------------------\n");
+        restaurarColor();
     }
 }
