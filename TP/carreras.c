@@ -4,33 +4,42 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
 {
     int op;
 
-    do{
-        puts("\n===============================================");
-        printf("\t\t   CARRERAS\n");
-        puts("===============================================");
-        printf("1. Registrar carrera (manual)\n");
-        printf("2. Simular carrera\n");
-        printf("3. Dar de baja carrera\n");
-        printf("0. Volver\n");
-        printf("\nOpción: ");
+    do
+    {
+        limpiarPantalla();
+        tituloSistema();
+        tituloMenu("GESTIÓN DE CARRERAS");
+        color(COLOR_TEXTO);
+
+        printf("   [1] Registrar carrera (manual)\n");
+        printf("   [2] Simular carrera\n");
+        printf("   [3] Baja de carrera\n");
+        printf("   [0] Volver\n");
+        color(COLOR_TITULO);
+        printf("\n====================================================\n\n");
+        restaurarColor();
+        printf("Seleccione una opción > ");
         scanf("%d", &op);
         while (getchar() != '\n');
-        system("cls");
 
         switch (op)
         {
-            case 1: registrarCarreraManual(archCarreras, archPilotos, archPuntajes, archEstadisticas);
-                break;
-            case 2: registrarCarreraSimulada(archCarreras, archPilotos, archPuntajes, archEstadisticas);
-                break;
-            case 3: bajaCarrera(archCarreras, archPilotos);
-                break;
-            case 0:
-                break;
-            default:
-                printf("Opción inválida.\n");
+        case 1:
+            registrarCarreraManual(archCarreras, archPilotos, archPuntajes, archEstadisticas);
+            break;
+        case 2:
+            registrarCarreraSimulada(archCarreras, archPilotos, archPuntajes, archEstadisticas);
+            break;
+        case 3:
+            bajaCarrera(archCarreras, archPilotos);
+            break;
+        case 0:
+            break;
+        default:
+            printf("Opción inválida.\n");
         }
-    }while(op != 0);
+    }
+    while(op != 0);
 }
 
 void guardarCarreraCompleta(FILE* archCarreras, FILE* archPilotos, FILE* archEstadisticas, tda_vector* pilotos, t_carrera* carrera)
@@ -147,10 +156,11 @@ void cargarDatosCarrera(t_carrera* c)
     fflush(stdin);
     fgets(c->circuito, sizeof(c->circuito), stdin);
     if((p = strchr(c->circuito, '\n')) != NULL)
-            *p = '\0';
-        else while(getchar() != '\n');
+        *p = '\0';
+    else while(getchar() != '\n');
     //FECHA
-    do {
+    do
+    {
         printf("Fecha (AAAAMMDD): ");
         fgets(fechaStr, sizeof(fechaStr), stdin);
         if((p = strchr(fechaStr, '\n')) != NULL)
@@ -161,15 +171,18 @@ void cargarDatosCarrera(t_carrera* c)
         {
             while(getchar() != '\n');
         }
-    } while (ValidarFecha(fechaStr) != TODOOK);
+    }
+    while (ValidarFecha(fechaStr) != TODOOK);
     sscanf(fechaStr, "%I64u", &c->fecha);
     //ESTADO
     c->estado = 1;
 
-    do {
+    do
+    {
         printf("Cuantos pilotos finalizaron la carrera?: ");
         scanf("%d", &c->cant_resultados);
-    } while (c->cant_resultados < 1 || c->cant_resultados > MAX_RESULTADOS);
+    }
+    while (c->cant_resultados < 1 || c->cant_resultados > MAX_RESULTADOS);
 }
 //MOSTRAR PILOTOS CON ID
 void listarPilotosCarrera(FILE* archPilotos)
@@ -203,11 +216,13 @@ int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
         printf("%u° ", i + 1);
         puesto->posicion = i + 1;
 
-        do{
+        do
+        {
             scanf("%u", &puesto->id_piloto);
             if(pilotoYaIngresado(c,puesto->id_piloto,i))
                 printf("Ese piloto ya fue asignado a otra posición. Ingrese otro ID: ");
-        }while(pilotoYaIngresado(c,puesto->id_piloto,i));
+        }
+        while(pilotoYaIngresado(c,puesto->id_piloto,i));
 
 
         puntaje = obtenerPuntaje(puntos,i);
@@ -456,9 +471,9 @@ int MostrarCarrera(FILE* archCarreras)
             printf("\n%4s| %20s| %10s| %8s| %6s\n","ID","CIRCUITO","FECHA","CANT. R", "ESTADO");
             printf("--------------------------------------------------------\n");
             printf("%4d| %20s| %4u/%2u/%2u| %8d| %6d\n\n",carrera.id, carrera.circuito,
-                                                    fecha.anio, fecha.mes, fecha.dia,
-                                                    carrera.cant_resultados,
-                                                    carrera.estado);
+                   fecha.anio, fecha.mes, fecha.dia,
+                   carrera.cant_resultados,
+                   carrera.estado);
             if(confirmarModificacion("¿Desea ver los resultados?"))
             {
                 getchar();

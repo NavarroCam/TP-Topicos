@@ -6,6 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "tipos.h"
+#include "interfaz.h"
 
 #define MINTAM 5
 #define ERROR_MEMORIA -1

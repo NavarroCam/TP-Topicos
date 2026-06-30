@@ -51,6 +51,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="estadisticas.h" />
+		<Unit filename="interfaz.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="interfaz.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

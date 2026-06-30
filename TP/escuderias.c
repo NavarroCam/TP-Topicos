@@ -3,33 +3,48 @@
 void menuEscuderias(FILE* pilotos, FILE* escuderias)
 {
     int op;
-    do{
-        puts("\n===============================================");
-        printf("\t\t ESCUDERIAS\n");
-        puts("===============================================");
-        printf("1. Listar escuderias\n");
-        printf("2. Alta escuderia\n");
-        printf("3. Baja escuderia\n");
-        printf("4. Modificar escuderia\n");
-        printf("0. Volver\n");
+    do
+    {
+        limpiarPantalla();
+        tituloSistema();
+        tituloMenu("GESTIÓN DE ESCUDERÍAS");
+        color(COLOR_TEXTO);
 
-        printf("\nOpción: ");
+        printf("   [1] Listar escuderías\n");
+        printf("   [2] Alta de escudería\n");
+        printf("   [3] Baja de escudería\n");
+        printf("   [4] Modificar escudería\n");
+        printf("   [0] Volver\n");
+
+        color(COLOR_TITULO);
+        printf("\n====================================================\n\n");
+        restaurarColor();
+        printf("Seleccione una opción > ");
         scanf("%d", &op);
 
         while (getchar() != '\n');
-        system("cls");
 
         switch (op)
         {
-            case 1: listarEscuderias(escuderias); break;
-            case 2: altaEscuderias(escuderias); break;
-            case 3: bajaEscuderia(escuderias); break;
-            case 4: modificarEscuderia(escuderias); break;
-            case 0: break;
-            default:
-                printf("Opcion inválida.\n");
+        case 1:
+            listarEscuderias(escuderias);
+            break;
+        case 2:
+            altaEscuderias(escuderias);
+            break;
+        case 3:
+            bajaEscuderia(escuderias);
+            break;
+        case 4:
+            modificarEscuderia(escuderias);
+            break;
+        case 0:
+            break;
+        default:
+            printf("Opcion inválida.\n");
         }
-    }while(op != 0);
+    }
+    while(op != 0);
 }
 void listarEscuderias(FILE* escuderias)
 {
@@ -44,9 +59,9 @@ void listarEscuderias(FILE* escuderias)
     {
         if(esc.estado == 1)
             printf("| %-3u | %-6s | %-30s | %-30s |\n",esc.id,
-                                                       esc.codigo,
-                                                       esc.nombre,
-                                                       esc.pais);
+                   esc.codigo,
+                   esc.nombre,
+                   esc.pais);
     }
     puts("==================================================================================");
 }
@@ -89,7 +104,8 @@ void altaEscuderias(FILE* escuderias)
     int aux;
     char *p;
     nuevo.id = generarNuevoIdEscuderias(escuderias);
-    do{
+    do
+    {
         printf("==== ALTA ESCUDERIA ====\n");
         printf("Codigo: ");
         fgets(nuevo.codigo, sizeof(nuevo.codigo), stdin);
@@ -103,18 +119,19 @@ void altaEscuderias(FILE* escuderias)
             system("pause");
             system("cls");
         }
-    }while(aux != ERROR_);
+    }
+    while(aux != ERROR_);
 
     printf("Nombre: ");
     fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
     if((p = strchr(nuevo.nombre, '\n')) != NULL)
-            *p = '\0';
+        *p = '\0';
     else while(getchar() != '\n');
 
     printf("Pais: ");
     fgets(nuevo.pais, sizeof(nuevo.pais), stdin);
     if((p = strchr(nuevo.pais, '\n')) != NULL)
-            *p = '\0';
+        *p = '\0';
     else while(getchar() != '\n');
 
     nuevo.estado = 1;
@@ -222,7 +239,8 @@ int bajaEscuderia(FILE* escuderias)
                 printf("Error al abrir %s\n", BAJAS_ESCUDERIAS_DAT);
                 return ERROR_;
             }
-            else{
+            else
+            {
                 fwrite(&esc, sizeof(t_escuderia), 1, fbajas);
                 fclose(fbajas);
                 exportarBajasEscuderiasTxt(BAJAS_ESCUDERIAS_DAT, BAJAS_ESCUDERIAS_TXT); //Para leer los pilotos en el txt

@@ -2,13 +2,13 @@
 1781302346 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\archivos.c
 	"archivos.h"
 
-1781703820 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
+1782825896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.c
 	"carreras.h"
 
 1781648278 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\escuderias.c
 	"escuderias.h"
 
-1781648278 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
+1782825896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\estadisticas.c
 	"estadisticas.h"
 
 1781702822 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\main.c
@@ -19,7 +19,7 @@
 	"carreras.h"
 	"estadisticas.h"
 
-1781703089 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
+1782828818 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
@@ -74,55 +74,71 @@
 1781385671 source:c:\topicos\tp\tp-topicos\tp\archivos.c
 	"archivos.h"
 
-1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.c
+1781302346 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.c
 	"archivos.h"
 
-1779122679 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.h
+1781227288 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\archivos.h
 	"comunes.h"
 	"pilotos.h"
 	"escuderias.h"
 	"carreras.h"
 
-1779563421 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\pilotos.h
+1782835650 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\pilotos.h
 	<stdio.h>
 	<string.h>
 	"archivos.h"
+	"escuderias.h"
 	"tipos.h"
+	"comunes.h"
 
-1779120897 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\escuderias.h
+1781703873 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\escuderias.h
 	<stdio.h>
 	<string.h>
 	"tipos.h"
+	"comunes.h"
 
-1779120896 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.h
+1782825896 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.h
+	"pilotos.h"
+	"estadisticas.h"
+	"comunes.h"
+	"tipos.h"
+	<time.h>
 
-1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.c
+1782834202 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\carreras.c
+	"carreras.h"
 
-1779120896 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\escuderias.c
+1782834202 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\escuderias.c
 	"escuderias.h"
 
-1779120897 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\estadisticas.c
+1782834202 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\estadisticas.c
+	"estadisticas.h"
 
-1779120897 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\main.c
+1782835604 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\main.c
 	<stdio.h>
+	<locale.h>
+	<windows.h>
 	"archivos.h"
-	"pilotos.h"
+	"carreras.h"
+	"estadisticas.h"
 
-1779567547 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\pilotos.c
+1782835604 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\pilotos.c
 	"pilotos.h"
 	<ctype.h>
 
 1778712994 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\rutas.h
 
-1779562342 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.c
+1781702821 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.c
 	"comunes.h"
 
-1779562342 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.h
+1782832261 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\comunes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<ctype.h>
+	"tipos.h"
+	"interfaz.h"
 
-1779120897 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\tipos.h
+1781648278 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\tipos.h
 
 1779120896 source:c:\users\iaraaristimuño\documents\topicos\tp-topicos-main\tp-topicos-main\tp\archivos.c
 	"archivos.h"
@@ -201,11 +217,12 @@
 	"tipos.h"
 	"comunes.h"
 
-1781703820 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
+1782825896 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\carreras.h
 	"pilotos.h"
 	"estadisticas.h"
 	"comunes.h"
 	"tipos.h"
+	<time.h>
 
 1781702821 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\tp-topicos\tp\comunes.c
 	"comunes.h"
@@ -358,4 +375,15 @@
 
 1781711921 c:\users\npabl\tp-topicos\tp\estadisticas.h
 	"archivos.h"
+
+1781648278 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\estadisticas.h
+	"archivos.h"
+
+1782833983 source:c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\interfaz.c
+	"interfaz.h"
+
+1782831816 c:\users\iaraa\onedrive\documentos\topicos_de_programacion\tp\prueba_local\tp\interfaz.h
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
 

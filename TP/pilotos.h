@@ -17,10 +17,7 @@
 #define BAJAS_PILOTOS_DAT "../Archivos/bajas_pilotos.dat"
 #define BAJAS_PILOTOS_TXT "../Archivos/bajas_pilotos.txt"
 
-void menuPilotos(const char *binPath, const char *bajasPath);
-
-void mostrarPiloto(void* pilotos);
-void __menuPilotos(FILE* pilotos, FILE* escuderias);
+void menuPilotos(FILE* pilotos, FILE* escuderias);
 void listarPilotos(FILE* pilotos);
 
 int compararPuntos(const void* a, const void* b);
@@ -34,8 +31,6 @@ int bajaPiloto(FILE* pilotos);
 int modificarPiloto(FILE* pilotos, FILE* escuderias);
 
 void mostrarRanking(FILE* pilotos);
-
-void listarPilotosPorEscuderia_Op1(tda_vector* pilotos, tda_vector* escuderias);
 
 void mostrarPilotoCarrera(void* pilotos);
 void listarPilotosPorEscuderia(FILE* pilotos, FILE* escuderias);

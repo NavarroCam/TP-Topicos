@@ -6,41 +6,51 @@ void menuEstadisticas(FILE* Estadisticas)
     t_estadistica mejorPiloto;
     do
     {
-        puts("\n===============================================");
-        printf("\t\t   ESTADISTICAS\n");
-        puts("===============================================");
-        printf("1. Estadísticas de un piloto\n");
-        printf("2. Top 5 pilotos con más victorias\n");
-        printf("3. Piloto con mejor promedio de posición\n");
-        printf("4. Piloto con más victorias\n");
-        printf("0. Volver\n");
-        printf("\nOpción: ");
+        limpiarPantalla();
+        tituloSistema();
+        tituloMenu("ESTADÍSTICAS");
+
+        color(COLOR_TEXTO);
+
+        printf("   [1] Estadisticas de un piloto\n");
+        printf("   [2] Top 5 pilotos con mas victorias\n");
+        printf("   [3] Mejor promedio de posicion\n");
+        printf("   [4] Piloto con mas victorias\n");
+        printf("   [0] Volver\n");
+
+        color(COLOR_TITULO);
+        printf("\n====================================================\n\n");
+        restaurarColor();
+        printf("Seleccione una opción > ");
         scanf("%d", &op);
         while (getchar() != '\n');
-        system("cls");
         switch (op)
         {
         case 1:
             EstadisticasPiloto(Estadisticas);
+            system("pause");
             break;
         case 2:
             top5MasVictorias(Estadisticas);
+            system("pause");
             break;
         case 3:
             mejorPromedioPosicion(Estadisticas);
+            system("pause");
             break;
         case 4:
             if(pilotoMasVictorias(Estadisticas,&mejorPiloto)==TODOOK)
             {
                 puts("=============================================");
-                printf("\t\tRECORD DE VICTORIAS \n");
+                printf("\t\tRÉCORD DE VICTORIAS \n");
                 puts("=============================================");
 
                 printf("ID del Piloto: %u\n", mejorPiloto.id_piloto);
                 printf("Cantidad de Victorias: %u\n", mejorPiloto.victorias);
             }
             else
-                printf("No se pudieron calcular las estadisticas.\n");
+                printf("No se pudieron calcular las estadísticas.\n");
+            system("pause");
             break;
         case 0:
             break;

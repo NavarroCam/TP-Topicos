@@ -5,10 +5,13 @@
 #include "archivos.h"
 #include "carreras.h"
 #include "estadisticas.h"
+//#include "interfaz.h"
 
 int main()
 {
     setlocale(LC_ALL, "");
+
+
     int op;
 
     FILE* test;
@@ -39,26 +42,29 @@ int main()
         return ERROR_ARCH;
     }
 
-    printf("=== SISTEMA DE GESTION TEMPORADA F1 ===");
     do
     {
-        puts("\n===============================================");
-        puts("\t\t   MENU PRINCIPAL");
-        puts("===============================================");
-        printf("1. Pilotos\n");
-        printf("2. Escuderias\n");
-        printf("3. Carreras\n");
-        printf("4. Estadisticas\n");
-        printf("0. Salir\n");
-        printf("\nOpcion: ");
+        limpiarPantalla();
+        tituloSistema();
+        tituloMenu("MENÚ PRINCIPAL");
+        color(COLOR_TEXTO);
+        printf("   [1] Gestion de Pilotos\n");
+        printf("   [2] Gestion de Escuderias\n");
+        printf("   [3] Gestion de Carreras\n");
+        printf("   [4] Estadisticas\n");
+        printf("   [0] Salir\n");
+
+        color(COLOR_TITULO);
+        printf("\n====================================================\n\n");
+        restaurarColor();
+        printf("Seleccione una opcion > ");
         scanf("%d", &op);
         while (getchar() != '\n');
-        system("cls");
 
         switch (op)
         {
         case 1:
-            __menuPilotos(pPilotos, pEscuderias);
+            menuPilotos(pPilotos, pEscuderias);
             break;
         case 2:
             menuEscuderias(pPilotos, pEscuderias);
@@ -121,6 +127,7 @@ int main()
             fclose(pEstadisticas);
             break;
         case 0:
+            limpiarPantalla();
             printf("Saliendo..\n");
             Sleep(1000);
             break;
