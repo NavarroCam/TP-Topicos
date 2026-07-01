@@ -1,7 +1,5 @@
 #include "archivos.h"
 
-/* PILOTOS: txt -> dat
-   Formato linea: id;nombre;nacionalidad;id_escuderia;puntos;estado;fechaNacimiento*/
 int cargarPilotosTxtABin(const char *txtPath, const char *binPath)
 {
     char cad[TAMCADENA];
@@ -75,11 +73,10 @@ int trozarPilotos(char* cad, t_piloto* p1)
     *p = '\0';
 
     sscanf(cad,"%u",&p1->id);
+
     return TODOOK;
 }
 
-/* ESCUDERIAS: txt -> dat
-   Formato linea: id;codigo;nombre;pais;estado*/
 int cargarEscuderiasTxtABin(const char *txtPath, const char *binPath)
 {
     char cad[TAMCADENA];
@@ -150,9 +147,6 @@ int trozarEscuderias(char* cad, t_escuderia* e1)
     return TODOOK;
 }
 
-/* ---------------------------------------------------------------
-   EXPORTAR PILOTOS: dat -> txt
-   --------------------------------------------------------------- */
 int exportarPilotosTxt(const char *binPath, const char *txtPath)
 {
     t_piloto piloto;
@@ -226,6 +220,7 @@ int generarArchivoOrdenado(const char* nomArch,size_t tamRegistro, int cmp(const
     size_t cantRegistros;
     long tamArchivo;
     void* vec;
+
     pf = fopen(nomArch,"r+b");
     if(!pf)
     {
@@ -249,5 +244,6 @@ int generarArchivoOrdenado(const char* nomArch,size_t tamRegistro, int cmp(const
 
     free(vec);
     fclose(pf);
+
     return TODOOK;
 }

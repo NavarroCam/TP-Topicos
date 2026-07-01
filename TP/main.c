@@ -1,30 +1,20 @@
-#include <stdio.h>
 #include <locale.h>
-#include <windows.h>
-
-#include "archivos.h"
-#include "carreras.h"
 #include "estadisticas.h"
-//#include "interfaz.h"
 
 int main()
 {
     setlocale(LC_ALL, "");
-
-
     int op;
-
     FILE* test;
     FILE* pPilotos, *pEscuderias, *pCarreras, *pPuntajes, *pEstadisticas;
 
-//    Carga inicial si no existen los .dat
     test = fopen(PILOTOS_DAT,"rb");
     if(!test)
     {
         puts("Cargando datos iniciales...");
-        cargarPilotosTxtABin(PILOTOS_TXT,PILOTOS_DAT);//para poder modificarlos
+        cargarPilotosTxtABin(PILOTOS_TXT,PILOTOS_DAT);
         generarArchivoOrdenado(PILOTOS_DAT,sizeof(t_piloto),compararIdPiloto);
-        cargarEscuderiasTxtABin(ESCUDERIAS_TXT,ESCUDERIAS_DAT);//para poder modificarlos
+        cargarEscuderiasTxtABin(ESCUDERIAS_TXT,ESCUDERIAS_DAT);
         generarArchivoOrdenado(ESCUDERIAS_DAT,sizeof(t_escuderia),compararIdEscuderia);
     }
     else
@@ -35,6 +25,7 @@ int main()
     {
         return ERROR_ARCH;
     }
+
     pEscuderias = fopen(ESCUDERIAS_DAT, "r+b");
     if(!pEscuderias)
     {
@@ -63,39 +54,39 @@ int main()
 
         switch (op)
         {
-        case 1:
-            menuPilotos(pPilotos, pEscuderias);
-            break;
-        case 2:
-            menuEscuderias(pPilotos, pEscuderias);
-            break;
-        case 3:
-            pCarreras = fopen(CARRERAS_DAT, "r+b");
+            case 1:
+                menuPilotos(pPilotos, pEscuderias);
+                break;
 
-            if(!pCarreras)
-            {
-                pCarreras = fopen(CARRERAS_DAT, "w+b");
+            case 2:
+                menuEscuderias(pPilotos, pEscuderias);
+                break;
+
+            case 3:
+                pCarreras = fopen(CARRERAS_DAT, "r+b");
 
                 if(!pCarreras)
                 {
-                    printf("Error al abrir el archivo\n");
+                    pCarreras = fopen(CARRERAS_DAT, "w+b");
+
+                    if(!pCarreras)
+                    {
+                        printf("Error al abrir el archivo\n");
+                        fclose(pPilotos);
+                        fclose(pEscuderias);
+                        return ERROR_ARCH;
+                    }
+                }
+                pPuntajes = fopen(PUNTAJES_TXT,"rt");
+                if(!pPuntajes)
+                {
                     fclose(pPilotos);
                     fclose(pEscuderias);
+                    fclose(pCarreras);
                     return ERROR_ARCH;
                 }
-            }
-            pPuntajes = fopen(PUNTAJES_TXT,"rt");
-            if(!pPuntajes)
-            {
-                fclose(pPilotos);
-                fclose(pEscuderias);
-                fclose(pCarreras);
-                return ERROR_ARCH;
-            }
 
-            pEstadisticas = fopen(ESTADISTICAS_DAT, "r+b");
-            if(!pEstadisticas)
-            {
+                pEstadisticas = fopen(ESTADISTICAS_DAT, "r+b");
                 if(!pEstadisticas)
                 {
                     pEstadisticas = fopen(ESTADISTICAS_DAT, "w+b");
@@ -109,33 +100,34 @@ int main()
                         return ERROR_ARCH;
                     }
                 }
-            }
-            menuCarreras(pCarreras,pPilotos,pPuntajes,pEstadisticas);
+                menuCarreras(pCarreras,pPilotos,pPuntajes,pEstadisticas);
 
-            fclose(pCarreras);
-            fclose(pPuntajes);
-            fclose(pEstadisticas);
-            break;
-        case 4:
-            pEstadisticas = fopen(ESTADISTICAS_DAT,"rb");
-            if(!pEstadisticas)
-            {
-                puts("No fue posible abrir el archivo de estadisticas :(\n Puede agregar una carrera y volver a intentarlo\n");
+                fclose(pCarreras);
+                fclose(pPuntajes);
+                fclose(pEstadisticas);
                 break;
-            }
-            menuEstadisticas(pEstadisticas);
-            fclose(pEstadisticas);
-            break;
-        case 0:
-            limpiarPantalla();
-            printf("Saliendo..\n");
-            Sleep(1000);
-            break;
-        default:
-            printf("Opcion inválida.\n");
+
+            case 4:
+                pEstadisticas = fopen(ESTADISTICAS_DAT,"rb");
+                if(!pEstadisticas)
+                {
+                    puts("No fue posible abrir el archivo de estadisticas :(\n Puede agregar una carrera y volver a intentarlo\n");
+                    break;
+                }
+                menuEstadisticas(pEstadisticas);
+                fclose(pEstadisticas);
+                break;
+
+            case 0:
+                limpiarPantalla();
+                printf("Saliendo..\n");
+                Sleep(1000);
+                break;
+
+            default:
+                printf("Opcion inválida.\n");
         }
-    }
-    while (op != 0);
+    }while(op != 0);
 
     fclose(pPilotos);
     fclose(pEscuderias);
@@ -146,7 +138,8 @@ int main()
     rename(PILOTOS_ACT_TXT,PILOTOS_TXT);
     remove(ESCUDERIAS_TXT);
     rename(ESCUDERIAS_ACT_TXT,ESCUDERIAS_TXT);
-    system("cls");
+    limpiarPantalla();
     puts("Archivos exportados exitosamente!");
+
     return 0;
 }

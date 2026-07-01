@@ -10,7 +10,7 @@ void color(int c)
 
 void restaurarColor(void)
 {
-    color(COLOR_TEXTO);        // Gris claro
+    color(COLOR_TEXTO);
 }
 
 void limpiarPantalla(void)
@@ -20,7 +20,7 @@ void limpiarPantalla(void)
 
 void tituloSistema(void)
 {
-    color(COLOR_TITULO);   // Cian brillante
+    color(COLOR_TITULO);
 
     printf("====================================================\n");
     printf("              SISTEMA DE GESTION F1\n");
@@ -31,7 +31,7 @@ void tituloSistema(void)
 
 void tituloMenu(const char* titulo)
 {
-    color(COLOR_MENU_PRINCIPAL);   // Amarillo
+    color(COLOR_MENU_PRINCIPAL);
 
     printf("\n            %s\n\n", titulo);
 

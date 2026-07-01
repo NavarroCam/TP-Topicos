@@ -4,6 +4,7 @@ void menuEstadisticas(FILE* Estadisticas)
 {
     int op;
     t_estadistica mejorPiloto;
+
     do
     {
         limpiarPantalla();
@@ -24,42 +25,42 @@ void menuEstadisticas(FILE* Estadisticas)
         printf("Seleccione una opción > ");
         scanf("%d", &op);
         while (getchar() != '\n');
+
         switch (op)
         {
-        case 1:
-            EstadisticasPiloto(Estadisticas);
-            system("pause");
-            break;
-        case 2:
-            top5MasVictorias(Estadisticas);
-            system("pause");
-            break;
-        case 3:
-            mejorPromedioPosicion(Estadisticas);
-            system("pause");
-            break;
-        case 4:
-            limpiarPantalla();
-            tituloSistema();
-            if(pilotoMasVictorias(Estadisticas,&mejorPiloto)==TODOOK)
-            {
-                color(COLOR_TEXTO);
-                tituloMenu("   RÉCORD DE VICTORIAS");
-                restaurarColor();
-                printf("ID del Piloto: %u\n", mejorPiloto.id_piloto);
-                printf("Cantidad de Victorias: %u\n", mejorPiloto.victorias);
-            }
-            else
-                printf("No se pudieron calcular las estadísticas.\n");
-            system("pause");
-            break;
-        case 0:
-            break;
-        default:
-            printf("Opción inválida.\n");
+            case 1:
+                EstadisticasPiloto(Estadisticas);
+                system("pause");
+                break;
+            case 2:
+                top5MasVictorias(Estadisticas);
+                system("pause");
+                break;
+            case 3:
+                mejorPromedioPosicion(Estadisticas);
+                system("pause");
+                break;
+            case 4:
+                limpiarPantalla();
+                tituloSistema();
+                if(pilotoMasVictorias(Estadisticas,&mejorPiloto)==TODOOK)
+                {
+                    color(COLOR_TEXTO);
+                    tituloMenu("   RÉCORD DE VICTORIAS");
+                    restaurarColor();
+                    printf("ID del Piloto: %u\n", mejorPiloto.id_piloto);
+                    printf("Cantidad de Victorias: %u\n", mejorPiloto.victorias);
+                }
+                else
+                    printf("No se pudieron calcular las estadísticas.\n");
+                system("pause");
+                break;
+            case 0:
+                break;
+            default:
+                printf("Opción inválida.\n");
         }
-    }
-    while(op != 0);
+    }while(op != 0);
 }
 
 void actualizarEstadisticas(FILE* Estadisticas, const t_carrera* c)
@@ -68,6 +69,7 @@ void actualizarEstadisticas(FILE* Estadisticas, const t_carrera* c)
     t_posicion* result;
     int i;
     int encontrado;
+
     rewind(Estadisticas);
     for(i=0; i<c->cant_resultados; i++)
     {
@@ -128,51 +130,83 @@ int EstadisticasPiloto(FILE* pf)
     restaurarColor();
 
     printf("\nIngrese ID del piloto: ");
-    scanf("%u", &idBuscado);
-
+    if(!scanf("%u", &idBuscado))
+    {
+        while(getchar() != '\n');
+        printf("ID inválido.\n");
+        return ERROR_;
+    }
     rewind(pf);
     encontrado = 0;
     fread(&est, sizeof(t_estadistica), 1, pf);
-    limpiarPantalla();
-    tituloSistema();
+
     while(!feof(pf) && !encontrado)
     {
         if(est.id_piloto == idBuscado)
         {
             encontrado = 1;
-            color(COLOR_MENU_PRINCIPAL);
-
-            printf("         -------------------------------\n");
-            printf("         | ESTADISTICAS PILOTO ID: %u |\n", est.id_piloto);
-            printf("         -------------------------------\n");
-            restaurarColor();
-            printf("         | Carreras corridas : %7u |\n",  est.carreras_corridas);
-            printf("         | Victorias         : %7u |\n",  est.victorias);
-            printf("         | Podios            : %7u |\n",  est.podios);
-            printf("         | Puntos totales    : %7u |\n",  est.total_puntos);
-            printf("         | Mejor posicion    : %7u |\n",  est.mejor_posicion);
-            printf("         | Peor posicion     : %7u |\n",  est.peor_posicion);
-            printf("         | Prom. posicion    :    %3.2f |\n", (float)est.suma_posiciones / est.carreras_corridas);
-            printf("         | Prom. puntos/carr :   %3.2f |\n", (float)est.total_puntos / est.carreras_corridas);
-            color(COLOR_MENU_PRINCIPAL);
-            printf("         -------------------------------\n");
-            restaurarColor();
         }
-        fread(&est, sizeof(t_estadistica), 1, pf);
+        else
+        {
+            fread(&est, sizeof(t_estadistica), 1, pf);
+        }
     }
+    limpiarPantalla();
+    tituloSistema();
     if(!encontrado)
-        printf("Piloto no encontrado.\n");
+    {
+        est.id_piloto = idBuscado;
+        est.carreras_corridas = 0;
+        est.victorias = 0;
+        est.podios = 0;
+        est.total_puntos = 0;
+        est.mejor_posicion = 0;
+        est.peor_posicion = 0;
+        est.suma_posiciones = 0;
+    }
+    color(COLOR_MENU_PRINCIPAL);
+    printf("         -------------------------------\n");
+    printf("         | ESTADISTICAS PILOTO ID: %u |\n", est.id_piloto);
+    printf("         -------------------------------\n");
+    restaurarColor();
+    printf("         | Carreras corridas : %7u |\n",  est.carreras_corridas);
+    printf("         | Victorias         : %7u |\n",  est.victorias);
+    printf("         | Podios            : %7u |\n",  est.podios);
+    printf("         | Puntos totales    : %7u |\n",  est.total_puntos);
+    printf("         | Mejor posicion    : %7u |\n",  est.mejor_posicion);
+    printf("         | Peor posicion     : %7u |\n",  est.peor_posicion);
+
+    if(est.carreras_corridas > 0)
+    {
+        printf("         | Prom. posicion    : %7.2f |\n", (float)est.suma_posiciones / est.carreras_corridas);
+        printf("         | Prom. puntos/carr : %7.2f |\n", (float)est.total_puntos / est.carreras_corridas);
+    }
+    else
+    {
+        printf("         | Prom. posicion    : %7.2f |\n", 0.0);
+        printf("         | Prom. puntos/carr : %7.2f |\n", 0.0);
+    }
+
+    color(COLOR_MENU_PRINCIPAL);
+    printf("         -------------------------------\n");
+    restaurarColor();
+
+    if(!encontrado)
+    {
+        printf("\n[Nota]: El piloto no registra carreras disputadas en el historial.\n");
+    }
 
     return TODOOK;
 }
+
 int pilotoMasVictorias(FILE* pf, t_estadistica* mejor)
 {
     t_estadistica est;
 
     rewind(pf);
-
     if(!fread(mejor,sizeof(t_estadistica),1,pf))
         return ERROR_ARCH;
+
     fread(&est,sizeof(t_estadistica),1,pf);
     while(!feof(pf))
     {
@@ -201,7 +235,6 @@ int top5MasVictorias(FILE* pf)
         {
             top[cant] = est;
             cant++;
-            // inserción para mantener ordenado por victorias desc
             j = cant - 1;
             while(j > 0 && top[j].victorias > top[j-1].victorias)
             {
@@ -245,6 +278,7 @@ int top5MasVictorias(FILE* pf)
     color(COLOR_MENU_PRINCIPAL);
     printf("      -----------------------------------\n");
     restaurarColor();
+
     return TODOOK;
 }
 
@@ -284,7 +318,6 @@ int mejorPromedioPosicion(FILE* pf)
 
     color(COLOR_MENU_PRINCIPAL);
     tituloMenu("MEJOR PROMEDIO DE POSICIÓN");
-
     restaurarColor();
 
     printf("ID: %u \nPromedio: %.2f\n", mejor.id_piloto, promMejor);

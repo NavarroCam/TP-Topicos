@@ -18,31 +18,31 @@ void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE
         color(COLOR_TITULO);
         printf("\n====================================================\n\n");
         restaurarColor();
+
         printf("Seleccione una opción > ");
         scanf("%d", &op);
         while (getchar() != '\n');
 
         switch (op)
         {
-        case 1:
-            registrarCarreraManual(archCarreras, archPilotos, archPuntajes, archEstadisticas);
-            system("pause");
-            break;
-        case 2:
-            registrarCarreraSimulada(archCarreras, archPilotos, archPuntajes, archEstadisticas);
-            system("pause");
-            break;
-        case 3:
-            bajaCarrera(archCarreras, archPilotos);
-            system("pause");
-            break;
-        case 0:
-            break;
-        default:
-            printf("Opción inválida.\n");
+            case 1:
+                registrarCarreraManual(archCarreras, archPilotos, archPuntajes, archEstadisticas);
+                system("pause");
+                break;
+            case 2:
+                registrarCarreraSimulada(archCarreras, archPilotos, archPuntajes, archEstadisticas);
+                system("pause");
+                break;
+            case 3:
+                bajaCarrera(archCarreras, archPilotos);
+                system("pause");
+                break;
+            case 0:
+                break;
+            default:
+                printf("Opción inválida.\n");
         }
-    }
-    while(op != 0);
+    }while(op != 0);
 }
 
 void guardarCarreraCompleta(FILE* archCarreras, FILE* archPilotos, FILE* archEstadisticas, tda_vector* pilotos, t_carrera* carrera)
@@ -86,6 +86,7 @@ int registrarCarreraManual(FILE* archCarreras, FILE* archPilotos,FILE* archPunta
 
     destruir_Vector(&puntos);
     destruir_Vector(&pilotos);
+
     return TODOOK;
 }
 
@@ -123,15 +124,16 @@ int registrarCarreraSimulada(FILE* archCarreras, FILE* archPilotos, FILE* archPu
     printf("\nOpción: ");
     scanf("%d",&op);
 
+    limpiarPantalla();
     if(op == 1)
     {
         guardarCarreraCompleta(archCarreras, archPilotos, archEstadisticas, &pilotos, &c);
-        printf("\nCarrera guardada correctamente.\n");
+        printf("Carrera guardada correctamente.\n");
     }
 
     else
     {
-        printf("\nLa simulación fue descartada.\n");
+        printf("La simulación fue descartada.\n");
     }
 
     destruir_Vector(&puntos);
@@ -140,7 +142,6 @@ int registrarCarreraSimulada(FILE* archCarreras, FILE* archPilotos, FILE* archPu
     return TODOOK;
 }
 
-//GENERAR ID
 int generarIdCarrera(FILE* archCarreras)
 {
     t_carrera auxCarrera;
@@ -157,19 +158,17 @@ int generarIdCarrera(FILE* archCarreras)
         return 1;
     }
 }
-//CARGA BASICA
+
 void cargarDatosCarrera(t_carrera* c)
 {
     char fechaStr[20];
     char *p;
-    //CIRCUITO
     printf("Circuito: ");
     fflush(stdin);
     fgets(c->circuito, sizeof(c->circuito), stdin);
     if((p = strchr(c->circuito, '\n')) != NULL)
         *p = '\0';
     else while(getchar() != '\n');
-    //FECHA
     do
     {
         printf("Fecha (AAAAMMDD): ");
@@ -182,23 +181,22 @@ void cargarDatosCarrera(t_carrera* c)
         {
             while(getchar() != '\n');
         }
-    }
-    while (ValidarFecha(fechaStr) != TODOOK);
+    }while (ValidarFecha(fechaStr) != TODOOK);
+
     sscanf(fechaStr, "%I64u", &c->fecha);
-    //ESTADO
     c->estado = 1;
 
     do
     {
         printf("Cuantos pilotos finalizaron la carrera?: ");
         scanf("%d", &c->cant_resultados);
-    }
-    while (c->cant_resultados < 1 || c->cant_resultados > MAX_RESULTADOS);
+    }while (c->cant_resultados < 1 || c->cant_resultados > MAX_RESULTADOS);
 }
-//MOSTRAR PILOTOS CON ID
+
 void listarPilotosCarrera(FILE* archPilotos)
 {
     t_piloto p;
+
     fseek(archPilotos, 0, SEEK_SET);
     limpiarPantalla();
     tituloSistema();
@@ -210,6 +208,7 @@ void listarPilotosCarrera(FILE* archPilotos)
     printf("| %-8s | %-30s |\n", "ID", "NOMBRE");
     printf("---------------------------------------------\n");
     restaurarColor();
+
     fread(&p,sizeof(t_piloto),1,archPilotos);
     while(!feof(archPilotos))
     {
@@ -220,7 +219,7 @@ void listarPilotosCarrera(FILE* archPilotos)
     printf("---------------------------------------------\n");
     restaurarColor();
 }
-//CARGAR RESULTADOS
+
 int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
 {
     t_puntajes* puntaje;
@@ -239,15 +238,14 @@ int cargarResultadosCarrera(t_carrera* c, const tda_vector* puntos)
             scanf("%u", &puesto->id_piloto);
             if(pilotoYaIngresado(c,puesto->id_piloto,i))
                 printf("Ese piloto ya fue asignado a otra posición. Ingrese otro ID: ");
-        }
-        while(pilotoYaIngresado(c,puesto->id_piloto,i));
-
+        }while(pilotoYaIngresado(c,puesto->id_piloto,i));
 
         puntaje = obtenerPuntaje(puntos,i);
         if(!puntaje)
             printf("Error obteniendo el puntaje\n");
         puesto->puntos = puntaje->puntos;
     }
+
     return TODOOK;
 }
 
@@ -262,12 +260,15 @@ int pilotoYaIngresado(const t_carrera* c, unsigned idPiloto, int cantCargados)
             return ENCONTRADO;
         act++;
     }
+
     return NO_ENCONTRADO;
 }
+
 void mostrarResultadosCarrera(const t_carrera* c)
 {
     int i;
     t_posicion* aux;
+
     limpiarPantalla();
     tituloSistema();
     tituloMenu("    REGISTRAR CARRERA");
@@ -287,6 +288,7 @@ void mostrarResultadosCarrera(const t_carrera* c)
     printf("  ------------------------------------------------\n");
     restaurarColor();
 }
+
 int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos)
 {
     t_piloto p;
@@ -298,6 +300,7 @@ int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos)
         insertarAlFinal_Vector(pilotos,&p);
         fread(&p,sizeof(t_piloto),1,archPilotos);
     }
+
     return TODOOK;
 }
 
@@ -334,6 +337,7 @@ int guardarCarrera(FILE* archCarreras, const t_carrera* c)
     fseek(archCarreras,0,SEEK_END);
     if(fwrite(c,sizeof(t_carrera),1,archCarreras) != 1)
         return ERROR_;
+
     return TODOOK;
 }
 
@@ -341,6 +345,7 @@ void* obtenerPuntaje(const tda_vector* v, unsigned pos)
 {
     if(pos >= v->ce)
         return NULL;
+
     return (char*)v->vec + pos * v->tam;
 }
 
@@ -364,6 +369,7 @@ int trozarPuntajes(const char* cad,t_puntajes* puntos)
 {
     char* p;
     p = strrchr(cad,'\n');
+
     if(!p)
         return ERROR_;
     *p = '\0';
@@ -374,6 +380,7 @@ int trozarPuntajes(const char* cad,t_puntajes* puntos)
     sscanf(p + 1,"%u",&puntos->puntos);
     *p = '\0';
     sscanf(cad,"%u",&puntos->posicion);
+
     return TODOOK;
 }
 
@@ -404,6 +411,7 @@ int listarCarrerasActivas(FILE* archCarreras)
     color(COLOR_MENU_PRINCIPAL);
     printf("  ------------------------------------------------\n");
     restaurarColor();
+
     return cantidad;
 }
 
@@ -529,5 +537,6 @@ int simularResultadoCarrera(t_carrera* c, const tda_vector* pilotos, const tda_v
     }
     free(pIds);
     printf("Carrera simulada con %d pilotos.\n\n",c->cant_resultados);
+
     return TODOOK;
 }

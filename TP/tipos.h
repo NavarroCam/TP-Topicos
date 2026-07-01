@@ -41,16 +41,15 @@ typedef struct{
     t_posicion resultados[MAX_RESULTADOS];
 }t_carrera;
 
-
 typedef struct {
     unsigned id_piloto;
     unsigned carreras_corridas;
     unsigned victorias;
-    unsigned podios;             // Posiciones 1, 2 o 3
+    unsigned podios;
     unsigned total_puntos;
     unsigned mejor_posicion;
     unsigned peor_posicion;
-    unsigned suma_posiciones; //para promedio de posición
+    unsigned suma_posiciones;
 } t_estadistica;
 
 typedef struct{

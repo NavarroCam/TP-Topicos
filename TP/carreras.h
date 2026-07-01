@@ -1,11 +1,10 @@
 #ifndef CARRERAS_H_INCLUDED
 #define CARRERAS_H_INCLUDED
 
+#include <time.h>
 #include "pilotos.h"
 #include "estadisticas.h"
-#include "comunes.h"
-#include "tipos.h"
-#include <time.h>
+
 #define MAX_PUNTAJES 10
 #define CANT_CAMPOS_POSICION 3
 #define CARRERAS_DAT "../Archivos/carreras.dat"
@@ -13,14 +12,12 @@
 #define BAJAS_CAR_DAT "../Archivos/bajas_car.dat"
 
 void menuCarreras(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas);
-
 void guardarCarreraCompleta(FILE* archCarreras, FILE* archPilotos, FILE* archEstadisticas, tda_vector* pilotos, t_carrera* carrera);
 int registrarCarreraManual(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas);
 int registrarCarreraSimulada(FILE* archCarreras, FILE* archPilotos,FILE* archPuntajes, FILE* archEstadisticas);
 int cargarVectorPuntos(tda_vector* v,FILE* pf);
 int trozarPuntajes(const char* cad,t_puntajes* puntos);
 void* obtenerPuntaje(const tda_vector* v, unsigned pos);
-
 int generarIdCarrera(FILE* archCarreras);
 void cargarDatosCarrera(t_carrera* c);
 void listarPilotosCarrera(FILE* archPilotos);
@@ -32,7 +29,6 @@ int cargarPilotosAMemoria(tda_vector* pilotos, FILE* archPilotos);
 void guardarPilotos(FILE* archPilotos, const tda_vector* pilotos);
 void actualizarPuntosPilotos(tda_vector* pil, const t_carrera* c, const char* tipo);
 int pilotoYaIngresado(const t_carrera* c, unsigned idPiloto, int cantCargados);
-
 int listarCarrerasActivas(FILE* archCarreras);
 int bajaCarrera(FILE* archCarreras, FILE* archPilotos);
 int simularResultadoCarrera(t_carrera* c, const tda_vector* pilotos, const tda_vector* puntos);

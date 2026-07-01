@@ -19,6 +19,7 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
         color(COLOR_TITULO);
         printf("\n====================================================\n\n");
         restaurarColor();
+
         printf("Seleccione una opción > ");
         scanf("%d", &op);
 
@@ -26,30 +27,30 @@ void menuEscuderias(FILE* pilotos, FILE* escuderias)
 
         switch (op)
         {
-        case 1:
-            listarEscuderias(escuderias);
-            system("pause");
-            break;
-        case 2:
-            altaEscuderias(escuderias);
-            system("pause");
-            break;
-        case 3:
-            bajaEscuderia(escuderias);
-            system("pause");
-            break;
-        case 4:
-            modificarEscuderia(escuderias);
-            system("pause");
-            break;
-        case 0:
-            break;
-        default:
-            printf("Opcion inválida.\n");
+            case 1:
+                listarEscuderias(escuderias);
+                system("pause");
+                break;
+            case 2:
+                altaEscuderias(escuderias);
+                system("pause");
+                break;
+            case 3:
+                bajaEscuderia(escuderias);
+                system("pause");
+                break;
+            case 4:
+                modificarEscuderia(escuderias);
+                system("pause");
+                break;
+            case 0:
+                break;
+            default:
+                printf("Opcion inválida.\n");
         }
-    }
-    while(op != 0);
+    }while(op != 0);
 }
+
 void listarEscuderias(FILE* escuderias)
 {
     t_escuderia esc;
@@ -57,8 +58,15 @@ void listarEscuderias(FILE* escuderias)
     rewind(escuderias);
 
     limpiarPantalla();
-    tituloSistema();
-    tituloMenu("             ESCUDERÍAS");
+    color(COLOR_TITULO);
+
+    printf("=============================================================================\n");
+    printf("                             SISTEMA DE GESTION F1\n");
+    printf("=============================================================================\n");
+
+    restaurarColor();
+
+    tituloMenu("                      ESCUDERÍAS");
     color(COLOR_MENU_PRINCIPAL);
 
     printf("  -------------------------------------------------------------------------\n");
@@ -84,6 +92,7 @@ int compararIdEscuderia(const void* a, const void* b)
     unsigned idB = ((t_escuderia*)b)->id;
     if(idA < idB) return -1;
     if(idA > idB) return  1;
+
     return 0;
 }
 
@@ -107,6 +116,7 @@ int escuderiaValida(unsigned idEsc, FILE* escuderias)
         }
     }
     printf("Escuderia no encontrada.\n");
+
     return ERROR_;
 }
 
@@ -115,6 +125,7 @@ void altaEscuderias(FILE* escuderias)
     t_escuderia nuevo;
     int aux;
     char *p;
+
     limpiarPantalla();
     tituloSistema();
     tituloMenu("ALTA ESCUDERÍA");
@@ -133,8 +144,7 @@ void altaEscuderias(FILE* escuderias)
             system("pause");
             system("cls");
         }
-    }
-    while(aux != ERROR_);
+    }while(aux != ERROR_);
 
     printf("Nombre: ");
     fgets(nuevo.nombre, sizeof(nuevo.nombre), stdin);
@@ -163,7 +173,6 @@ int BuscarCodigoEscuderia(FILE* escuderias, const char* cod)///ACOMODAR
     int band = ERROR_;
 
     rewind(escuderias);
-
     while(fread(&escuderia, sizeof(t_escuderia), 1, escuderias) == 1 && band != TODOOK)
         if (strcmp(escuderia.codigo, cod) == 0)
             band = TODOOK;
@@ -216,6 +225,7 @@ int exportarBajasEscuderiasTxt(const char* binPath, const char* txtPath)
 
     fclose(fbin);
     fclose(ftxt);
+
     return TODOOK;
 }
 
@@ -272,7 +282,6 @@ int bajaEscuderia(FILE* escuderias)
     return encontrado ? TODOOK : ERROR_;
 }
 
-
 int modificarEscuderia(FILE* escuderias)
 {
     unsigned idBuscado;
@@ -280,6 +289,7 @@ int modificarEscuderia(FILE* escuderias)
 
     int encontrado=0;
     char* p;
+
     limpiarPantalla();
     tituloSistema();
     tituloMenu("MODIFICAR ESCUDERÍA");
@@ -331,5 +341,6 @@ int modificarEscuderia(FILE* escuderias)
     }
     if(!encontrado)
         printf("Escuderia no encontrada.\n");
+
     return encontrado ? TODOOK : ERROR_;
 }

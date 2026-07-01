@@ -1,5 +1,4 @@
 #include "pilotos.h"
-#include <ctype.h>
 
 void menuPilotos(FILE* pilotos, FILE* escuderias)
 {
@@ -28,44 +27,48 @@ void menuPilotos(FILE* pilotos, FILE* escuderias)
 
         switch (op)
         {
-        case 1:
-            listarPilotos(pilotos);
-            system("pause");
-            break;
-        case 2:
-            altaPiloto(pilotos, escuderias);
-            system("pause");
-            break;
-        case 3:
-            bajaPiloto(pilotos);
-            system("pause");
-            break;
-        case 4:
-            modificarPiloto(pilotos, escuderias);
-            system("pause");
-            break;
-        case 5:
-            mostrarRanking(pilotos);
-            system("pause");
-            break;
-        case 6:
-            listarPilotosPorEscuderia(pilotos, escuderias);
-            system("pause");
-            break;
-        case 0:
-            break;
-        default:
-            printf("Opción inválida.\n");
+            case 1:
+                listarPilotos(pilotos);
+                system("pause");
+                break;
+            case 2:
+                altaPiloto(pilotos, escuderias);
+                system("pause");
+                break;
+            case 3:
+                bajaPiloto(pilotos);
+                system("pause");
+                break;
+            case 4:
+                modificarPiloto(pilotos, escuderias);
+                system("pause");
+                break;
+            case 5:
+                mostrarRanking(pilotos);
+                system("pause");
+                break;
+            case 6:
+                listarPilotosPorEscuderia(pilotos, escuderias);
+                system("pause");
+                break;
+            case 0:
+                break;
+            default:
+                printf("Opción inválida.\n");
         }
-    }
-    while(op != 0);
+    }while(op != 0);
 }
 
 int compararPuntos(const void* a, const void* b)
 {
     t_piloto* pil1 = (t_piloto*)a;
     t_piloto* pil2 = (t_piloto*)b;
-    return pil2->puntos_acumulados - pil1->puntos_acumulados;
+    if(pil1->puntos_acumulados != pil2->puntos_acumulados)
+    {
+        return pil2->puntos_acumulados - pil1->puntos_acumulados;
+    }
+
+    return strcmp(pil1->nombre,pil2->nombre);
 }
 
 int compararIdPiloto(const void* a, const void* b)
@@ -74,6 +77,7 @@ int compararIdPiloto(const void* a, const void* b)
     unsigned idB = ((t_piloto*)b)->id;
     if(idA < idB) return -1;
     if(idA > idB) return  1;
+
     return 0;
 }
 
@@ -84,13 +88,14 @@ void listarPilotos(FILE* pilotos)
     rewind(pilotos);
     limpiarPantalla();
     tituloSistema();
-    tituloMenu("  CAMPEONATO DE PILOTOS");
+    tituloMenu("       PILOTOS");
     color(COLOR_MENU_PRINCIPAL);
 
     printf("  ------------------------------------------------\n");
     printf("  | %-30s | %-11s |\n", "NOMBRE", "PUNTOS");
     printf("  ------------------------------------------------\n");
     restaurarColor();
+
     while(fread(&pil,sizeof(t_piloto),1,pilotos)==1)
     {
         if(pil.estado=='A' || pil.estado=='S')
@@ -114,6 +119,7 @@ unsigned generarNuevoIdPilotos(FILE* pilotos)
         fread(&pil,sizeof(t_piloto),1,pilotos);
         Id = pil.id + 1;
     }
+
     return Id;
 }
 
@@ -146,8 +152,7 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
     {
         printf("ID escuderia: ");
         scanf("%u", &nuevo.id_escuderia);
-    }
-    while(escuderiaValida(nuevo.id_escuderia, escuderias) != TODOOK);
+    }while(escuderiaValida(nuevo.id_escuderia, escuderias) != TODOOK);
 
     nuevo.puntos_acumulados = 0;
     nuevo.estado = 'A';
@@ -161,16 +166,15 @@ int altaPiloto(FILE* pilotos, FILE* escuderias)
             *p = '\0';
         else while(getchar() != '\n');
 
-    }
-    while (ValidarFecha(fechaStr) != TODOOK);
+    }while (ValidarFecha(fechaStr) != TODOOK);
     sscanf(fechaStr, "%I64u", &nuevo.fechaNacimiento);
 
     fseek(pilotos,0,SEEK_END);
     fwrite(&nuevo,sizeof(t_piloto),1,pilotos);
     fflush(pilotos);
 
-
     printf("Piloto %s dado de alta con ID %u.\n", nuevo.nombre, nuevo.id);
+
     return TODOOK;
 }
 
@@ -197,14 +201,13 @@ int exportarBajasPilotosTxt(const char* binPath, const char* txtPath)
 
     while(fread(&p, sizeof(t_piloto), 1, fbin) == 1)
     {
-        fprintf(ftxt, "%u;%s;%s;%u;%u;%c;%I64u\n",
-                p.id, p.nombre, p.nacionalidad,
-                p.id_escuderia, p.puntos_acumulados,
-                p.estado, p.fechaNacimiento);
+        fprintf(ftxt, "%u;%s;%s;%u;%u;%c;%I64u\n", p.id, p.nombre, p.nacionalidad, p.id_escuderia, p.puntos_acumulados,
+                                                    p.estado, p.fechaNacimiento);
     }
 
     fclose(fbin);
     fclose(ftxt);
+
     return TODOOK;
 }
 
@@ -255,7 +258,9 @@ int bajaPiloto(FILE* pilotos)
         }
     }
 
-    if(!encontrado) printf("Piloto no encontrado.\n");
+    if(!encontrado)
+        printf("Piloto no encontrado.\n");
+
     return encontrado ? TODOOK : ERROR_;
 }
 
@@ -289,8 +294,8 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
                 fgets(piloto.nombre, sizeof(piloto.nombre), stdin);
                 if((p = strchr(piloto.nombre, '\n')) != NULL)
                     *p = '\0';
-                else while(getchar() != '\n');
-
+                else
+                    while(getchar() != '\n');
             }
 
             printf("\nNacionalidad: %s\n", piloto.nacionalidad);
@@ -301,7 +306,8 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
                 fgets(piloto.nacionalidad, sizeof(piloto.nacionalidad), stdin);
                 if((p = strchr(piloto.nacionalidad, '\n')) != NULL)
                     *p = '\0';
-                else while(getchar() != '\n');
+                else
+                    while(getchar() != '\n');
             }
 
             printf("\nID Escuderia: %u\n", piloto.id_escuderia);
@@ -312,8 +318,7 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
                 {
                     printf("ID escuderia: ");
                     scanf("%u", &nuevoIdEsc);
-                }
-                while(escuderiaValida(nuevoIdEsc, escuderias) != TODOOK);
+                }while(escuderiaValida(nuevoIdEsc, escuderias) != TODOOK);
                 piloto.id_escuderia = nuevoIdEsc;
             }
 
@@ -338,9 +343,9 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
                     fgets(fechaStr, sizeof(fechaStr), stdin);
                     if((p = strchr(fechaStr, '\n')) != NULL)
                         *p = '\0';
-                    else while(getchar() != '\n');
-                }
-                while (ValidarFecha(fechaStr) != TODOOK);
+                    else
+                        while(getchar() != '\n');
+                }while (ValidarFecha(fechaStr) != TODOOK);
                 sscanf(fechaStr, "%I64u", &piloto.fechaNacimiento);
             }
 
@@ -353,6 +358,7 @@ int modificarPiloto(FILE* pilotos, FILE* escuderias)
     }
     if(!encontrado)
         printf("Piloto no encontrado.\n");
+
     return encontrado ? TODOOK : ERROR_;
 }
 
@@ -360,7 +366,8 @@ void mostrarRanking(FILE* pilotos)
 {
     tda_vector ranking;
     t_piloto pil;
-    int i,puesto_real = 1;
+    t_piloto* piloto_actual;
+    int i;
 
     crear_Vector(&ranking,sizeof(t_piloto));
     rewind(pilotos);
@@ -375,7 +382,7 @@ void mostrarRanking(FILE* pilotos)
 
     limpiarPantalla();
     tituloSistema();
-    tituloMenu("    RANKING DE PILOTOS");
+    tituloMenu("    CAMPEONATO DE PILOTOS");
     color(COLOR_MENU_PRINCIPAL);
 
     puts("-------------------------------------------------------");
@@ -385,17 +392,8 @@ void mostrarRanking(FILE* pilotos)
 
     for(i=0; i<ranking.ce; i++)
     {
-        t_piloto* piloto_actual = (t_piloto*)((char*)ranking.vec + (i*ranking.tam));
-
-        if(i > 0)
-        {
-            t_piloto* piloto_anterior = (t_piloto*)((char*)ranking.vec + ((i - 1) * ranking.tam));
-            if(piloto_actual->puntos_acumulados < piloto_anterior->puntos_acumulados)
-            {
-                puesto_real = i + 1;
-            }
-        }
-        printf("| %-8d | %-30s | %-4u pts|\n",puesto_real, piloto_actual->nombre, piloto_actual->puntos_acumulados);
+        piloto_actual = (t_piloto*)((char*)ranking.vec + (i*ranking.tam));
+        printf("| %-8d | %-30s | %-4u pts|\n",i+1, piloto_actual->nombre, piloto_actual->puntos_acumulados);
     }
     color(COLOR_MENU_PRINCIPAL);
     printf("-------------------------------------------------------\n");
@@ -408,9 +406,7 @@ void mostrarPilotoCarrera(void* pilotos)
     t_piloto* pil = (t_piloto*)pilotos;
     if(pil->estado == 'A' || pil->estado == 'S')
     {
-        printf("| %-8u | %-30s |\n",
-               pil->id,
-               pil->nombre);
+        printf("| %-8u | %-30s |\n",pil->id,pil->nombre);
     }
 }
 

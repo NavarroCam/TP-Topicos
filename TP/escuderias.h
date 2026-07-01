@@ -3,9 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "tipos.h"
 #include "comunes.h"
-
 
 #define ESCUDERIAS_DAT "../Archivos/escuderias.dat"
 #define ESCUDERIAS_TXT "../Archivos/escuderias.txt"
@@ -13,7 +11,6 @@
 
 #define BAJAS_ESCUDERIAS_DAT "../Archivos/bajas_escuderias.dat"
 #define BAJAS_ESCUDERIAS_TXT "../Archivos/bajas_escuderias.txt"
-
 
 void menuEscuderias(FILE* pilotos, FILE* escuderias);
 void listarEscuderias(FILE* escuderias);
